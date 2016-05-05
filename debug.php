@@ -48,7 +48,7 @@ if (!$services) {
 $count = count($services);
 
 echo "{$count} TVH Services found." . PHP_EOL . PHP_EOL;
-/* debug 
+/* debug
 foreach ($services as $service) {
 	echo $service->svcname . PHP_EOL;
 }
@@ -71,6 +71,13 @@ foreach ($channels as $channel) {
 }
 */
 echo PHP_EOL;
+
+/* save node
+$sucess = $tvhserver->saveNode('#uuid#', array('number' => '1'));
+*/
+/* get node data
+$node = $tvhserver->getNode('#uuid#');
+*/
 
 function sortByID($a, $b) { return ($a->number > $b->number); }
 
