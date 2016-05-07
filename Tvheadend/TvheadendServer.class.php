@@ -47,10 +47,10 @@ class TvheadendServer {
 
 	/**
 	 * returns the list of channel tags
-	 * @param	TBD			$filter
+	 * @param	array			$filters
 	 * @return	array<\Tvheadend\Models\ChannelTag>
 	 */
-	public function getChannelTags($filter = null) {
+	public function getChannelTags($filters = null) {
 		$tags = array();
 		$response = $this->_client->doGet('/api/channeltag/grid', array('all' => 1, 'dir'=>'ASC', 'sort' => 'name'));
 
@@ -58,7 +58,32 @@ class TvheadendServer {
 		foreach ($content->entries as $entry) {
 			$tags[] = new ChannelTag($entry);
 		}
-		return $tags;
+
+		if ($filters == null) {
+			return $tags;
+		}
+
+		// search for tags by filters
+		$filteredTags = array_filter(
+			$tags,
+			function ($tag) use ($filters) {
+				$valid = true;
+				foreach ($filters as $key => $value) {
+					// invalid filter
+					if (!$tag->hasProperty($key)) continue;
+					// filter ok
+					else if ($tag->$key === $value) continue;
+					// not valid
+					$valid = false;
+					break;
+				}
+				return $valid;
+			}
+		);
+		// reset order
+		sort($filteredTags);
+
+		return $filteredTags;
 	}
 
 	/**
