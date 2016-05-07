@@ -1,6 +1,7 @@
 <?php
 namespace Tvheadend;
 use Tvheadend\Models\Channel;
+use Tvheadend\Models\ChannelTag;
 use Tvheadend\Models\Service;
 use Http\Client;
 
@@ -42,6 +43,22 @@ class TvheadendServer {
 			$channels[] = new Channel($entry);
 		}
 		return $channels;
+	}
+
+	/**
+	 * returns the list of channel tags
+	 * @param	TBD			$filter
+	 * @return	array<\Tvheadend\Models\ChannelTag>
+	 */
+	public function getChannelTags($filter = null) {
+		$tags = array();
+		$response = $this->_client->doGet('/api/channeltag/grid', array('all' => 1, 'dir'=>'ASC', 'sort' => 'name'));
+
+		$content = json_decode($response->getContent());
+		foreach ($content->entries as $entry) {
+			$tags[] = new ChannelTag($entry);
+		}
+		return $tags;
 	}
 
 	/**

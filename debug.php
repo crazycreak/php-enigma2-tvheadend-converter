@@ -72,6 +72,21 @@ foreach ($channels as $channel) {
 */
 echo PHP_EOL;
 
+// tvh channels
+$channelTags = $tvhserver->getChannelTags();
+if (!$channelTags) {
+	exit;
+}
+$count = count($channelTags);
+
+echo "{$count} TVH Channel Tags found." . PHP_EOL . PHP_EOL;
+
+/* debug
+foreach ($channelTags as $channelTag) {
+	echo $channelTag->name . PHP_EOL;
+}
+*/
+
 /* save node
 $sucess = $tvhserver->saveNode('#uuid#', array('number' => '1'));
 */
