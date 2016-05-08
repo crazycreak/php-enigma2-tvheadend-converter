@@ -87,6 +87,39 @@ class TvheadendServer {
 	}
 
 	/**
+	 * create a tag tag by the given config
+	 * @param	array			$config
+	 * @return	boolean
+	 */
+	public function createChannelTag($config = array()) {
+		if (empty($config) || !isset($config['name']) || empty($config['name'])) return false;
+
+		$default_config = array(
+			"enabled" => true,
+			"index" => 0,
+			"internal" => false,
+			"private" => false,
+			"icon" => "",
+			"titled_icon" => false,
+			"comment" => ""
+		);
+
+		foreach ($default_config as $key => $value) {
+			if (isset($config[$key])) continue;
+
+			$config[$key] = $value;
+		}
+
+		$response = $this->_client->doGet('/api/channeltag/create', array('conf' => json_encode($config)));
+		$status = $response->getStatus();
+		if ($status != 200) {
+			return false;
+		}
+		// success
+		return true;
+	}
+
+	/**
 	 * returns the list of services
 	 * @param	TBD			$filter
 	 * @return	array<\Tvheadend\Models\Service>
