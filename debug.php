@@ -72,6 +72,39 @@ foreach ($channels as $channel) {
 */
 echo PHP_EOL;
 
+// tvh channels
+$channelTags = $tvhserver->getChannelTags();
+if (!$channelTags) {
+	exit;
+}
+$count = count($channelTags);
+
+echo "{$count} TVH Channel Tags found." . PHP_EOL . PHP_EOL;
+
+$filter = array('name' => 'TV channels');
+//$filter = array('enabled' => true);
+//$filter = array('index' => 0);
+//$filter = array('enabled' => true, 'name' => 'TV channels');
+$channelTags = $tvhserver->getChannelTags($filter);
+if (!$channelTags) {
+	exit;
+}
+$count = count($channelTags);
+
+echo "{$count} filtered TVH Channel Tags found." . PHP_EOL . PHP_EOL;
+
+/* debug
+foreach ($channelTags as $tag) {
+	echo $tag->name . ': ' . $tag->uuid . PHP_EOL;
+}
+*/
+
+/* debug
+foreach ($channelTags as $channelTag) {
+	echo $channelTag->name . PHP_EOL;
+}
+*/
+
 /* save node
 $sucess = $tvhserver->saveNode('#uuid#', array('number' => '1'));
 */

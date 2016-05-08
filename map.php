@@ -46,8 +46,8 @@ foreach ($myChannels as $channel) {
 	// search for entries by name
 	$entries = array_filter(
 		$tvhServices,
-		function ($services) use ($channel) {
-			return $services->svcname == $channel->e2servicename;
+		function ($service) use ($channel) {
+			return $service->svcname == $channel->e2servicename;
 		}
 	);
 	$cntAll++;
@@ -65,8 +65,10 @@ foreach ($myChannels as $channel) {
 	}
 	// channel to map
 	echo " (found {$cnt})" . PHP_EOL;
-	$entrie = array_pop($entries);
-	array_push($channelsToMap, $entrie);
+	// reset order
+	sort($entries);
+
+	array_push($channelsToMap, $entries[0]);
 }
 echo PHP_EOL;
 

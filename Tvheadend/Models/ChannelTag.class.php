@@ -2,24 +2,21 @@
 namespace Tvheadend\Models;
 use Models\Node;
 
-class Channel extends Node {
+class ChannelTag extends Node {
 	/**
 	 * @var array
 	 */
 	protected $_validProperties = array(
 		'uuid',
 		'enabled',
+		'index',
 		'name',
-		'number',
+		'internal',
+		'private',
 		'icon',
 		'icon_public_url',
-		'epgauto',
-		'epggrab',
-		'dvr_pre_time',
-		'dvr_pst_time',
-		'services',
-		'tags',
-		'bouquet'
+		'titled_icon',
+		'comment'
 	);
 
 	/**

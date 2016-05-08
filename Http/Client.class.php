@@ -93,6 +93,10 @@ class Client {
 	 * @return	\Http\Response
 	 */
 	protected function execute($method, $path, $parameters) {
+		if (!function_exists('curl_exec')) {
+			throw new \Exception("curl doesn't exists");
+		}
+		// create request
 		$request = $this->createRequest($method, $path, $parameters);
 
 		$curl = curl_init();
