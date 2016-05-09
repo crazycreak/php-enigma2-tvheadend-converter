@@ -5,7 +5,7 @@ use Tvheadend\Models\ChannelTag;
 use Tvheadend\Models\Service;
 use Http\Client;
 
-class TvheadendServer {
+class Server {
 	/**
 	 * @var Http\Client
 	 */

@@ -2,8 +2,8 @@
 require_once('global.php');
 require_once('config.inc.php');
 
-use Enigma2\Enigma2Server;
-use Tvheadend\TvheadendServer;
+use Enigma2\Server as Enigma2Server;
+use Tvheadend\Server as TvheadendServer;
 
 // new Enigma2Server instance
 $e2server = new Enigma2Server(ENIGMA2_HOST);

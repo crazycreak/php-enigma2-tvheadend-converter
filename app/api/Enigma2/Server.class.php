@@ -3,7 +3,7 @@ namespace Enigma2;
 use Enigma2\Models\Service;
 use Http\Client;
 
-class Enigma2Server {
+class Server {
 	const SERVICES_TV = 'TV';
 	const SERVICES_RADIO = 'RADIO';
 
