@@ -9,7 +9,9 @@ class TvheadendServer {
 	/**
 	 * @var Http\Client
 	 */
-	private $_client;
+	private $_client = null;
+
+	private $_boxid = null;
 
 	/**
 	 * constructor
@@ -200,6 +202,25 @@ class TvheadendServer {
 		}
 		// success
 		return true;
+	}
+
+	public function getLogMessages() {
+		$response = $this->_client->doGet('/comet/poll', array(
+			'boxid' => $this->getBoxId()
+		));
+
+		$content = json_decode($response->getContent());
+		print_r($content);
+	}
+
+	private function getBoxId() {
+		if ($this->_boxid != null) return $this->_boxid;
+
+		$response = $this->_client->doGet('/comet/poll');
+
+		$content = json_decode($response->getContent());
+		$this->_boxid = $content->boxid;
+		return $this->_boxid;
 	}
 
 	/**
