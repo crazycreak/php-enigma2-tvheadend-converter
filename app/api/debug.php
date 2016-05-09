@@ -81,6 +81,12 @@ $count = count($channelTags);
 
 echo "{$count} TVH Channel Tags found." . PHP_EOL . PHP_EOL;
 
+/* debug
+foreach ($channelTags as $tag) {
+	echo $tag->name . ': ' . $tag->uuid . PHP_EOL;
+}
+*/
+
 $filter = array('name' => 'TV channels');
 //$filter = array('enabled' => true);
 //$filter = array('index' => 0);
@@ -94,12 +100,6 @@ $count = count($channelTags);
 echo "{$count} filtered TVH Channel Tags found." . PHP_EOL . PHP_EOL;
 
 /* debug
-foreach ($channelTags as $tag) {
-	echo $tag->name . ': ' . $tag->uuid . PHP_EOL;
-}
-*/
-
-/* debug
 foreach ($channelTags as $channelTag) {
 	echo $channelTag->name . PHP_EOL;
 }
@@ -110,6 +110,9 @@ $sucess = $tvhserver->saveNode('#uuid#', array('number' => '1'));
 */
 /* get node data
 $node = $tvhserver->getNode('#uuid#');
+*/
+/* create channel tag
+$status = $tvhserver->createChannelTag(array('name' => 'test1'));
 */
 
 function sortByID($a, $b) { return ($a->number > $b->number); }
