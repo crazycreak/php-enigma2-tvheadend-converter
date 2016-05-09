@@ -1,8 +1,4 @@
 <?php
-define('TVHEADEND_HOST', '#NAME#');
-define('ENIGMA2_HOST', '#NAME#');
-/*
-define('TVHEADEND_HOST', 'xxx.xxx.xxx.xxx');
-define('ENIGMA2_HOST', 'xxx.xxx.xxx.xxx');
-*/
+define('TVHEADEND_HOST', 'NAME_OR_IP');
+define('ENIGMA2_HOST', 'NAME_OR_IP');
 ?>
