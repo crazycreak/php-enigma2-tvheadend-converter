@@ -18,10 +18,34 @@ abstract class Node implements \JsonSerializable {
 	protected $_validProperties = array();
 
 	/**
+	 * @var array
+	 */
+	protected static $_defaultProperties = array();
+
+	/**
 	 * constructor
 	 */
 	public function __construct($raw = null) {
 		$this->_raw = $raw;
+
+		if ($this->_raw !== null) {
+			$this->parseRaw();
+		}
+	}
+
+	/**
+	 * static constructor
+	 */
+	 public static function create() {
+		 $className = get_called_class();
+		 return new $className((object) static::$_defaultProperties);
+	 }
+
+	/**
+	 * json serialize
+	 */
+	public function jsonSerialize() {
+		return $this->_properties;
 	}
 
 	/**
@@ -47,13 +71,6 @@ abstract class Node implements \JsonSerializable {
 	}
 
 	/**
-	 * json serialize
-	 */
-	public function jsonSerialize() {
-		return $this->_properties;
-	}
-
-	/**
 	 * @param	string		$name
 	 * @return	bool
 	 */
@@ -61,6 +78,9 @@ abstract class Node implements \JsonSerializable {
 		return array_key_exists($name, $this->_properties);
 	}
 
+	/**
+	 * parse valid properties
+	 */
 	protected function parseRaw() {
 		foreach ($this->_validProperties as $property) {
 			if (isset($this->_raw->$property)) $this->$property = $this->_raw->$property;

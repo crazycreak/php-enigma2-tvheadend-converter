@@ -1,7 +1,6 @@
 <?php
 namespace Tvheadend;
 use Tvheadend\Models\Channel;
-use Tvheadend\Models\ChannelTag;
 use Tvheadend\Models\Service;
 use Http\Client;
 
@@ -10,6 +9,11 @@ class Server {
 	 * @var Http\Client
 	 */
 	private $_client = null;
+
+	/**
+	 * @var Tvheadend\Services\ChannelTag
+	 */
+	private $_channelTagService = null;
 
 	private $_boxid = null;
 
@@ -48,77 +52,14 @@ class Server {
 	}
 
 	/**
-	 * returns the list of channel tags
-	 * @param	array			$filters
-	 * @return	array<\Tvheadend\Models\ChannelTag>
+	 * @return	Tvheadend\Services\ChannelTag
 	 */
-	public function getChannelTags($filters = null) {
-		$tags = array();
-		$response = $this->_client->doGet('/api/channeltag/grid', array('all' => 1, 'dir'=>'ASC', 'sort' => 'name'));
-
-		$content = json_decode($response->getContent());
-		foreach ($content->entries as $entry) {
-			$tags[] = new ChannelTag($entry);
+	public function getChannelTagService() {
+		if ($this->_channelTagService == null) {
+			$this->_channelTagService = new Services\ChannelTag($this->_client);
 		}
 
-		if ($filters == null) {
-			return $tags;
-		}
-
-		// search for tags by filters
-		$filteredTags = array_filter(
-			$tags,
-			function ($tag) use ($filters) {
-				$valid = true;
-				foreach ($filters as $key => $value) {
-					// invalid filter
-					if (!$tag->hasProperty($key)) continue;
-					// filter ok
-					else if ($tag->$key === $value) continue;
-					// not valid
-					$valid = false;
-					break;
-				}
-				return $valid;
-			}
-		);
-		// reset order
-		sort($filteredTags);
-
-		return $filteredTags;
-	}
-
-	/**
-	 * create a tag tag by the given config
-	 * @param	array			$config
-	 * @return	boolean
-	 */
-	public function createChannelTag($config = array()) {
-		if (empty($config) || !isset($config['name']) || empty($config['name'])) return false;
-
-		$default_config = array(
-			"enabled" => true,
-			"index" => 0,
-			"internal" => false,
-			"private" => false,
-			"icon" => "",
-			"titled_icon" => false,
-			"comment" => ""
-		);
-
-		foreach ($default_config as $key => $value) {
-			if (isset($config[$key])) continue;
-
-			$config[$key] = $value;
-		}
-
-		$response = $this->_client->doGet('/api/channeltag/create', array('conf' => json_encode($config)));
-		$status = $response->getStatus();
-		if ($status != 200) {
-			return false;
-		}
-		// success
-		return true;
+		return $this->_channelTagService;
 	}
 
 	/**
@@ -197,6 +138,24 @@ class Server {
 			)))
 		));
 		$status = $response->getStatus();
+		if ($status != 200) {
+			return false;
+		}
+		// success
+		return true;
+	}
+
+	/**
+	 * delete a node by the given uuid
+	 * @param	string		$uuid
+	 * @return	boolean
+	 */
+	public function deleteNode($uuid = '') {
+		if (empty($uuid)) return false;
+
+		$response = $this->_client->doGet('/api/idnode/delete', array('uuid' => $uuid));
+		$status = $response->getStatus();
+
 		if ($status != 200) {
 			return false;
 		}

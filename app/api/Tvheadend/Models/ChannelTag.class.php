@@ -20,13 +20,15 @@ class ChannelTag extends Node {
 	);
 
 	/**
-	 * constructor
+	 * @var array
 	 */
-	public function __construct($raw = null) {
-		parent::__construct($raw);
-
-		if ($this->_raw !== null) {
-			$this->parseRaw();
-		}
-	}
+	protected static $_defaultProperties = array(
+		"enabled" => true,
+		"index" => 0,
+		"internal" => false,
+		"private" => false,
+		"icon" => "",
+		"titled_icon" => false,
+		"comment" => ""
+	);
 }

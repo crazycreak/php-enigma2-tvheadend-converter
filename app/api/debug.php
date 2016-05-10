@@ -112,7 +112,7 @@ $sucess = $tvhserver->saveNode('#uuid#', array('number' => '1'));
 $node = $tvhserver->getNode('#uuid#');
 */
 /* create channel tag
-$status = $tvhserver->createChannelTag(array('name' => 'test1'));
+$status = $tvhserver->getChannelTagService()->create(array('name' => 'test1'));
 */
 
 function sortByID($a, $b) { return ($a->number > $b->number); }

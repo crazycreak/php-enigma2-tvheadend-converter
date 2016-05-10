@@ -21,15 +21,4 @@ class Channel extends Node {
 		'tags',
 		'bouquet'
 	);
-
-	/**
-	 * constructor
-	 */
-	public function __construct($raw = null) {
-		parent::__construct($raw);
-
-		if ($this->_raw !== null) {
-			$this->parseRaw();
-		}
-	}
 }

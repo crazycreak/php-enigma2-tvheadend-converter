@@ -12,17 +12,6 @@ class Service extends Node {
 	);
 
 	/**
-	 * constructor
-	 */
-	public function __construct($raw = null) {
-		parent::__construct($raw);
-
-		if ($this->_raw !== null) {
-			$this->parseRaw();
-		}
-	}
-
-	/**
 	 * check if service is marker
 	 * @return	boolean
 	 */
