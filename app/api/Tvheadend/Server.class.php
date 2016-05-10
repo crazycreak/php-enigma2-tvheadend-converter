@@ -1,5 +1,6 @@
 <?php
 namespace Tvheadend;
+use Tvheadend\Services\ChannelTag as ChannelTagService;
 use Tvheadend\Models\Channel;
 use Tvheadend\Models\Service;
 use Http\Client;
@@ -56,7 +57,7 @@ class Server {
 	 */
 	public function getChannelTagService() {
 		if ($this->_channelTagService == null) {
-			$this->_channelTagService = new Services\ChannelTag($this->_client);
+			$this->_channelTagService = new ChannelTagService($this->_client);
 		}
 
 		return $this->_channelTagService;
