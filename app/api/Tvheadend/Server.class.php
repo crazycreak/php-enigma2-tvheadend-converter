@@ -5,6 +5,7 @@ use Tvheadend\Services\Node as NodeService;
 use Tvheadend\Services\Channel as ChannelService;
 use Tvheadend\Services\ChannelTag as ChannelTagService;
 use Tvheadend\Services\Service as ServiceService;
+use Tvheadend\Services\Message as MessageService;
 
 class Server {
 	/**
@@ -32,7 +33,10 @@ class Server {
 	 */
 	private $_serviceService = null;
 
-	private $_boxid = null;
+	/**
+	 * @var Tvheadend\Services\Message
+	 */
+	private $_messageService = null;
 
 	/**
 	 * constructor
@@ -57,7 +61,7 @@ class Server {
 	 */
 	public function getNodeService() {
 		if ($this->_nodeService == null) {
-			$this->_nodeService = new NodeService($this->_client);
+			$this->_nodeService = new NodeService($this->getClient());
 		}
 
 		return $this->_nodeService;
@@ -68,7 +72,7 @@ class Server {
 	 */
 	public function getChannelService() {
 		if ($this->_channelService == null) {
-			$this->_channelService = new ChannelService($this->_client);
+			$this->_channelService = new ChannelService($this->getClient());
 		}
 
 		return $this->_channelService;
@@ -79,7 +83,7 @@ class Server {
 	 */
 	public function getChannelTagService() {
 		if ($this->_channelTagService == null) {
-			$this->_channelTagService = new ChannelTagService($this->_client);
+			$this->_channelTagService = new ChannelTagService($this->getClient());
 		}
 
 		return $this->_channelTagService;
@@ -90,29 +94,28 @@ class Server {
 	 */
 	public function getServiceService() {
 		if ($this->_serviceService == null) {
-			$this->_serviceService = new ServiceService($this->_client);
+			$this->_serviceService = new ServiceService($this->getClient());
 		}
 
 		return $this->_serviceService;
 	}
 
-	public function getLogMessages() {
-		$response = $this->_client->doGet('/comet/poll', array(
-			'boxid' => $this->getBoxId()
-		));
+	/**
+	 * @return	Tvheadend\Services\Message
+	 */
+	public function getMessageService() {
+		if ($this->_messageService == null) {
+			$this->_messageService = new MessageService($this->getClient());
+		}
 
-		$content = json_decode($response->getContent());
-		print_r($content);
+		return $this->_messageService;
 	}
 
-	private function getBoxId() {
-		if ($this->_boxid != null) return $this->_boxid;
-
-		$response = $this->_client->doGet('/comet/poll');
-
-		$content = json_decode($response->getContent());
-		$this->_boxid = $content->boxid;
-		return $this->_boxid;
+	/**
+	 * @return Http\Client
+	 */
+	protected function getClient() {
+		return $this->_client;
 	}
 
 	/**

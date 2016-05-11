@@ -10,6 +10,17 @@ $e2server = new Enigma2Server(ENIGMA2_HOST);
 // new TvheadendServer instance
 $tvhserver = new TvheadendServer(TVHEADEND_HOST);
 
+/* debug MessageService
+$cnt = 0;
+while ($cnt < 5) {
+	$cnt++;
+	$tvhserver->getMessageService()->update();
+	$messages = $tvhserver->getMessageService()->get();
+	print_r($messages);
+	sleep(1);
+}
+*/
+
 // enigma2 services
 // - getAllServices || getProviderServices || getBouquetsServices
 // - Enigma2Server::SERVICES_TV || Enigma2Server::SERVICES_RADIO
