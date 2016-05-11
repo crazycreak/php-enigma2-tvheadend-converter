@@ -1,20 +1,9 @@
 <?php
 namespace Tvheadend\Services;
+use Services\Base;
 use Tvheadend\Models;
 
-class Channel {
-	/**
-	 * @var Http\Client
-	 */
-	private $_client = null;
-
-	/**
-	 * constructor
-	 */
-	public function __construct($client) {
-		$this->_client = $client;
-	}
-
+class Channel extends Base {
 	/**
 	 * returns a filterd list of channels
 	 * @param	array			$filters
@@ -55,7 +44,7 @@ class Channel {
 	 */
 	public function getAll() {
 		$channels = array();
-		$response = $this->_client->doGet('/api/channel/grid', array(
+		$response = $this->getClient()->doGet('/api/channel/grid', array(
 			'all' => 1,
 			'dir'=>'ASC',
 			'sort' => 'name',

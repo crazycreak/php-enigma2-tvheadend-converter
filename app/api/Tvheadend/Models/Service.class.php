@@ -1,8 +1,8 @@
 <?php
 namespace Tvheadend\Models;
-use Models\Node;
+use Models\Base;
 
-class Service extends Node {
+class Service extends Base {
 	/**
 	 * @var array
 	 */

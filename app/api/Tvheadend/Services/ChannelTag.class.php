@@ -1,20 +1,9 @@
 <?php
 namespace Tvheadend\Services;
+use Services\Base;
 use Tvheadend\Models;
 
-class ChannelTag {
-	/**
-	 * @var Http\Client
-	 */
-	private $_client = null;
-
-	/**
-	 * constructor
-	 */
-	public function __construct($client) {
-		$this->_client = $client;
-	}
-
+class ChannelTag extends Base {
 	/**
 	 * returns a filterd list of channel tags
 	 * @param	array			$filters
@@ -55,7 +44,7 @@ class ChannelTag {
 	 */
 	public function getAll() {
 		$tags = array();
-		$response = $this->_client->doGet('/api/channeltag/grid', array(
+		$response = $this->getClient()->doGet('/api/channeltag/grid', array(
 			'all' => 1,
 			'dir'=>'ASC',
 			'sort' => 'name'
@@ -84,7 +73,7 @@ class ChannelTag {
 			$channelTag->$key = $value;
 		}
 
-		$response = $this->_client->doGet('/api/channeltag/create', array('conf' => json_encode($channelTag)));
+		$response = $this->getClient()->doGet('/api/channeltag/create', array('conf' => json_encode($channelTag)));
 		$status = $response->getStatus();
 		// failed
 		if ($status != 200) return false;

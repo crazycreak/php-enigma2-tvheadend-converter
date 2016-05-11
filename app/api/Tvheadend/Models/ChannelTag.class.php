@@ -1,8 +1,8 @@
 <?php
 namespace Tvheadend\Models;
-use Models\Node;
+use Models\Base;
 
-class ChannelTag extends Node {
+class ChannelTag extends Base {
 	/**
 	 * @var array
 	 */

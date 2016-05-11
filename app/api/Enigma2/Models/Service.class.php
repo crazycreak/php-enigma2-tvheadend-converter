@@ -1,8 +1,8 @@
 <?php
 namespace Enigma2\Models;
-use Models\Node;
+use Models\Base;
 
-class Service extends Node {
+class Service extends Base {
 	/**
 	 * @var array
 	 */

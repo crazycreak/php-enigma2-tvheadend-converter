@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-abstract class Node implements \JsonSerializable {
+abstract class Base implements \JsonSerializable {
 	/**
 	 * @var object
 	 */
