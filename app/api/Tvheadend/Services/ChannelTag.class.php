@@ -73,8 +73,11 @@ class ChannelTag extends Base {
 			$channelTag->$key = $value;
 		}
 
-		$response = $this->getClient()->doGet('/api/channeltag/create', array('conf' => json_encode($channelTag)));
+		$response = $this->getClient()->doGet('/api/channeltag/create', array(
+			'conf' => json_encode($channelTag)
+		));
 		$status = $response->getStatus();
+
 		// failed
 		if ($status != 200) return false;
 		// success

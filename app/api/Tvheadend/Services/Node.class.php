@@ -11,7 +11,9 @@ class Node extends Base {
 	public function get($uuid = '') {
 		if (empty($uuid)) return false;
 
-		$response = $this->getClient()->doGet('/api/idnode/load', array('uuid' => $uuid));
+		$response = $this->getClient()->doGet('/api/idnode/load', array(
+			'uuid' => $uuid
+		));
 		$content = json_decode($response->getContent());
 
 		if (count($content->entries) > 0) {
@@ -36,9 +38,9 @@ class Node extends Base {
 			)))
 		));
 		$status = $response->getStatus();
-		if ($status != 200) {
-			return false;
-		}
+
+		// failed
+		if ($status != 200) return false;
 		// success
 		return true;
 	}
@@ -51,12 +53,13 @@ class Node extends Base {
 	public function delete($uuid = '') {
 		if (empty($uuid)) return false;
 
-		$response = $this->getClient()->doGet('/api/idnode/delete', array('uuid' => $uuid));
+		$response = $this->getClient()->doGet('/api/idnode/delete', array(
+			'uuid' => $uuid
+		));
 		$status = $response->getStatus();
 
-		if ($status != 200) {
-			return false;
-		}
+		// failed
+		if ($status != 200) return false;
 		// success
 		return true;
 	}

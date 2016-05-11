@@ -41,7 +41,7 @@ foreach ($services as $service) {
 echo PHP_EOL;
 
 // tvh services
-$services = $tvhserver->getServices();
+$services = $tvhserver->getServiceService()->getAll();
 if (!$services) {
 	exit;
 }

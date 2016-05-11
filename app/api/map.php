@@ -11,7 +11,7 @@ $e2server = new Enigma2Server(ENIGMA2_HOST);
 $tvhserver = new TvheadendServer(TVHEADEND_HOST);
 
 // tvh services
-$tvhServices = $tvhserver->getServices();
+$tvhServices = $tvhserver->getServiceService()->getAll();
 if (!$tvhServices) {
 	exit;
 }
@@ -78,7 +78,7 @@ $cntSkipp = $cntAll - $cntMap;
 echo "found {$cntAll} Channels in Bouquet, {$cntNotFound} not Found, {$cntSkipp} skipped because not unique" . PHP_EOL;
 
 // mapp all
-$status = $tvhserver->mapServices($channelsToMap);
+$status = $tvhserver->getServiceService()->map($channelsToMap);
 if ($status) {
 	echo 'sucess: channels mapped!';
 } else {

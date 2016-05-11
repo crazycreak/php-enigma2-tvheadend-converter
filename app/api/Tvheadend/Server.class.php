@@ -1,10 +1,10 @@
 <?php
 namespace Tvheadend;
+use Http\Client;
 use Tvheadend\Services\Node as NodeService;
 use Tvheadend\Services\Channel as ChannelService;
 use Tvheadend\Services\ChannelTag as ChannelTagService;
-use Tvheadend\Models\Service;
-use Http\Client;
+use Tvheadend\Services\Service as ServiceService;
 
 class Server {
 	/**
@@ -26,6 +26,11 @@ class Server {
 	 * @var Tvheadend\Services\ChannelTag
 	 */
 	private $_channelTagService = null;
+
+	/**
+	 * @var Tvheadend\Services\Service
+	 */
+	private $_serviceService = null;
 
 	private $_boxid = null;
 
@@ -81,46 +86,14 @@ class Server {
 	}
 
 	/**
-	 * returns the list of services
-	 * @param	TBD			$filter
-	 * @return	array<\Tvheadend\Models\Service>
+	 * @return	Tvheadend\Services\Service
 	 */
-	public function getServices($filter = null) {
-		$services = array();
-		$response = $this->_client->doGet('/api/mpegts/service/grid', array('all' => 1, 'dir'=>'ASC', 'limit' => 9999, 'start' => 0));
-
-		$content = json_decode($response->getContent());
-		foreach ($content->entries as $entry) {
-			$services[] = new Service($entry);
+	public function getServiceService() {
+		if ($this->_serviceService == null) {
+			$this->_serviceService = new ServiceService($this->_client);
 		}
-		return $services;
-	}
 
-	/**
-	 * maps the given services as channels
-	 * @param	array<\Tvheadend\Models\Service>	$services
-	 * @return	boolean
-	 */
-	public function mapServices($services = null) {
-		if ($services == null) return false;
-
-		// set uuids for request
-		$uuids = array();
-		foreach ($services as $service) {
-			if ($service instanceof Service) {
-				array_push($uuids, $service->uuid);
-			}
-		}
-		// no valid services
-		if (empty($uuids)) return false;
-
-		$response = $this->_client->doGet('/api/service/mapper/start', array('uuids' => json_encode($uuids)));
-		$status = $response->getStatus();
-		if ($status != 200) {
-			return false;
-		}
-		// success
-		return true;
+		return $this->_serviceService;
 	}
 
 	public function getLogMessages() {
