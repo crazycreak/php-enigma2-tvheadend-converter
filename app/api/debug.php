@@ -73,7 +73,7 @@ foreach ($channels as $channel) {
 echo PHP_EOL;
 
 // tvh channels
-$channelTags = $tvhserver->getChannelTags();
+$channelTags = $tvhserver->getChannelTagService()->getAll();
 if (!$channelTags) {
 	exit;
 }
@@ -91,7 +91,7 @@ $filter = array('name' => 'TV channels');
 //$filter = array('enabled' => true);
 //$filter = array('index' => 0);
 //$filter = array('enabled' => true, 'name' => 'TV channels');
-$channelTags = $tvhserver->getChannelTags($filter);
+$channelTags = $tvhserver->getChannelTagService()->get($filter);
 if (!$channelTags) {
 	exit;
 }

@@ -28,7 +28,7 @@ class ChannelTag {
 
 		// search for tags by filters
 		$filteredTags = array_filter(
-			$tags,
+			$allTags,
 			function ($tag) use ($filters) {
 				$valid = true;
 				foreach ($filters as $key => $value) {
