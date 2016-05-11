@@ -127,13 +127,16 @@ foreach ($channelTags as $channelTag) {
 echo PHP_EOL;
 
 /* save node
-$sucess = $tvhserver->saveNode('#uuid#', array('number' => '1'));
+$sucess = $tvhserver->getNodeService()->save('#uuid#', array('number' => '1'));
 */
-/* get node data
-$node = $tvhserver->getNode('#uuid#');
+/* get node
+$node = $tvhserver->getNodeService()->get('#uuid#');
+*/
+/* delete node
+$node = $tvhserver->getNodeService()->delete('#uuid#');
 */
 /* create channel tag
-$status = $tvhserver->getChannelTagService()->create(array('name' => 'test1'));
+$status = $tvhserver->getChannelTagService()->create(array('name' => 'dummy'));
 */
 
 function sortByID($a, $b) { return ($a->number > $b->number); }

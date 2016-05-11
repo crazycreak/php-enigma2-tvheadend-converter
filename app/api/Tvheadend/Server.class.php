@@ -1,5 +1,6 @@
 <?php
 namespace Tvheadend;
+use Tvheadend\Services\Node as NodeService;
 use Tvheadend\Services\Channel as ChannelService;
 use Tvheadend\Services\ChannelTag as ChannelTagService;
 use Tvheadend\Models\Service;
@@ -10,6 +11,11 @@ class Server {
 	 * @var Http\Client
 	 */
 	private $_client = null;
+
+	/**
+	 * @var Tvheadend\Services\Node
+	 */
+	private $_nodeService = null;
 
 	/**
 	 * @var Tvheadend\Services\Channel
@@ -39,6 +45,17 @@ class Server {
 		));
 
 		$this->attemptConnection();
+	}
+
+	/**
+	 * @return	Tvheadend\Services\Node
+	 */
+	public function getNodeService() {
+		if ($this->_nodeService == null) {
+			$this->_nodeService = new NodeService($this->_client);
+		}
+
+		return $this->_nodeService;
 	}
 
 	/**
@@ -99,64 +116,6 @@ class Server {
 
 		$response = $this->_client->doGet('/api/service/mapper/start', array('uuids' => json_encode($uuids)));
 		$status = $response->getStatus();
-		if ($status != 200) {
-			return false;
-		}
-		// success
-		return true;
-	}
-
-	/**
-	 * returns data about a node by the given uuid
-	 * @param	string		$uuid
-	 * @return	\stdClass
-	 */
-	public function getNode($uuid = '') {
-		if (empty($uuid)) return false;
-
-		$response = $this->_client->doGet('/api/idnode/load', array('uuid' => $uuid));
-		$content = json_decode($response->getContent());
-
-		if (count($content->entries) > 0) {
-			return $content->entries[0];
-		} else {
-			return null;
-		}
-	}
-
-	/**
-	 * set data by given uuid
-	 * @param	string		$uuid
-	 * @param	array		$parameters
-	 * @return	boolean
-	 */
-	public function saveNode($uuid = '', $parameters = array()) {
-		if (empty($uuid) || empty($parameters)) return false;
-
-		$response = $this->_client->doGet('/api/idnode/save', array(
-			'node' => json_encode(array_merge($parameters, array(
-				'uuid' => $uuid
-			)))
-		));
-		$status = $response->getStatus();
-		if ($status != 200) {
-			return false;
-		}
-		// success
-		return true;
-	}
-
-	/**
-	 * delete a node by the given uuid
-	 * @param	string		$uuid
-	 * @return	boolean
-	 */
-	public function deleteNode($uuid = '') {
-		if (empty($uuid)) return false;
-
-		$response = $this->_client->doGet('/api/idnode/delete', array('uuid' => $uuid));
-		$status = $response->getStatus();
-
 		if ($status != 200) {
 			return false;
 		}
