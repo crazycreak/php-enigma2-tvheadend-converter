@@ -19,7 +19,7 @@ if (!$services) {
 }
 $count = count($services);
 
-echo "{$count} Enigma2 Services found." . PHP_EOL . PHP_EOL;
+echo "{$count} Enigma2 Services found." . PHP_EOL;
 
 /* debug
 foreach ($services as $service) {
@@ -47,7 +47,7 @@ if (!$services) {
 }
 $count = count($services);
 
-echo "{$count} TVH Services found." . PHP_EOL . PHP_EOL;
+echo "{$count} TVH Services found." . PHP_EOL;
 /* debug
 foreach ($services as $service) {
 	echo $service->svcname . PHP_EOL;
@@ -56,13 +56,13 @@ foreach ($services as $service) {
 echo PHP_EOL;
 
 // tvh channels
-$channels = $tvhserver->getChannels();
+$channels = $tvhserver->getChannelService()->getAll();
 if (!$channels) {
 	exit;
 }
 $count = count($channels);
 
-echo "{$count} TVH Channels found." . PHP_EOL . PHP_EOL;
+echo "{$count} TVH Channels found." . PHP_EOL;
 
 /* debug
 usort($channels, "sortByID");
@@ -72,20 +72,40 @@ foreach ($channels as $channel) {
 */
 echo PHP_EOL;
 
-// tvh channels
+$filter = array('name' => 'ORF1');
+//$filter = array('enabled' => true);
+//$filter = array('number' => 1);
+//$filter = array('enabled' => true, 'name' => 'ORF1');
+$channels = $tvhserver->getChannelService()->get($filter);
+if (!$channels) {
+	exit;
+}
+$count = count($channels);
+
+echo "{$count} filtered TVH Channels found." . PHP_EOL;
+
+/* debug
+foreach ($channels as $channel) {
+	echo $channel->name . PHP_EOL;
+}
+*/
+echo PHP_EOL;
+
+// tvh channel tags
 $channelTags = $tvhserver->getChannelTagService()->getAll();
 if (!$channelTags) {
 	exit;
 }
 $count = count($channelTags);
 
-echo "{$count} TVH Channel Tags found." . PHP_EOL . PHP_EOL;
+echo "{$count} TVH Channel Tags found." . PHP_EOL;
 
 /* debug
 foreach ($channelTags as $tag) {
 	echo $tag->name . ': ' . $tag->uuid . PHP_EOL;
 }
 */
+echo PHP_EOL;
 
 $filter = array('name' => 'TV channels');
 //$filter = array('enabled' => true);
@@ -97,13 +117,14 @@ if (!$channelTags) {
 }
 $count = count($channelTags);
 
-echo "{$count} filtered TVH Channel Tags found." . PHP_EOL . PHP_EOL;
+echo "{$count} filtered TVH Channel Tags found." . PHP_EOL;
 
 /* debug
 foreach ($channelTags as $channelTag) {
 	echo $channelTag->name . PHP_EOL;
 }
 */
+echo PHP_EOL;
 
 /* save node
 $sucess = $tvhserver->saveNode('#uuid#', array('number' => '1'));

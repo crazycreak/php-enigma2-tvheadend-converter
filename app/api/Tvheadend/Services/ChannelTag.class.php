@@ -16,7 +16,7 @@ class ChannelTag {
 	}
 
 	/**
-	 * returns a list of channel tags by filters
+	 * returns a filterd list of channel tags
 	 * @param	array			$filters
 	 * @return	array<\Tvheadend\Models\ChannelTag>
 	 */
@@ -24,11 +24,11 @@ class ChannelTag {
 		if (empty($filters)) return false;
 
 		// get all tags
-		$allTags = $this->getAll();
+		$all = $this->getAll();
 
 		// search for tags by filters
-		$filteredTags = array_filter(
-			$allTags,
+		$tags = array_filter(
+			$all,
 			function ($tag) use ($filters) {
 				$valid = true;
 				foreach ($filters as $key => $value) {
@@ -44,9 +44,9 @@ class ChannelTag {
 			}
 		);
 		// reset order
-		sort($filteredTags);
+		sort($tags);
 
-		return $filteredTags;
+		return $tags;
 	}
 
 	/**

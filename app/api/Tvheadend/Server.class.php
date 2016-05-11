@@ -1,7 +1,7 @@
 <?php
 namespace Tvheadend;
+use Tvheadend\Services\Channel as ChannelService;
 use Tvheadend\Services\ChannelTag as ChannelTagService;
-use Tvheadend\Models\Channel;
 use Tvheadend\Models\Service;
 use Http\Client;
 
@@ -10,6 +10,11 @@ class Server {
 	 * @var Http\Client
 	 */
 	private $_client = null;
+
+	/**
+	 * @var Tvheadend\Services\Channel
+	 */
+	private $_channelService = null;
 
 	/**
 	 * @var Tvheadend\Services\ChannelTag
@@ -37,19 +42,14 @@ class Server {
 	}
 
 	/**
-	 * returns the list of channels
-	 * @param	TBD			$filter
-	 * @return	array<\Tvheadend\Models\Channel>
+	 * @return	Tvheadend\Services\Channel
 	 */
-	public function getChannels($filter = null) {
-		$channels = array();
-		$response = $this->_client->doGet('/api/channel/grid', array('all' => 1, 'dir'=>'ASC', 'limit' => 9999, 'start' => 0));
-
-		$content = json_decode($response->getContent());
-		foreach ($content->entries as $entry) {
-			$channels[] = new Channel($entry);
+	public function getChannelService() {
+		if ($this->_channelService == null) {
+			$this->_channelService = new ChannelService($this->_client);
 		}
-		return $channels;
+
+		return $this->_channelService;
 	}
 
 	/**
