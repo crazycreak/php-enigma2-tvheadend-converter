@@ -1,9 +1,8 @@
 <?php
 namespace Tvheadend\Services;
-use Services\Base;
 use Tvheadend\Models;
 
-class Service extends Base {
+class Service extends ExtendedBase {
 	/**
 	 * returns a filterd list of services
 	 * @param	array			$filters
@@ -34,7 +33,6 @@ class Service extends Base {
 		);
 		// reset order
 		sort($services);
-
 		return $services;
 	}
 
@@ -55,7 +53,6 @@ class Service extends Base {
 		foreach ($content->entries as $entry) {
 			$services[] = new Models\Service($entry);
 		}
-
 		return $services;
 	}
 
@@ -80,12 +77,11 @@ class Service extends Base {
 		$response = $this->_client->doGet('/api/service/mapper/start', array(
 			'uuids' => json_encode($uuids)
 		));
-		$status = $response->getStatus();
 
+		$status = $response->getStatus();
 		// failed
 		if ($status != 200) return false;
 		// success
 		return true;
 	}
-
 }

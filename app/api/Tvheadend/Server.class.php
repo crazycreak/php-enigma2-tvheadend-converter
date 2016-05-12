@@ -5,7 +5,6 @@ use Tvheadend\Services\Node as NodeService;
 use Tvheadend\Services\Channel as ChannelService;
 use Tvheadend\Services\ChannelTag as ChannelTagService;
 use Tvheadend\Services\Service as ServiceService;
-use Tvheadend\Services\Message as MessageService;
 
 class Server {
 	/**
@@ -32,11 +31,6 @@ class Server {
 	 * @var Tvheadend\Services\Service
 	 */
 	private $_serviceService = null;
-
-	/**
-	 * @var Tvheadend\Services\Message
-	 */
-	private $_messageService = null;
 
 	/**
 	 * constructor
@@ -98,17 +92,6 @@ class Server {
 		}
 
 		return $this->_serviceService;
-	}
-
-	/**
-	 * @return	Tvheadend\Services\Message
-	 */
-	public function getMessageService() {
-		if ($this->_messageService == null) {
-			$this->_messageService = new MessageService($this->getClient());
-		}
-
-		return $this->_messageService;
 	}
 
 	/**

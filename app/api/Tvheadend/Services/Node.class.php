@@ -1,8 +1,7 @@
 <?php
 namespace Tvheadend\Services;
-use Services\Base;
 
-class Node extends Base {
+class Node extends ExtendedBase {
 	/**
 	 * returns data about a node by the given uuid
 	 * @param	string		$uuid
@@ -14,8 +13,8 @@ class Node extends Base {
 		$response = $this->getClient()->doGet('/api/idnode/load', array(
 			'uuid' => $uuid
 		));
-		$content = json_decode($response->getContent());
 
+		$content = json_decode($response->getContent());
 		if (count($content->entries) > 0) {
 			return $content->entries[0];
 		} else {
@@ -37,8 +36,8 @@ class Node extends Base {
 				'uuid' => $uuid
 			)))
 		));
-		$status = $response->getStatus();
 
+		$status = $response->getStatus();
 		// failed
 		if ($status != 200) return false;
 		// success
@@ -56,8 +55,8 @@ class Node extends Base {
 		$response = $this->getClient()->doGet('/api/idnode/delete', array(
 			'uuid' => $uuid
 		));
-		$status = $response->getStatus();
 
+		$status = $response->getStatus();
 		// failed
 		if ($status != 200) return false;
 		// success

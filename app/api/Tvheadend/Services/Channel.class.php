@@ -1,9 +1,8 @@
 <?php
 namespace Tvheadend\Services;
-use Services\Base;
 use Tvheadend\Models;
 
-class Channel extends Base {
+class Channel extends ExtendedBase {
 	/**
 	 * returns a filterd list of channels
 	 * @param	array			$filters
@@ -34,7 +33,6 @@ class Channel extends Base {
 		);
 		// reset order
 		sort($channels);
-
 		return $channels;
 	}
 
@@ -55,7 +53,6 @@ class Channel extends Base {
 		foreach ($content->entries as $entry) {
 			$channels[] = new Models\Channel($entry);
 		}
-
 		return $channels;
 	}
 }

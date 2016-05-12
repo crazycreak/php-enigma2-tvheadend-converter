@@ -1,9 +1,13 @@
 <?php
 namespace Tvheadend\Services;
-use Services\Base;
 use Tvheadend\Models;
 
-class ChannelTag extends Base {
+class ChannelTag extends ExtendedBase {
+	/**
+	 * @see Tvheadend\Services\ExtendedBase
+	 */
+	protected $notificationClass = 'channeltag';
+
 	/**
 	 * returns a filterd list of channel tags
 	 * @param	array			$filters
@@ -34,7 +38,6 @@ class ChannelTag extends Base {
 		);
 		// reset order
 		sort($tags);
-
 		return $tags;
 	}
 
@@ -54,16 +57,15 @@ class ChannelTag extends Base {
 		foreach ($content->entries as $entry) {
 			$tags[] = new Models\ChannelTag($entry);
 		}
-
 		return $tags;
 	}
 
 	/**
 	 * create a tag by the given config
 	 * @param	array			$config
-	 * @return	boolean
+	 * @return	mixed
 	 */
-	public function create($config = array()) {
+	public function create(array $config = array()) {
 		if (empty($config) || !isset($config['name']) || empty($config['name'])) return false;
 
 		// create a channel tag with default properties
@@ -76,11 +78,11 @@ class ChannelTag extends Base {
 		$response = $this->getClient()->doGet('/api/channeltag/create', array(
 			'conf' => json_encode($channelTag)
 		));
-		$status = $response->getStatus();
 
+		$status = $response->getStatus();
 		// failed
 		if ($status != 200) return false;
-		// success
-		return true;
+		// check result
+		return $this->getResult('change');
 	}
 }
