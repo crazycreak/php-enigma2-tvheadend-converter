@@ -1,8 +1,8 @@
 <?php
 namespace Tvheadend\Services;
-use Services\ServiceBase;
+use Services\AbstractService;
 
-class Message extends ServiceBase {
+class Message extends AbstractService {
 	/**
 	 * @var string
 	 */

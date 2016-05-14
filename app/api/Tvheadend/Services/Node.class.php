@@ -1,7 +1,7 @@
 <?php
 namespace Tvheadend\Services;
 
-class Node extends ExtendedServiceBase {
+class Node extends AbstractExtendedService {
 	/**
 	 * returns data about a node by the given uuid
 	 * @param	string		$uuid
