@@ -56,6 +56,11 @@ abstract class AbstractAPI {
 	protected $requestData = '';
 
 	/**
+	 * requested model
+	 */
+	protected $endpoint = '';
+
+	/**
 	 * Result Data
 	 */
 	protected $resultData = array();
@@ -124,6 +129,8 @@ abstract class AbstractAPI {
 		}
 		// set request
 		$this->request = explode('/', rtrim($_REQUEST[$this->requestParameter], '/'));
+		// set endpoint
+		$this->endpoint = array_shift($this->request);
 		// set request data
 		switch ($this->method) {
 			case self::METHOD_DELETE:
@@ -156,29 +163,27 @@ abstract class AbstractAPI {
 	}
 
 	public function process() {
-		$this->response();
+		if (!method_exists($this, $this->endpoint)) {
+			throw new UnknownException();
+		}
+		// call endpoint method
+		$this->{$this->endpoint}();
+		// handle response
+		return $this->response();
 	}
 
-	protected function response($statusCode = 200) {
+	private function response($statusCode = 200) {
 		$statusMessage = $this->getStatusMessage($statusCode);
-		// http status
-		header("HTTP/1.1 " . $statusCode . " " . $statusMessage);
 		// build result
 		$result = array(
 			'code' => $statusCode,
 			'message' => $statusMessage,
 			'data' => $this->resultData
 		);
-		// allow for CORS
-		header("Access-Control-Allow-Orgin: *");
-		header("Access-Control-Allow-Methods: *");
-		// content type
-		header("Content-Type: application/json");
-		// output
-		echo json_encode($result);
+		return $result;
 	}
 
-	protected function getStatusMessage($statusCode) {
+	private function getStatusMessage($statusCode) {
 		$status = array(
 			200 => 'OK',
 			404 => 'Not Found',

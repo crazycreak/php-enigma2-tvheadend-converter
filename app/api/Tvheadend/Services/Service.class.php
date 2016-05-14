@@ -2,7 +2,7 @@
 namespace Tvheadend\Services;
 use Tvheadend\Models;
 
-class Service extends ExtendedBase {
+class Service extends AbstractExtendedService {
 	/**
 	 * returns a filterd list of services
 	 * @param	array			$filters
