@@ -34,8 +34,8 @@ var Enigma2BouquetList = React.createClass({
 
 var Enigma2Box = React.createClass({
 	loadBouquetsFromServer: function() {
-		var path = '/enigma2';
-		var bouquetsUrl = this.props.url + path + '/bouquets/tv';
+		var bouquetsUrl = this.props.url + '/bouquets/tv';
+
 		$.ajax({
 			url: bouquetsUrl,
 			dataType: 'json',
@@ -77,7 +77,7 @@ var App = React.createClass({
 		return (
 			<div className="mainApp">
 				{enigma2BoxHeader}
-				<Enigma2Box url="/api/v1" />
+				<Enigma2Box url="/api/v1/enigma2" />
 				<BootstrapButton className="btn-default">Button 1</BootstrapButton>
 				<BootstrapButton className="btn-default">Button 2</BootstrapButton>
 			</div>
