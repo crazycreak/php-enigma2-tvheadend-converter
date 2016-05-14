@@ -2,7 +2,7 @@
 namespace Tvheadend\Services;
 use Tvheadend\Models;
 
-class ChannelTag extends ExtendedBase {
+class ChannelTag extends ExtendedServiceBase {
 	/**
 	 * @see Tvheadend\Services\ExtendedBase
 	 */

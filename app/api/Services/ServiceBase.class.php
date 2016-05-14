@@ -1,7 +1,7 @@
 <?php
 namespace Services;
 
-abstract class Base {
+abstract class ServiceBase {
 	/**
 	 * @var Http\Client
 	 */

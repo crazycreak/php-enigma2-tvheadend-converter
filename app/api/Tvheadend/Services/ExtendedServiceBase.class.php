@@ -1,8 +1,9 @@
 <?php
 namespace Tvheadend\Services;
+use Services\ServiceBase;
 use Tvheadend\Services\Message as MessageService;
 
-abstract class ExtendedBase extends \Services\Base {
+abstract class ExtendedServiceBase extends ServiceBase {
 	/**
 	 * @var Tvheadend\Services\Message
 	 */

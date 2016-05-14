@@ -1,7 +1,7 @@
 <?php
 namespace Tvheadend\Services;
 
-class Node extends ExtendedBase {
+class Node extends ExtendedServiceBase {
 	/**
 	 * returns data about a node by the given uuid
 	 * @param	string		$uuid
