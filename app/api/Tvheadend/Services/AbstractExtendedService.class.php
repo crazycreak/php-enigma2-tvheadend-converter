@@ -3,7 +3,7 @@ namespace Tvheadend\Services;
 use Services\AbstractService;
 use Tvheadend\Services\Message as MessageService;
 
-abstract class ExtendedServiceBase extends AbstractService {
+abstract class AbstractExtendedService extends AbstractService {
 	/**
 	 * @var Tvheadend\Services\Message
 	 */

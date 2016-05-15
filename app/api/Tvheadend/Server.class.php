@@ -107,7 +107,7 @@ class Server {
 	 * @param	string			$password
 	 */
 	protected function setCredentials($username, $password) {
-		$this->_client->setCredentials($username, $password);
+		$this->getClient()->setCredentials($username, $password);
 	}
 
 	/**
@@ -116,13 +116,13 @@ class Server {
 	 * @param	string			$password
 	 */
 	protected function setHeaders($headers) {
-		$this->_client->setHeaders($headers);
+		$this->getClient()->setHeaders($headers);
 	}
 
 	/**
 	 * try connection
 	 */
 	protected function attemptConnection() {
-		$this->_client->doGet('/');
+		$this->getClient()->doGet('/');
 	}
 }
