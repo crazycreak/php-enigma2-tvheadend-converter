@@ -2,7 +2,7 @@
 namespace Services;
 use Exception\UnknownException;
 use Enigma2\Server as Enigma2Server;
-use Enigma2\Services\Service as Enigma2ServiceService;
+use Enigma2\Modules\Service as Enigma2ServiceModule;
 use Tvheadend\Server as TvheadendServer;
 
 class AppAPI extends AbstractJsonAPI {
@@ -12,9 +12,9 @@ class AppAPI extends AbstractJsonAPI {
 	protected $enigma2Server = null;
 
 	/**
-	 * Enigma2 Services
+	 * Enigma2 Modules
 	 */
-	protected $enigma2Services = array(
+	protected $enigma2Modules = array(
 		'service'
 	);
 
@@ -23,26 +23,26 @@ class AppAPI extends AbstractJsonAPI {
 	 */
 	protected $enigma2Parameters = array(
 		'bouquets' => array(
-			'tv' => Enigma2ServiceService::SERVICES_TV,
-			'radio' => Enigma2ServiceService::SERVICES_RADIO
+			'tv' => Enigma2ServiceModule::SERVICES_TV,
+			'radio' => Enigma2ServiceModule::SERVICES_RADIO
 		)
 	);
 
 	/**
-	 * request construction: /<endpoint>/<service>/<method>/<parameter>
+	 * request construction: /<endpoint>/<module>/<method>/<parameter>
 	 */
 	protected function enigma2() {
 		// init server instance
 		$this->enigma2Server = new Enigma2Server(ENIGMA2_HOST);
-		// [0] service - required
+		// [0] module - required
 		if (!isset($this->request[0]) || empty($this->request[0])) {
 			throw new UnknownException();
 		}
-		$serviceKey = $this->request[0];
-		$service = 'get' . ucfirst($serviceKey) . 'Service';
-		if (!in_array($serviceKey, $this->enigma2Services)) {
+		$moduleKey = $this->request[0];
+		if (!in_array($moduleKey, $this->enigma2Modules)) {
 			throw new UnknownException();
 		}
+		$module = 'get' . ucfirst($moduleKey) . 'Module';
 		// [1] method - required
 		if (!isset($this->request[1]) || empty($this->request[1])) {
 			throw new UnknownException();
@@ -61,9 +61,9 @@ class AppAPI extends AbstractJsonAPI {
 		// call server
 		$result = false;
 		if (empty($parameter)) {
-			$result = $this->enigma2Server->{$service}()->{$method}();
+			$result = $this->enigma2Server->{$module}()->{$method}();
 		} else {
-			$result = $this->enigma2Server->{$service}()->{$method}($parameter);
+			$result = $this->enigma2Server->{$module}()->{$method}($parameter);
 		}
 		if (!$result) {
 			throw new UnknownException();
