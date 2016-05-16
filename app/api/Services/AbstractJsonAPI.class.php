@@ -9,8 +9,8 @@ abstract class AbstractJsonAPI extends AbstractAPI {
 		try {
 			parent::init();
 		} catch (\Exception $e) {
-			//echo $e->getMessage(); catch me !!
-		 }
+			$this->response(500);
+		}
 	}
 
 	/**
@@ -20,19 +20,21 @@ abstract class AbstractJsonAPI extends AbstractAPI {
 		try {
 			parent::process();
 		} catch (\Exception $e) {
-			//echo $e->getMessage(); catch me !!
+			$this->response(500);
 		}
-		$this->responseJson();
 	}
 
 	/**
 	 * @see Services\AbstractAPI
 	 */
-	protected function response() {
-		$response = parent::response();
+	protected function response($statusCode = 200) {
+		$response = parent::response($statusCode);
 		$this->responseJson($response);
 	}
 
+	/**
+	 * output response as json
+	 */
 	protected function responseJson($response) {
 		// set http status
 		header("HTTP/1.1 " . $response['code'] . " " . $response['message']);

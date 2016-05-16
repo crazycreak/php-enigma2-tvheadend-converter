@@ -187,23 +187,19 @@ abstract class AbstractAPI {
 		}
 		// call endpoint method
 		$this->{$this->endpoint}();
-		// build response
-		$this->buildResponse();
-		// return response
+		// handle response
 		return $this->response();
 	}
 
-	protected function buildResponse($statusCode = 200) {
+	protected function response($statusCode = 200) {
 		$statusMessage = $this->getStatusMessage($statusCode);
-		// set response data
+
 		$this->responseData = array(
 			'code' => $statusCode,
 			'message' => $statusMessage,
 			'data' => $this->data
 		);
-	}
 
-	protected function response() {
 		return $this->responseData;
 	}
 
