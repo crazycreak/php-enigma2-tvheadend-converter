@@ -8,7 +8,7 @@ class AppAPI extends AbstractJsonAPI {
 	 */
 	protected function enigma2() {
 		$request = new Enigma2Request($this->getRequest(), $this->getRequestData());
-		$this->resultData = $request->process();
+		$this->data = $request->process();
 	}
 
 	/**
