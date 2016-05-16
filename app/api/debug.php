@@ -3,7 +3,7 @@ require_once('global.php');
 require_once('config.inc.php');
 
 use Enigma2\Server as Enigma2Server;
-use Enigma2\Services\Service as Enigma2ServiceService;
+use Enigma2\Modules\Service as Enigma2ServiceModule;
 use Tvheadend\Server as TvheadendServer;
 
 // new Enigma2Server instance
@@ -13,8 +13,8 @@ $tvhserver = new TvheadendServer(TVHEADEND_HOST);
 
 // enigma2 services
 // - get || getAll || getProvider || getBouquets
-// - Enigma2ServiceService::SERVICES_TV || Enigma2ServiceService::SERVICES_RADIO
-$services = $e2server->getServiceService()->getBouquets(Enigma2ServiceService::SERVICES_TV);
+// - Enigma2ServiceModule::SERVICES_TV || Enigma2ServiceModule::SERVICES_RADIO
+$services = $e2server->getServiceModule()->getBouquets(Enigma2ServiceModule::SERVICES_TV);
 if (!$services) {
 	exit;
 }
@@ -25,7 +25,7 @@ echo "{$count} Enigma2 Services found." . PHP_EOL;
 /* debug
 foreach ($services as $service) {
 	echo $service->e2servicename . ': ' . $service->e2servicereference . PHP_EOL;
-	$channels = $e2server->getServiceService()->get($service->e2servicereference);
+	$channels = $e2server->getServiceModule()->get($service->e2servicereference);
 	if (!$channels) {
 		exit;
 	}
@@ -42,7 +42,7 @@ foreach ($services as $service) {
 echo PHP_EOL;
 
 // tvh services
-$services = $tvhserver->getServiceService()->getAll();
+$services = $tvhserver->getServiceModule()->getAll();
 if (!$services) {
 	exit;
 }
@@ -57,7 +57,7 @@ foreach ($services as $service) {
 echo PHP_EOL;
 
 // tvh channels
-$channels = $tvhserver->getChannelService()->getAll();
+$channels = $tvhserver->getChannelModule()->getAll();
 if (!$channels) {
 	exit;
 }
@@ -77,7 +77,7 @@ $filter = array('name' => 'ORF1');
 //$filter = array('enabled' => true);
 //$filter = array('number' => 1);
 //$filter = array('enabled' => true, 'name' => 'ORF1');
-$channels = $tvhserver->getChannelService()->get($filter);
+$channels = $tvhserver->getChannelModule()->get($filter);
 if (!$channels) {
 	exit;
 }
@@ -93,7 +93,7 @@ foreach ($channels as $channel) {
 echo PHP_EOL;
 
 // tvh channel tags
-$channelTags = $tvhserver->getChannelTagService()->getAll();
+$channelTags = $tvhserver->getChannelTagModule()->getAll();
 if (!$channelTags) {
 	exit;
 }
@@ -112,7 +112,7 @@ $filter = array('name' => 'TV channels');
 //$filter = array('enabled' => true);
 //$filter = array('index' => 0);
 //$filter = array('enabled' => true, 'name' => 'TV channels');
-$channelTags = $tvhserver->getChannelTagService()->get($filter);
+$channelTags = $tvhserver->getChannelTagModule()->get($filter);
 if (!$channelTags) {
 	exit;
 }
@@ -128,16 +128,16 @@ foreach ($channelTags as $channelTag) {
 echo PHP_EOL;
 
 /* save node
-$sucess = $tvhserver->getNodeService()->save('#uuid#', array('number' => '1'));
+$sucess = $tvhserver->getNodeModule()->save('#uuid#', array('number' => '1'));
 */
 /* get node
-$node = $tvhserver->getNodeService()->get('#uuid#');
+$node = $tvhserver->getNodeModule()->get('#uuid#');
 */
 /* delete node
-$node = $tvhserver->getNodeService()->delete('#uuid#');
+$node = $tvhserver->getNodeModule()->delete('#uuid#');
 */
 /* create channel tag
-$uuid = $tvhserver->getChannelTagService()->create(array('name' => 'dummy'));
+$uuid = $tvhserver->getChannelTagModule()->create(array('name' => 'dummy'));
 */
 
 function sortByID($a, $b) { return ($a->number > $b->number); }

@@ -1,8 +1,8 @@
 <?php
-namespace Tvheadend\Services;
+namespace Tvheadend\Modules;
 use Tvheadend\Models;
 
-class ChannelTag extends AbstractExtendedService {
+class ChannelTag extends AbstractExtendedModule {
 	/**
 	 * @see Tvheadend\Services\ExtendedBase
 	 */

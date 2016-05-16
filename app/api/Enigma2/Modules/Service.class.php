@@ -1,10 +1,15 @@
 <?php
-namespace Enigma2\Services;
+namespace Enigma2\Modules;
 use Enigma2\Models;
 
-class Service extends AbstractExtendedService {
+class Service extends AbstractExtendedModule {
 	const SERVICES_TV = 'TV';
 	const SERVICES_RADIO = 'RADIO';
+
+	/**
+	 * @var string
+	 */
+	protected $filterXMLTag = 'e2service';
 
 	/**
 	 * @var string
@@ -30,7 +35,7 @@ class Service extends AbstractExtendedService {
 
 		$response = $this->_client->doPost('/web/getservices', $parameters);
 
-		$content = $this->xml2json($response->getContent(), 'e2service');
+		$content = $this->getResult($response->getContent(), $this->filterXMLTag);
 		foreach ($content as $entry) {
 			$services[] = new Models\Service($entry);
 		}

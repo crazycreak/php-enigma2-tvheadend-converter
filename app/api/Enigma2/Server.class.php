@@ -1,6 +1,6 @@
 <?php
 namespace Enigma2;
-use Enigma2\Services\Service as ServiceService;
+use Enigma2\Modules\Service as ServiceModule;
 use Http\Client;
 
 class Server {
@@ -10,9 +10,9 @@ class Server {
 	private $_client;
 
 	/**
-	 * @var Enigma2\Services\Service
+	 * @var Enigma2\Modules\Service
 	 */
-	private $_serviceService = null;
+	private $_serviceModule = null;
 
 	/**
 	 * constructor
@@ -27,14 +27,14 @@ class Server {
 	}
 
 	/**
-	 * @return	Tvheadend\Services\Service
+	 * @return	Tvheadend\Modules\Service
 	 */
-	public function getServiceService() {
-		if ($this->_serviceService == null) {
-			$this->_serviceService = new ServiceService($this->getClient());
+	public function getServiceModule() {
+		if ($this->_serviceModule == null) {
+			$this->_serviceModule = new ServiceModule($this->getClient());
 		}
 
-		return $this->_serviceService;
+		return $this->_serviceModule;
 	}
 
 	/**
