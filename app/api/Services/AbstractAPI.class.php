@@ -162,6 +162,14 @@ abstract class AbstractAPI {
 		return $result;
 	}
 
+	public function getRequest() {
+		return $this->request;
+	}
+
+	public function getRequestData() {
+		return $this->requestData;
+	}
+
 	public function process() {
 		if (!method_exists($this, $this->endpoint)) {
 			throw new UnknownException();
