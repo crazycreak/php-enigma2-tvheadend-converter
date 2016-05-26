@@ -1,8 +1,8 @@
 <?php
-namespace Tvheadend\Services;
+namespace Tvheadend\Modules;
 use Tvheadend\Models;
 
-class Service extends AbstractExtendedService {
+class Service extends AbstractExtendedModule {
 	/**
 	 * returns a filterd list of services
 	 * @param	array			$filters

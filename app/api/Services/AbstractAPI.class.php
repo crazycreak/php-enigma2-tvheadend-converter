@@ -41,6 +41,11 @@ abstract class AbstractAPI {
 	protected $apiVersionParameter = 'v';
 
 	/**
+	 * Data
+	 */
+	protected $data = array();
+
+	/**
 	 * Request
 	 */
 	protected $request = '';
@@ -61,15 +66,21 @@ abstract class AbstractAPI {
 	protected $endpoint = '';
 
 	/**
-	 * Result Data
+	 * Response Data
 	 */
-	protected $resultData = array();
+	protected $responseData = array();
 
 	/**
 	 * constructor
 	 */
 	public function __construct() {
-		// init defaults
+		$this->init();
+	}
+
+	/**
+	 * initialize defaults
+	 */
+	protected function init() {
 		$this->initApi();
 		$this->initMethod();
 		$this->initRequest();
@@ -151,15 +162,23 @@ abstract class AbstractAPI {
 	}
 
 	protected function cleanInputs($data) {
-		$result = Array();
+		$_data = Array();
 		if (is_array($data)) {
 			foreach ($data as $key => $value) {
-				$result[$key] = $this->cleanInputs($value);
+				$_data[$key] = $this->cleanInputs($value);
 			}
 		} else {
-			$result = trim(strip_tags($data));
+			$_data = trim(strip_tags($data));
 		}
-		return $result;
+		return $_data;
+	}
+
+	public function getRequest() {
+		return $this->request;
+	}
+
+	public function getRequestData() {
+		return $this->requestData;
 	}
 
 	public function process() {
@@ -172,15 +191,16 @@ abstract class AbstractAPI {
 		return $this->response();
 	}
 
-	private function response($statusCode = 200) {
+	protected function response($statusCode = 200) {
 		$statusMessage = $this->getStatusMessage($statusCode);
-		// build result
-		$result = array(
+
+		$this->responseData = array(
 			'code' => $statusCode,
 			'message' => $statusMessage,
-			'data' => $this->resultData
+			'data' => $this->data
 		);
-		return $result;
+
+		return $this->responseData;
 	}
 
 	private function getStatusMessage($statusCode) {

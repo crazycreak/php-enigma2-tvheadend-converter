@@ -1,13 +1,13 @@
 <?php
-namespace Tvheadend\Services;
-use Services\AbstractService;
-use Tvheadend\Services\Message as MessageService;
+namespace Tvheadend\Modules;
+use Modules\AbstractModule;
+use Tvheadend\Modules\Message as MessageModule;
 
-abstract class ExtendedServiceBase extends AbstractService {
+abstract class AbstractExtendedModule extends AbstractModule {
 	/**
 	 * @var Tvheadend\Services\Message
 	 */
-	private $_messageService = null;
+	private $_messageModule = null;
 
 	/**
 	 * @var string
@@ -20,7 +20,7 @@ abstract class ExtendedServiceBase extends AbstractService {
 	public function __construct($client) {
 		parent::__construct($client);
 
-		$this->_messageService = new MessageService($client);
+		$this->_messageModule = new MessageModule($client);
 	}
 
 	/**
@@ -29,15 +29,15 @@ abstract class ExtendedServiceBase extends AbstractService {
 	protected function getClient() {
 		$client = parent::getClient();
 		// update before return the client
-		$this->getMessageService()->update();
+		$this->getMessageModule()->update();
 		return $client;
 	}
 
 	/**
 	 * @return Tvheadend\Services\Message
 	 */
-	protected function getMessageService() {
-		return $this->_messageService;
+	protected function getMessageModule() {
+		return $this->_messageModule;
 	}
 
 	/**
@@ -59,7 +59,7 @@ abstract class ExtendedServiceBase extends AbstractService {
 	 * @return array
 	 */
 	protected function getNotifications() {
-		$all = $this->getMessageService()->get();
+		$all = $this->getMessageModule()->get();
 		$messages = array_filter(
 			$all,
 			function ($message) {

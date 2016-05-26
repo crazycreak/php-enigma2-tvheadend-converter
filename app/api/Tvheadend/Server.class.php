@@ -1,10 +1,10 @@
 <?php
 namespace Tvheadend;
 use Http\Client;
-use Tvheadend\Services\Node as NodeService;
-use Tvheadend\Services\Channel as ChannelService;
-use Tvheadend\Services\ChannelTag as ChannelTagService;
-use Tvheadend\Services\Service as ServiceService;
+use Tvheadend\Modules\Node as NodeModule;
+use Tvheadend\Modules\Channel as ChannelModule;
+use Tvheadend\Modules\ChannelTag as ChannelTagModule;
+use Tvheadend\Modules\Service as ServiceModule;
 
 class Server {
 	/**
@@ -13,24 +13,24 @@ class Server {
 	private $_client = null;
 
 	/**
-	 * @var Tvheadend\Services\Node
+	 * @var Tvheadend\Modules\Node
 	 */
-	private $_nodeService = null;
+	private $_nodeModule = null;
 
 	/**
-	 * @var Tvheadend\Services\Channel
+	 * @var Tvheadend\Modules\Channel
 	 */
-	private $_channelService = null;
+	private $_channelModule = null;
 
 	/**
-	 * @var Tvheadend\Services\ChannelTag
+	 * @var Tvheadend\Modules\ChannelTag
 	 */
-	private $_channelTagService = null;
+	private $_channelTagModule = null;
 
 	/**
-	 * @var Tvheadend\Services\Service
+	 * @var Tvheadend\Modules\Service
 	 */
-	private $_serviceService = null;
+	private $_serviceModule = null;
 
 	/**
 	 * constructor
@@ -51,47 +51,47 @@ class Server {
 	}
 
 	/**
-	 * @return	Tvheadend\Services\Node
+	 * @return	Tvheadend\Modules\Node
 	 */
-	public function getNodeService() {
-		if ($this->_nodeService == null) {
-			$this->_nodeService = new NodeService($this->getClient());
+	public function getNodeModule() {
+		if ($this->_nodeModule == null) {
+			$this->_nodeModule = new NodeModule($this->getClient());
 		}
 
-		return $this->_nodeService;
+		return $this->_nodeModule;
 	}
 
 	/**
-	 * @return	Tvheadend\Services\Channel
+	 * @return	Tvheadend\Modules\Channel
 	 */
-	public function getChannelService() {
-		if ($this->_channelService == null) {
-			$this->_channelService = new ChannelService($this->getClient());
+	public function getChannelModule() {
+		if ($this->_channelModule == null) {
+			$this->_channelModule = new ChannelModule($this->getClient());
 		}
 
-		return $this->_channelService;
+		return $this->_channelModule;
 	}
 
 	/**
-	 * @return	Tvheadend\Services\ChannelTag
+	 * @return	Tvheadend\Modules\ChannelTag
 	 */
-	public function getChannelTagService() {
-		if ($this->_channelTagService == null) {
-			$this->_channelTagService = new ChannelTagService($this->getClient());
+	public function getChannelTagModule() {
+		if ($this->_channelTagModule == null) {
+			$this->_channelTagModule = new ChannelTagModule($this->getClient());
 		}
 
-		return $this->_channelTagService;
+		return $this->_channelTagModule;
 	}
 
 	/**
-	 * @return	Tvheadend\Services\Service
+	 * @return	Tvheadend\Modules\Service
 	 */
-	public function getServiceService() {
-		if ($this->_serviceService == null) {
-			$this->_serviceService = new ServiceService($this->getClient());
+	public function getServiceModule() {
+		if ($this->_serviceModule == null) {
+			$this->_serviceModule = new ServiceModule($this->getClient());
 		}
 
-		return $this->_serviceService;
+		return $this->_serviceModule;
 	}
 
 	/**
@@ -107,7 +107,7 @@ class Server {
 	 * @param	string			$password
 	 */
 	protected function setCredentials($username, $password) {
-		$this->_client->setCredentials($username, $password);
+		$this->getClient()->setCredentials($username, $password);
 	}
 
 	/**
@@ -116,13 +116,13 @@ class Server {
 	 * @param	string			$password
 	 */
 	protected function setHeaders($headers) {
-		$this->_client->setHeaders($headers);
+		$this->getClient()->setHeaders($headers);
 	}
 
 	/**
 	 * try connection
 	 */
 	protected function attemptConnection() {
-		$this->_client->doGet('/');
+		$this->getClient()->doGet('/');
 	}
 }

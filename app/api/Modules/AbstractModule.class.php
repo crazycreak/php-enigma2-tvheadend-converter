@@ -1,7 +1,7 @@
 <?php
-namespace Services;
+namespace Modules;
 
-abstract class AbstractService {
+abstract class AbstractModule {
 	/**
 	 * @var Http\Client
 	 */
