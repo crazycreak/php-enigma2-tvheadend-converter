@@ -98,4 +98,13 @@ class Service extends AbstractExtendedModule {
 		}
 		return false;
 	}
+
+	/**
+	 * returns the list of services by reference
+	 * @param	string			$sref
+	 * @return	array<\Enigma2\Models\Service>
+	 */
+	public function getChannels($sref = '') {
+		return $this->get($sref);
+	}
 }
