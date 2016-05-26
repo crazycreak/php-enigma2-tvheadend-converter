@@ -1,3 +1,2 @@
-.enigma2-box .bouquet-list {padding-top:10px;}
-.enigma2-box .bouquet-item .service-name {padding-left:10px;}
-.enigma2-box .channel-list {padding-top:10px;}
+.enigma2-box .channel-item > .service-name {padding-left: 10px;}
+.enigma2-box .bouquets-actionbar > .btn {margin-left: 10px;}

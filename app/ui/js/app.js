@@ -15,7 +15,7 @@ var Enigma2ChannelItem = React.createClass({
 
 		return (
 			<li className="channel-item list-group-item">
-				<BootstrapButton className="btn-danger btn-xs">map</BootstrapButton>
+				<BootstrapButton className="btn-info btn-xs">map</BootstrapButton>
 				<span className="service-name">{servicename}</span>
 			</li>
 		);
@@ -26,8 +26,7 @@ var Enigma2ChannelList = React.createClass({
 	contextTypes: {
 		url: React.PropTypes.string
 	},
-	loadChannelsFromServer: function() {
-		this.setState({data: []});
+	loadChannels: function() {
 		var channelsUrl = this.context.url + '/service/channels/' + this.props.servicereference;
 
 		$.ajax({
@@ -43,6 +42,9 @@ var Enigma2ChannelList = React.createClass({
 				console.error(channelsUrl, status, err.toString());
 			}.bind(this)
 		});
+	},
+	clearChannels: function() {
+		this.setState({data: []});
 	},
 	getInitialState: function() {
 		return {data: []};
@@ -67,19 +69,27 @@ var Enigma2ChannelList = React.createClass({
 });
 
 var Enigma2BouquetItem = React.createClass({
-	openChannelList: function () {
-		this.refs.channelList.loadChannelsFromServer();
+	loadChannels: function () {
+		this.refs.channelList.loadChannels();
+	},
+	clearChannels: function () {
+		this.refs.channelList.clearChannels();
 	},
 	render: function() {
 		var servicename = this.props.data.e2servicename;
 		var servicereference = this.props.data.e2servicereference;
 
 		return (
-			<li className="bouquet-item list-group-item">
-				<BootstrapButton className="btn-primary btn-xs" onClick={this.openChannelList}>channels</BootstrapButton>
-				<span className="service-name">{servicename}</span>
+			<div className="panel panel-default">
+				<div className="panel-heading">
+					<span className="service-name">{servicename}</span>
+				</div>
+				<div className="panel-body">
+					<BootstrapButton className="btn-primary btn-xs" onClick={this.loadChannels}>channels</BootstrapButton>
+					<BootstrapButton className="btn-danger btn-xs pull-right" onClick={this.clearChannels}>clear</BootstrapButton>
+				</div>
 				<Enigma2ChannelList ref="channelList" servicereference={servicereference} />
-			</li>
+			</div>
 		);
 	}
 });
@@ -89,7 +99,6 @@ var Enigma2BouquetList = React.createClass({
 		url: React.PropTypes.string
 	},
 	loadBouquets: function() {
-		this.setState({data: []});
 		var bouquetsUrl = this.context.url + '/service/bouquets/tv';
 
 		$.ajax({
@@ -106,11 +115,11 @@ var Enigma2BouquetList = React.createClass({
 			}.bind(this)
 		});
 	},
+	clearBouquets: function() {
+		this.setState({data: []});
+	},
 	getInitialState: function() {
 		return {data: []};
-	},
-	componentDidMount: function() {
-		this.loadBouquets();
 	},
 	render: function() {
 		var bouquetItems = this.state.data.map(function(item) {
@@ -119,16 +128,19 @@ var Enigma2BouquetList = React.createClass({
 			);
 		});
 		return (
-			<ul className="bouquet-list list-group">
+			<div className="bouquets">
 				{bouquetItems}
-			</ul>
+			</div>
 		);
 	}
 });
 
 var Enigma2Box = React.createClass({
-	reloadBouquets: function () {
+	loadBouquets: function () {
 		this.refs.bouquetList.loadBouquets();
+	},
+	clearBouquets: function () {
+		this.refs.bouquetList.clearBouquets();
 	},
 	getInitialState: function() {
 		return {url: ''};
@@ -145,8 +157,23 @@ var Enigma2Box = React.createClass({
 	render: function() {
 		return (
 			<div className="enigma2-box">
-				<BootstrapButton className="btn-default" onClick={this.reloadBouquets}>reload</BootstrapButton>
-				<Enigma2BouquetList ref="bouquetList" />
+				<ul className="nav nav-tabs" role="tablist">
+					<li role="presentation" className="active"><a href="#bouquets" aria-controls="bouquets" role="tab" data-toggle="tab">Bouquets</a></li>
+					<li role="presentation"><a href="#provider" aria-controls="provider" role="tab" data-toggle="tab">Provider</a></li>
+				</ul>
+				<div className="tab-content">
+					<div role="tabpanel" className="tab-pane active" id="bouquets">
+						<div className="well well-sm bouquets-actionbar">
+							<span className="text-uppercase">actionbar:</span>
+							<BootstrapButton className="btn-info btn-sm" onClick={this.loadBouquets}>load</BootstrapButton>
+							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearBouquets}>clear</BootstrapButton>
+						</div>
+						<Enigma2BouquetList ref="bouquetList" />
+					</div>
+					<div role="tabpanel" className="tab-pane" id="provider">
+						<div className="well well-sm">fixme...</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -154,10 +181,8 @@ var Enigma2Box = React.createClass({
 
 var App = React.createClass({
 	render: function() {
-		var enigma2BoxHeaderMessage = 'Enigma2 Box!';
-		var enigma2BoxHeader = null;
-
-		enigma2BoxHeader = (
+		var enigma2BoxHeaderMessage = 'Enigma2';
+		var enigma2BoxHeader = (
 			<h1>{enigma2BoxHeaderMessage}</h1>
 		);
 
