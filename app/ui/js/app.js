@@ -34,7 +34,7 @@ var Enigma2BouquetList = React.createClass({
 
 var Enigma2Box = React.createClass({
 	loadBouquetsFromServer: function() {
-		var bouquetsUrl = this.props.url + '/bouquets/tv';
+		var bouquetsUrl = this.props.url + '/service/bouquets/tv';
 
 		$.ajax({
 			url: bouquetsUrl,
