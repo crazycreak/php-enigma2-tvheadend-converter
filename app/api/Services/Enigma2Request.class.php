@@ -19,7 +19,8 @@ class Enigma2Request extends AbstractRequest {
 		'bouquets' => array(
 			'tv' => Enigma2ServiceModule::SERVICES_TV,
 			'radio' => Enigma2ServiceModule::SERVICES_RADIO
-		)
+		),
+		'channels' => true
 	);
 
 	/**
@@ -53,10 +54,17 @@ class Enigma2Request extends AbstractRequest {
 		// [2] parameter - optional
 		$parameter = '';
 		if (isset($this->request[2]) && !empty($this->request[2])) {
-			$parameterKey = $this->request[2];
 			// check is valid
-			if (isset($this->enigma2Parameters[$methodKey]) && isset($this->enigma2Parameters[$methodKey][$parameterKey])) {
-				$parameter = $this->enigma2Parameters[$methodKey][$parameterKey];
+			if (isset($this->enigma2Parameters[$methodKey])) {
+				// check mapping exists
+				$parameterValue = $this->request[2];
+				if ($this->enigma2Parameters[$methodKey] === true) {
+					// value as parameter
+					$parameter = $parameterValue;
+				} else if (isset($this->enigma2Parameters[$methodKey][$parameterValue])) {
+					// mapping per array
+					$parameter = $this->enigma2Parameters[$methodKey][$parameterValue];
+				}
 			}
 		}
 		// call server
