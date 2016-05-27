@@ -77,7 +77,7 @@ var Enigma2ChannelList = React.createClass({
 	}
 });
 
-var Enigma2BouquetItem = React.createClass({
+var Enigma2ServiceItem = React.createClass({
 	loadChannels: function () {
 		this.refs.channelList.loadChannels();
 	},
@@ -103,15 +103,15 @@ var Enigma2BouquetItem = React.createClass({
 	}
 });
 
-var Enigma2BouquetList = React.createClass({
+var Enigma2ServiceList = React.createClass({
 	contextTypes: {
 		url: React.PropTypes.string
 	},
-	loadBouquets: function() {
-		var bouquetsUrl = this.context.url + '/service/bouquets/tv';
+	loadServices: function() {
+		var serviceUrl = this.context.url + '/service/' + this.props.type + '/tv';
 
 		$.ajax({
-			url: bouquetsUrl,
+			url: serviceUrl,
 			dataType: 'json',
 			cache: false,
 			success: function(data) {
@@ -120,25 +120,25 @@ var Enigma2BouquetList = React.createClass({
 				}
 			}.bind(this),
 			error: function(xhr, status, err) {
-				console.error(bouquetsUrl, status, err.toString());
+				console.error(serviceUrl, status, err.toString());
 			}.bind(this)
 		});
 	},
-	clearBouquets: function() {
+	clearServices: function() {
 		this.setState({data: []});
 	},
 	getInitialState: function() {
 		return {data: []};
 	},
 	render: function() {
-		var bouquetItems = this.state.data.map(function(item) {
+		var items = this.state.data.map(function(item) {
 			return (
-				<Enigma2BouquetItem data={item} />
+				<Enigma2ServiceItem data={item} />
 			);
 		});
 		return (
-			<div className="bouquets">
-				{bouquetItems}
+			<div className="services">
+				{items}
 			</div>
 		);
 	}
@@ -146,10 +146,16 @@ var Enigma2BouquetList = React.createClass({
 
 var Enigma2Box = React.createClass({
 	loadBouquets: function () {
-		this.refs.bouquetList.loadBouquets();
+		this.refs.bouquetService.loadServices();
 	},
 	clearBouquets: function () {
-		this.refs.bouquetList.clearBouquets();
+		this.refs.bouquetService.clearServices();
+	},
+	loadProvider: function () {
+		this.refs.providerService.loadServices();
+	},
+	clearProvider: function () {
+		this.refs.providerService.clearServices();
 	},
 	getInitialState: function() {
 		return {url: ''};
@@ -172,15 +178,20 @@ var Enigma2Box = React.createClass({
 				</ul>
 				<div className="tab-content">
 					<div role="tabpanel" className="tab-pane active" id="bouquets">
-						<div className="well well-sm bouquets-actionbar">
+						<div className="well well-sm service-actionbar">
 							<span className="text-uppercase">actionbar:</span>
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadBouquets}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearBouquets}>clear</BootstrapButton>
 						</div>
-						<Enigma2BouquetList ref="bouquetList" />
+						<Enigma2ServiceList ref="bouquetService" type="bouquets" />
 					</div>
 					<div role="tabpanel" className="tab-pane" id="provider">
-						<div className="well well-sm">fixme...</div>
+						<div className="well well-sm service-actionbar">
+							<span className="text-uppercase">actionbar:</span>
+							<BootstrapButton className="btn-info btn-sm" onClick={this.loadProvider}>load</BootstrapButton>
+							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearProvider}>clear</BootstrapButton>
+						</div>
+						<Enigma2ServiceList ref="providerService" type="provider" />
 					</div>
 				</div>
 			</div>

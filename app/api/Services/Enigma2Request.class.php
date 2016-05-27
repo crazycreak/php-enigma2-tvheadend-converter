@@ -20,6 +20,10 @@ class Enigma2Request extends AbstractRequest {
 			'tv' => Enigma2ServiceModule::SERVICES_TV,
 			'radio' => Enigma2ServiceModule::SERVICES_RADIO
 		),
+		'provider' => array(
+			'tv' => Enigma2ServiceModule::SERVICES_TV,
+			'radio' => Enigma2ServiceModule::SERVICES_RADIO
+		),
 		'channels' => true
 	);
 
