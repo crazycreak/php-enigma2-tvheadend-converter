@@ -1,12 +1,6 @@
 <?php
-$entry = 'enigma2';
-if (!empty($_REQUEST['entry'])) $entry = $_REQUEST['entry'];
-
-$navigation = array(
-	'enigma2' => 'Enigma2',
-	'tvheadend' => 'TVHeadend'
-);
-
+// handle request
+include('request.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,15 +10,11 @@ $navigation = array(
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>enigma2-tvheadend-converter</title>
 	<!-- Stylesheet's -->
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/bootstrap-theme.min.css" />
-	<link rel="stylesheet" href="css/app.css" />
+	<link rel="stylesheet" href="/ui/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/ui/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" href="/ui/css/app.css" />
 	<!-- Javascript's -->
-	<script src="js/react.min.js"></script>
-	<script src="js/react-dom.min.js"></script>
-	<script src="js/babel.min.js"></script>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script>var app = "<?= $active_entry ?>";</script>
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -40,9 +30,9 @@ $navigation = array(
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<? foreach ($navigation as $href => $name): ?>
-						<? $class = ($href == $entry) ? ' class="active"' : ''; ?>
-						<li<?= $class ?>><a href="<?= $href ?>"><?= $name ?></a></li>
+					<? foreach ($entrys as $entry => $name): ?>
+						<? $class = ($entry == $active_entry) ? ' class="active"' : ''; ?>
+						<li<?= $class ?>><a href="<?= $entry ?>"><?= $name ?></a></li>
 					<? endforeach; ?>
 				</ul>
 			</div>
@@ -50,6 +40,6 @@ $navigation = array(
 	</nav>
 	<!-- App -->
 	<div id="appContainer" class="container"></div>
-	<script type="text/babel" src="js/app.js"></script>
+	<script src="/ui/js/build/app.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 body {padding-top: 50px;}
-.enigma2-box .service-actionbar {margin-top: 10px;}
-.enigma2-box .service-actionbar > .btn {margin-left: 10px;}
-.enigma2-box .channel-item > .service-name {padding-left: 10px;}
-.enigma2-box .channel-item > .number {margin-left: 10px;}
+.enigma2-app .service-actionbar {margin-top: 10px;}
+.enigma2-app .service-actionbar > .btn {margin-left: 10px;}
+.enigma2-app .channel-item > .service-name {padding-left: 10px;}
+.enigma2-app .channel-item > .number {margin-left: 10px;}
