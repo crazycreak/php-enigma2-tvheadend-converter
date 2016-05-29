@@ -1,4 +1,4 @@
 <?php
-define('TVHEADEND_HOST', 'openelec.home');
-define('ENIGMA2_HOST', 'dm7020hd.home');
+define('TVHEADEND_HOST', 'NAME_OR_IP');
+define('ENIGMA2_HOST', 'NAME_OR_IP');
 ?>
