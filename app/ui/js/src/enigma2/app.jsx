@@ -1,36 +1,53 @@
-var React = require('react');
-var BootstrapButton = require('bootstrap-button');
-var ServiceList = require('./ServiceList');
+import React, { Component, PropTypes } from 'react';
+import BootstrapButton from 'bootstrap-button';
+import ServiceList from './ServiceList.jsx';
 
-module.exports = React.createClass({
-	loadBouquets: function () {
+export default class Enigma2App extends Component {
+	// define required / optional properties
+	static propTypes = {
+		url: PropTypes.string.isRequired
+	}
+	// define default properties
+	static defaultProps = {
+        	url: '/api/v1/enigma2'
+	}
+	// child context variables
+	static childContextTypes = {
+		url: PropTypes.string
+	}
+	// get context function
+	getChildContext() {
+		return { url: this.state.url }
+	}
+	// initial state
+	state = {
+		url: this.props.url
+	}
+
+	constructor(props) {
+		super(props);
+	}
+
+	loadBouquets = () => {
 		this.refs.bouquetService.loadServices();
-	},
-	clearBouquets: function () {
+	}
+
+	clearBouquets = () => {
 		this.refs.bouquetService.clearServices();
-	},
-	loadProvider: function () {
+	}
+
+	loadProvider = () => {
 		this.refs.providerService.loadServices();
-	},
-	clearProvider: function () {
+	}
+
+	clearProvider = () => {
 		this.refs.providerService.clearServices();
-	},
-	getInitialState: function() {
-		return {url: ''};
-	},
-	childContextTypes: {
-		url: React.PropTypes.string
-	},
-	getChildContext: function() {
-		return {url: this.state.url};
-	},
-	componentWillMount: function() {
-		this.setState({url: this.props.url});
-	},
-	render: function() {
-		var headerMessage = 'Enigma2';
+	}
+
+	render() {
+		var message = 'Enigma2';
 		var header = (
-			<h1>{headerMessage}</h1>
+			<h1>{message}</h1>
 		);
 
 		return (
@@ -61,4 +78,4 @@ module.exports = React.createClass({
 			</div>
 		);
 	}
-});
+}

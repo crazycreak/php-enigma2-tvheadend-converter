@@ -2,389 +2,699 @@
 (function (global){
 'use strict';
 
-// app.js
-/*
- * Core
- */
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _enigma2App = require('enigma2-app');
+
+var _enigma2App2 = _interopRequireDefault(_enigma2App);
+
+var _tvheadendApp = require('tvheadend-app');
+
+var _tvheadendApp2 = _interopRequireDefault(_tvheadendApp);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// es6 import not working for jquery/bootstrap
 var $ = require("jquery");
 global.jQuery = $;
 var bootstrap = require('bootstrap');
-var ReactDOM = require('react-dom');
-var React = require('react');
 
 /*
  * Enigma2App
  */
-var Enigma2App = require('enigma2-app');
+
 
 /*
  * TVHeadendApp
  */
-var TVHeadendApp = require('tvheadend-app');
+
 
 /*
  * render app
  */
-if (app == 'enigma2') ReactDOM.render(React.createElement(Enigma2App, { url: '/api/v1/enigma2' }), document.getElementById('appContainer'));else if (app == 'tvheadend') ReactDOM.render(React.createElement(TVHeadendApp, { url: '/api/v1/enigma2' }), document.getElementById('appContainer'));
+if (app == 'enigma2') _reactDom2.default.render(_react2.default.createElement(_enigma2App2.default, { url: '/api/v1/enigma2' }), document.getElementById('appContainer'));else if (app == 'tvheadend') _reactDom2.default.render(_react2.default.createElement(_tvheadendApp2.default, { url: '/api/v1/enigma2' }), document.getElementById('appContainer'));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"bootstrap":9,"enigma2-app":7,"jquery":23,"react":189,"react-dom":24,"tvheadend-app":8}],2:[function(require,module,exports){
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var React = require('react');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-module.exports = React.createClass({
-	displayName: "exports",
+var _react = require("react");
 
-	render: function render() {
-		return React.createElement("a", _extends({}, this.props, {
-			href: "javascript:;",
-			role: "button",
-			className: (this.props.className || '') + ' btn' }));
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Enigma2App = function (_Component) {
+	_inherits(Enigma2App, _Component);
+
+	function Enigma2App(props) {
+		_classCallCheck(this, Enigma2App);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Enigma2App).call(this, props));
+
+		_this.state = {
+			props: _this.props,
+			className: _this.props.className
+		};
+		return _this;
 	}
-});
+	// initial state
+
+
+	_createClass(Enigma2App, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement("a", _extends({}, this.state.props, {
+				href: "javascript:;",
+				role: "button",
+				className: (this.state.className || '') + ' btn' }));
+		}
+	}]);
+
+	return Enigma2App;
+}(_react.Component);
+
+exports.default = Enigma2App;
 
 },{"react":189}],3:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-var BootstrapButton = require('bootstrap-button');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	render: function render() {
-		var servicename = this.props.data.e2servicename;
-		if (typeof this.props.data.e2servicename != 'undefined') {
-			servicename = React.createElement(
-				'span',
-				{ className: 'service-name' },
-				this.props.data.e2servicename
-			);
-		}
-
-		var number = null;
-		if (typeof this.props.data.number != 'undefined') {
-			number = React.createElement(
-				'span',
-				{ className: 'number label label-default' },
-				this.props.data.number
-			);
-		}
-
-		return React.createElement(
-			'li',
-			{ className: 'channel-item list-group-item' },
-			React.createElement(
-				BootstrapButton,
-				{ className: 'btn-info btn-xs' },
-				'map'
-			),
-			number,
-			servicename
-		);
-	}
+Object.defineProperty(exports, "__esModule", {
+	value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _bootstrapButton = require('bootstrap-button');
+
+var _bootstrapButton2 = _interopRequireDefault(_bootstrapButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChannelItem = function (_Component) {
+	_inherits(ChannelItem, _Component);
+
+	function ChannelItem(props) {
+		_classCallCheck(this, ChannelItem);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChannelItem).call(this, props));
+
+		_this.state = {
+			data: _this.props.data
+		};
+		return _this;
+	}
+	// initial state
+
+
+	_createClass(ChannelItem, [{
+		key: 'render',
+		value: function render() {
+			var servicename = null;
+			if (typeof this.state.data.e2servicename != 'undefined') {
+				servicename = _react2.default.createElement(
+					'span',
+					{ className: 'service-name' },
+					this.state.data.e2servicename
+				);
+			}
+
+			var number = null;
+			if (typeof this.state.data.number != 'undefined') {
+				number = _react2.default.createElement(
+					'span',
+					{ className: 'number label label-default' },
+					this.state.data.number
+				);
+			}
+
+			return _react2.default.createElement(
+				'li',
+				{ className: 'channel-item list-group-item' },
+				_react2.default.createElement(
+					_bootstrapButton2.default,
+					{ className: 'btn-info btn-xs' },
+					'map'
+				),
+				number,
+				servicename
+			);
+		}
+	}]);
+
+	return ChannelItem;
+}(_react.Component);
+
+exports.default = ChannelItem;
 
 },{"bootstrap-button":2,"react":189}],4:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-var $ = require("jquery");
-var ChannelItem = require('./ChannelItem');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	contextTypes: {
-		url: React.PropTypes.string
-	},
-	loadChannels: function loadChannels() {
-		var channelsUrl = this.context.url + '/service/channels/' + this.props.servicereference;
-
-		$.ajax({
-			url: channelsUrl,
-			dataType: 'json',
-			cache: false,
-			success: function (data) {
-				if (data['code'] == 200) {
-					this.setState({ data: data['data'] });
-				}
-			}.bind(this),
-			error: function (xhr, status, err) {
-				console.error(channelsUrl, status, err.toString());
-			}.bind(this)
-		});
-	},
-	clearChannels: function clearChannels() {
-		this.setState({ data: [] });
-	},
-	getInitialState: function getInitialState() {
-		return { data: [] };
-	},
-	render: function render() {
-		if (this.state.data.length === 0) {
-			return React.createElement('div', { className: 'empty' });
-		}
-		var channelItems = this.state.data.map(function (item) {
-			return React.createElement(ChannelItem, { data: item });
-		});
-		return React.createElement(
-			'ul',
-			{ className: 'channel-list list-group' },
-			channelItems
-		);
-	}
+Object.defineProperty(exports, "__esModule", {
+	value: true
 });
 
-},{"./ChannelItem":3,"jquery":23,"react":189}],5:[function(require,module,exports){
-'use strict';
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var React = require('react');
-var BootstrapButton = require('bootstrap-button');
-var ChannelList = require('./ChannelList');
+var _react = require('react');
 
-module.exports = React.createClass({
-	displayName: 'exports',
+var _react2 = _interopRequireDefault(_react);
 
-	loadChannels: function loadChannels() {
-		this.refs.channelList.loadChannels();
-	},
-	clearChannels: function clearChannels() {
-		this.refs.channelList.clearChannels();
-	},
-	render: function render() {
-		var servicename = this.props.data.e2servicename;
-		var servicereference = this.props.data.e2servicereference;
+var _jquery = require('jquery');
 
-		return React.createElement(
-			'div',
-			{ className: 'panel panel-default' },
-			React.createElement(
-				'div',
-				{ className: 'panel-heading' },
-				React.createElement(
-					'span',
-					{ className: 'service-name' },
-					servicename
-				)
-			),
-			React.createElement(
-				'div',
-				{ className: 'panel-body' },
-				React.createElement(
-					BootstrapButton,
-					{ className: 'btn-primary btn-xs', onClick: this.loadChannels },
-					'channels'
-				),
-				React.createElement(
-					BootstrapButton,
-					{ className: 'btn-danger btn-xs pull-right', onClick: this.clearChannels },
-					'clear'
-				)
-			),
-			React.createElement(ChannelList, { ref: 'channelList', servicereference: servicereference })
-		);
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _ChannelItem = require('./ChannelItem.jsx');
+
+var _ChannelItem2 = _interopRequireDefault(_ChannelItem);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChannelList = function (_Component) {
+	_inherits(ChannelList, _Component);
+
+	// context variables
+
+	function ChannelList(props) {
+		_classCallCheck(this, ChannelList);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChannelList).call(this, props));
+
+		_this.state = {
+			servicereference: _this.props.servicereference,
+			data: []
+		};
+
+		_this.loadChannels = function () {
+			var channelsUrl = _this.context.url + '/service/channels/' + _this.state.servicereference;
+
+			_jquery2.default.ajax({
+				url: channelsUrl,
+				dataType: 'json',
+				cache: false,
+				success: function (data) {
+					if (data['code'] == 200) {
+						this.setState({ data: data['data'] });
+					}
+				}.bind(_this),
+				error: function (xhr, status, err) {
+					console.error(channelsUrl, status, err.toString());
+				}.bind(_this)
+			});
+		};
+
+		_this.clearChannels = function () {
+			_this.setState({ data: [] });
+		};
+
+		return _this;
 	}
-});
+	// initial state
 
-},{"./ChannelList":4,"bootstrap-button":2,"react":189}],6:[function(require,module,exports){
-'use strict';
 
-var React = require('react');
-var $ = require("jquery");
-var ServiceItem = require('./ServiceItem');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	contextTypes: {
-		url: React.PropTypes.string
-	},
-	loadServices: function loadServices() {
-		var serviceUrl = this.context.url + '/service/' + this.props.type + '/tv';
-
-		$.ajax({
-			url: serviceUrl,
-			dataType: 'json',
-			cache: false,
-			success: function (data) {
-				if (data['code'] == 200) {
-					this.setState({ data: data['data'] });
-				}
-			}.bind(this),
-			error: function (xhr, status, err) {
-				console.error(serviceUrl, status, err.toString());
-			}.bind(this)
-		});
-	},
-	clearServices: function clearServices() {
-		this.setState({ data: [] });
-	},
-	getInitialState: function getInitialState() {
-		return { data: [] };
-	},
-	render: function render() {
-		var items = this.state.data.map(function (item) {
-			return React.createElement(ServiceItem, { data: item });
-		});
-		return React.createElement(
-			'div',
-			{ className: 'services' },
-			items
-		);
-	}
-});
-
-},{"./ServiceItem":5,"jquery":23,"react":189}],7:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var BootstrapButton = require('bootstrap-button');
-var ServiceList = require('./ServiceList');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	loadBouquets: function loadBouquets() {
-		this.refs.bouquetService.loadServices();
-	},
-	clearBouquets: function clearBouquets() {
-		this.refs.bouquetService.clearServices();
-	},
-	loadProvider: function loadProvider() {
-		this.refs.providerService.loadServices();
-	},
-	clearProvider: function clearProvider() {
-		this.refs.providerService.clearServices();
-	},
-	getInitialState: function getInitialState() {
-		return { url: '' };
-	},
-	childContextTypes: {
-		url: React.PropTypes.string
-	},
-	getChildContext: function getChildContext() {
-		return { url: this.state.url };
-	},
-	componentWillMount: function componentWillMount() {
-		this.setState({ url: this.props.url });
-	},
-	render: function render() {
-		var headerMessage = 'Enigma2';
-		var header = React.createElement(
-			'h1',
-			null,
-			headerMessage
-		);
-
-		return React.createElement(
-			'div',
-			{ className: 'enigma2-app' },
-			header,
-			React.createElement(
+	_createClass(ChannelList, [{
+		key: 'render',
+		value: function render() {
+			if (this.state.data.length === 0) {
+				return _react2.default.createElement('div', { className: 'empty' });
+			}
+			var channelItems = this.state.data.map(function (item) {
+				return _react2.default.createElement(_ChannelItem2.default, { data: item });
+			});
+			return _react2.default.createElement(
 				'ul',
-				{ className: 'nav nav-tabs', role: 'tablist' },
-				React.createElement(
-					'li',
-					{ role: 'presentation', className: 'active' },
-					React.createElement(
-						'a',
-						{ href: '#bouquets', 'aria-controls': 'bouquets', role: 'tab', 'data-toggle': 'tab' },
-						'Bouquets'
-					)
-				),
-				React.createElement(
-					'li',
-					{ role: 'presentation' },
-					React.createElement(
-						'a',
-						{ href: '#provider', 'aria-controls': 'provider', role: 'tab', 'data-toggle': 'tab' },
-						'Provider'
-					)
-				)
-			),
-			React.createElement(
-				'div',
-				{ className: 'tab-content' },
-				React.createElement(
-					'div',
-					{ role: 'tabpanel', className: 'tab-pane active', id: 'bouquets' },
-					React.createElement(
-						'div',
-						{ className: 'well well-sm service-actionbar' },
-						React.createElement(
-							'span',
-							{ className: 'text-uppercase' },
-							'actionbar:'
-						),
-						React.createElement(
-							BootstrapButton,
-							{ className: 'btn-info btn-sm', onClick: this.loadBouquets },
-							'load'
-						),
-						React.createElement(
-							BootstrapButton,
-							{ className: 'btn-danger btn-sm', onClick: this.clearBouquets },
-							'clear'
-						)
-					),
-					React.createElement(ServiceList, { ref: 'bouquetService', type: 'bouquets' })
-				),
-				React.createElement(
-					'div',
-					{ role: 'tabpanel', className: 'tab-pane', id: 'provider' },
-					React.createElement(
-						'div',
-						{ className: 'well well-sm service-actionbar' },
-						React.createElement(
-							'span',
-							{ className: 'text-uppercase' },
-							'actionbar:'
-						),
-						React.createElement(
-							BootstrapButton,
-							{ className: 'btn-info btn-sm', onClick: this.loadProvider },
-							'load'
-						),
-						React.createElement(
-							BootstrapButton,
-							{ className: 'btn-danger btn-sm', onClick: this.clearProvider },
-							'clear'
-						)
-					),
-					React.createElement(ServiceList, { ref: 'providerService', type: 'provider' })
-				)
-			)
-		);
-	}
-});
+				{ className: 'channel-list list-group' },
+				channelItems
+			);
+		}
+	}]);
 
-},{"./ServiceList":6,"bootstrap-button":2,"react":189}],8:[function(require,module,exports){
+	return ChannelList;
+}(_react.Component);
+
+ChannelList.contextTypes = {
+	url: _react.PropTypes.string.isRequired
+};
+exports.default = ChannelList;
+
+},{"./ChannelItem.jsx":3,"jquery":23,"react":189}],5:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	render: function render() {
-		var headerMessage = 'TVHeadend';
-		var header = React.createElement(
-			'h1',
-			null,
-			headerMessage
-		);
-
-		return React.createElement(
-			'div',
-			{ className: 'tvheadend-app' },
-			header
-		);
-	}
+Object.defineProperty(exports, "__esModule", {
+	value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _bootstrapButton = require('bootstrap-button');
+
+var _bootstrapButton2 = _interopRequireDefault(_bootstrapButton);
+
+var _ChannelList = require('./ChannelList.jsx');
+
+var _ChannelList2 = _interopRequireDefault(_ChannelList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ServiceItem = function (_Component) {
+	_inherits(ServiceItem, _Component);
+
+	function ServiceItem(props) {
+		_classCallCheck(this, ServiceItem);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServiceItem).call(this, props));
+
+		_this.state = {
+			servicename: _this.props.data.e2servicename,
+			servicereference: _this.props.data.e2servicereference
+		};
+
+		_this.loadChannels = function () {
+			_this.refs.channelList.loadChannels();
+		};
+
+		_this.clearChannels = function () {
+			_this.refs.channelList.clearChannels();
+		};
+
+		return _this;
+	}
+	// initial state
+
+
+	_createClass(ServiceItem, [{
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'div',
+				{ className: 'panel panel-default' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'panel-heading' },
+					_react2.default.createElement(
+						'span',
+						{ className: 'service-name' },
+						this.state.servicename
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'panel-body' },
+					_react2.default.createElement(
+						_bootstrapButton2.default,
+						{ className: 'btn-primary btn-xs', onClick: this.loadChannels },
+						'channels'
+					),
+					_react2.default.createElement(
+						_bootstrapButton2.default,
+						{ className: 'btn-danger btn-xs pull-right', onClick: this.clearChannels },
+						'clear'
+					)
+				),
+				_react2.default.createElement(_ChannelList2.default, { ref: 'channelList', servicereference: this.state.servicereference })
+			);
+		}
+	}]);
+
+	return ServiceItem;
+}(_react.Component);
+
+exports.default = ServiceItem;
+
+},{"./ChannelList.jsx":4,"bootstrap-button":2,"react":189}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _ServiceItem = require('./ServiceItem.jsx');
+
+var _ServiceItem2 = _interopRequireDefault(_ServiceItem);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ServiceList = function (_Component) {
+	_inherits(ServiceList, _Component);
+
+	// context variables
+
+	function ServiceList(props) {
+		_classCallCheck(this, ServiceList);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServiceList).call(this, props));
+
+		_this.state = {
+			type: _this.props.type,
+			data: []
+		};
+
+		_this.loadServices = function () {
+			var serviceUrl = _this.context.url + '/service/' + _this.state.type + '/tv';
+
+			_jquery2.default.ajax({
+				url: serviceUrl,
+				dataType: 'json',
+				cache: false,
+				success: function (data) {
+					if (data['code'] == 200) {
+						this.setState({ data: data['data'] });
+					}
+				}.bind(_this),
+				error: function (xhr, status, err) {
+					console.error(serviceUrl, status, err.toString());
+				}.bind(_this)
+			});
+		};
+
+		_this.clearServices = function () {
+			_this.setState({ data: [] });
+		};
+
+		return _this;
+	}
+	// initial state
+
+
+	_createClass(ServiceList, [{
+		key: 'render',
+		value: function render() {
+			var items = this.state.data.map(function (item) {
+				return _react2.default.createElement(_ServiceItem2.default, { data: item });
+			});
+			return _react2.default.createElement(
+				'div',
+				{ className: 'services' },
+				items
+			);
+		}
+	}]);
+
+	return ServiceList;
+}(_react.Component);
+
+ServiceList.contextTypes = {
+	url: _react.PropTypes.string.isRequired
+};
+exports.default = ServiceList;
+
+},{"./ServiceItem.jsx":5,"jquery":23,"react":189}],7:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _bootstrapButton = require('bootstrap-button');
+
+var _bootstrapButton2 = _interopRequireDefault(_bootstrapButton);
+
+var _ServiceList = require('./ServiceList.jsx');
+
+var _ServiceList2 = _interopRequireDefault(_ServiceList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Enigma2App = function (_Component) {
+	_inherits(Enigma2App, _Component);
+
+	_createClass(Enigma2App, [{
+		key: 'getChildContext',
+
+		// get context function
+
+		// define default properties
+		value: function getChildContext() {
+			return { url: this.state.url };
+		}
+		// initial state
+
+		// child context variables
+
+		// define required / optional properties
+
+	}]);
+
+	function Enigma2App(props) {
+		_classCallCheck(this, Enigma2App);
+
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Enigma2App).call(this, props));
+
+		_this.state = {
+			url: _this.props.url
+		};
+
+		_this.loadBouquets = function () {
+			_this.refs.bouquetService.loadServices();
+		};
+
+		_this.clearBouquets = function () {
+			_this.refs.bouquetService.clearServices();
+		};
+
+		_this.loadProvider = function () {
+			_this.refs.providerService.loadServices();
+		};
+
+		_this.clearProvider = function () {
+			_this.refs.providerService.clearServices();
+		};
+
+		return _this;
+	}
+
+	_createClass(Enigma2App, [{
+		key: 'render',
+		value: function render() {
+			var message = 'Enigma2';
+			var header = _react2.default.createElement(
+				'h1',
+				null,
+				message
+			);
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'enigma2-app' },
+				header,
+				_react2.default.createElement(
+					'ul',
+					{ className: 'nav nav-tabs', role: 'tablist' },
+					_react2.default.createElement(
+						'li',
+						{ role: 'presentation', className: 'active' },
+						_react2.default.createElement(
+							'a',
+							{ href: '#bouquets', 'aria-controls': 'bouquets', role: 'tab', 'data-toggle': 'tab' },
+							'Bouquets'
+						)
+					),
+					_react2.default.createElement(
+						'li',
+						{ role: 'presentation' },
+						_react2.default.createElement(
+							'a',
+							{ href: '#provider', 'aria-controls': 'provider', role: 'tab', 'data-toggle': 'tab' },
+							'Provider'
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'tab-content' },
+					_react2.default.createElement(
+						'div',
+						{ role: 'tabpanel', className: 'tab-pane active', id: 'bouquets' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'well well-sm service-actionbar' },
+							_react2.default.createElement(
+								'span',
+								{ className: 'text-uppercase' },
+								'actionbar:'
+							),
+							_react2.default.createElement(
+								_bootstrapButton2.default,
+								{ className: 'btn-info btn-sm', onClick: this.loadBouquets },
+								'load'
+							),
+							_react2.default.createElement(
+								_bootstrapButton2.default,
+								{ className: 'btn-danger btn-sm', onClick: this.clearBouquets },
+								'clear'
+							)
+						),
+						_react2.default.createElement(_ServiceList2.default, { ref: 'bouquetService', type: 'bouquets' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ role: 'tabpanel', className: 'tab-pane', id: 'provider' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'well well-sm service-actionbar' },
+							_react2.default.createElement(
+								'span',
+								{ className: 'text-uppercase' },
+								'actionbar:'
+							),
+							_react2.default.createElement(
+								_bootstrapButton2.default,
+								{ className: 'btn-info btn-sm', onClick: this.loadProvider },
+								'load'
+							),
+							_react2.default.createElement(
+								_bootstrapButton2.default,
+								{ className: 'btn-danger btn-sm', onClick: this.clearProvider },
+								'clear'
+							)
+						),
+						_react2.default.createElement(_ServiceList2.default, { ref: 'providerService', type: 'provider' })
+					)
+				)
+			);
+		}
+	}]);
+
+	return Enigma2App;
+}(_react.Component);
+
+Enigma2App.propTypes = {
+	url: _react.PropTypes.string.isRequired
+};
+Enigma2App.defaultProps = {
+	url: '/api/v1/enigma2'
+};
+Enigma2App.childContextTypes = {
+	url: _react.PropTypes.string
+};
+exports.default = Enigma2App;
+
+},{"./ServiceList.jsx":6,"bootstrap-button":2,"react":189}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TVHeadendApp = function (_React$Component) {
+	_inherits(TVHeadendApp, _React$Component);
+
+	function TVHeadendApp() {
+		_classCallCheck(this, TVHeadendApp);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(TVHeadendApp).apply(this, arguments));
+	}
+
+	_createClass(TVHeadendApp, [{
+		key: 'render',
+		value: function render() {
+			var message = 'TVHeadend';
+			var header = _react2.default.createElement(
+				'h1',
+				null,
+				message
+			);
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'tvheadend-app' },
+				header
+			);
+		}
+	}]);
+
+	return TVHeadendApp;
+}(_react2.default.Component);
+
+exports.default = TVHeadendApp;
 
 },{"react":189}],9:[function(require,module,exports){
 // This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.

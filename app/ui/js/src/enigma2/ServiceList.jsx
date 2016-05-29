@@ -1,13 +1,24 @@
-var React = require('react');
-var $ = require("jquery");
-var ServiceItem = require('./ServiceItem');
+import React, { Component, PropTypes } from 'react';
+import $ from 'jquery';
+import ServiceItem from './ServiceItem.jsx';
 
-module.exports = React.createClass({
-	contextTypes: {
-		url: React.PropTypes.string
-	},
-	loadServices: function() {
-		var serviceUrl = this.context.url + '/service/' + this.props.type + '/tv';
+export default class ServiceList extends Component {
+	// context variables
+	static contextTypes = {
+		url: PropTypes.string.isRequired
+	}
+	// initial state
+	state = {
+		type: this.props.type,
+		data: []
+	}
+
+	constructor(props) {
+		super(props);
+	}
+
+	loadServices = () => {
+		var serviceUrl = this.context.url + '/service/' + this.state.type + '/tv';
 
 		$.ajax({
 			url: serviceUrl,
@@ -22,14 +33,13 @@ module.exports = React.createClass({
 				console.error(serviceUrl, status, err.toString());
 			}.bind(this)
 		});
-	},
-	clearServices: function() {
+	}
+
+	clearServices = () => {
 		this.setState({data: []});
-	},
-	getInitialState: function() {
-		return {data: []};
-	},
-	render: function() {
+	}
+
+	render() {
 		var items = this.state.data.map(function(item) {
 			return (
 				<ServiceItem data={item} />
@@ -41,4 +51,4 @@ module.exports = React.createClass({
 			</div>
 		);
 	}
-});
+}

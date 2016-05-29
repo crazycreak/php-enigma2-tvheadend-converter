@@ -2,17 +2,18 @@
   "name": "php-e2-tvh-converter",
   "version": "1.0.0",
   "description": "A lightweight Enigma2-Bouquet to Tvheadend-Channel Converter.",
-  "main": "app.js",
+  "main": "app.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify js/src/app.js -o js/build/app.js",
-    "start": "watchify js/src/app.js -o js/build/app.js"
+    "build": "browserify js/src/app.jsx -o js/build/app.js",
+    "start": "watchify js/src/app.jsx -o js/build/app.js"
   },
   "author": "crazycreak",
   "license": "ISC",
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
     "watchify": "^3.7.0"
@@ -24,9 +25,9 @@
     "react-dom": "^15.1.0"
   },
   "browser": {
-    "bootstrap-button": "./js/src/bootstrap/Button.js",
-    "enigma2-app": "./js/src/enigma2/app.js",
-    "tvheadend-app": "./js/src/tvheadend/app.js"
+    "bootstrap-button": "./js/src/bootstrap/Button.jsx",
+    "enigma2-app": "./js/src/enigma2/app.jsx",
+    "tvheadend-app": "./js/src/tvheadend/app.jsx"
   },
   "browserify": {
     "transform": [

@@ -1,13 +1,24 @@
-var React = require('react');
-var $ = require("jquery");
-var ChannelItem = require('./ChannelItem');
+import React, { Component, PropTypes } from 'react';
+import $ from 'jquery';
+import ChannelItem from './ChannelItem.jsx';
 
-module.exports = React.createClass({
-	contextTypes: {
-		url: React.PropTypes.string
-	},
-	loadChannels: function() {
-		var channelsUrl = this.context.url + '/service/channels/' + this.props.servicereference;
+export default class ChannelList extends Component {
+	// context variables
+	static contextTypes = {
+		url: PropTypes.string.isRequired
+	}
+	// initial state
+	state = {
+		servicereference: this.props.servicereference,
+		data: []
+	}
+
+	constructor(props) {
+		super(props);
+	}
+
+	loadChannels = () => {
+		var channelsUrl = this.context.url + '/service/channels/' + this.state.servicereference;
 
 		$.ajax({
 			url: channelsUrl,
@@ -22,14 +33,13 @@ module.exports = React.createClass({
 				console.error(channelsUrl, status, err.toString());
 			}.bind(this)
 		});
-	},
-	clearChannels: function() {
+	}
+
+	clearChannels = () => {
 		this.setState({data: []});
-	},
-	getInitialState: function() {
-		return {data: []};
-	},
-	render: function() {
+	}
+
+	render() {
 		if (this.state.data.length === 0) {
 			return (
 				<div className="empty" />
@@ -46,4 +56,4 @@ module.exports = React.createClass({
 			</ul>
 		);
 	}
-});
+}
