@@ -544,14 +544,6 @@ var Enigma2App = function (_Component) {
 			return _this.refs.providerService.clear();
 		};
 
-		_this.loadServiceData = function () {
-			return _this.refs.serviceData.load();
-		};
-
-		_this.clearServiceData = function () {
-			return _this.refs.serviceData.clear();
-		};
-
 		return _this;
 	}
 
