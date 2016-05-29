@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
-import ServiceList from './ServiceList.jsx';
+import { Services } from './Services.jsx';
 
 export default class Enigma2App extends Component {
 	// define required / optional properties
@@ -28,13 +28,13 @@ export default class Enigma2App extends Component {
 		super(props);
 	}
 
-	loadBouquets = () => this.refs.bouquetService.loadServices();
+	loadBouquets = () => this.refs.bouquetService.load();
 
-	clearBouquets = () => this.refs.bouquetService.clearServices();
+	clearBouquets = () => this.refs.bouquetService.clear();
 
-	loadProvider = () => this.refs.providerService.loadServices();
+	loadProvider = () => this.refs.providerService.load();
 
-	clearProvider = () => this.refs.providerService.clearServices();
+	clearProvider = () => this.refs.providerService.clear();
 
 	render() {
 		var message = 'Enigma2';
@@ -56,7 +56,7 @@ export default class Enigma2App extends Component {
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadBouquets}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearBouquets}>clear</BootstrapButton>
 						</div>
-						<ServiceList ref="bouquetService" type="bouquets" />
+						<Services ref="bouquetService" method="bouquets" parameter="tv" />
 					</div>
 					<div role="tabpanel" className="tab-pane" id="provider">
 						<div className="well well-sm service-actionbar">
@@ -64,7 +64,7 @@ export default class Enigma2App extends Component {
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadProvider}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearProvider}>clear</BootstrapButton>
 						</div>
-						<ServiceList ref="providerService" type="provider" />
+						<Services ref="providerService" method="provider" parameter="tv" />
 					</div>
 				</div>
 			</div>

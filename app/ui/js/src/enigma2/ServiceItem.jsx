@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
-import ChannelList from './ChannelList.jsx';
+import { ChannelList } from './ChannelList.jsx';
 
 export default class ServiceItem extends Component {
 	// initial state
@@ -13,9 +13,9 @@ export default class ServiceItem extends Component {
 		super(props);
 	}
 
-	loadChannels = () => this.refs.channelList.loadChannels();
+	loadChannels = () => this.refs.channelList.load();
 
-	clearChannels = () => this.refs.channelList.clearChannels();
+	clearChannels = () => this.refs.channelList.clear();
 
 	render() {
 		return (
@@ -27,7 +27,7 @@ export default class ServiceItem extends Component {
 					<BootstrapButton className="btn-primary btn-xs" onClick={this.loadChannels}>channels</BootstrapButton>
 					<BootstrapButton className="btn-danger btn-xs pull-right" onClick={this.clearChannels}>clear</BootstrapButton>
 				</div>
-				<ChannelList ref="channelList" servicereference={this.state.servicereference} />
+				<ChannelList ref="channelList" method="channels" parameter={this.state.servicereference} />
 			</div>
 		);
 	}

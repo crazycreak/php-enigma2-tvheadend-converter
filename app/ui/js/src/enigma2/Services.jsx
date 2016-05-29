@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import ChannelItem from './ChannelItem.jsx';
+import ServiceItem from './ServiceItem.jsx';
 import { Data } from "./Data.jsx";
 
-export var ChannelList = Data('service', class extends Component {
+export var Services = Data('service', class extends Component {
 	render() {
 		if (this.props.data.length === 0) {
 			return <div className="empty"></div>;
@@ -10,13 +10,13 @@ export var ChannelList = Data('service', class extends Component {
 
 		var items = this.props.data.map(function(item) {
 			return (
-				<ChannelItem data={item} />
+				<ServiceItem data={item} />
 			);
 		});
 		return (
-			<ul className="channel-list list-group">
+			<div className="services">
 				{items}
-			</ul>
+			</div>
 		);
 	}
 });
