@@ -19,5 +19,5 @@ import TVHeadendApp from 'tvheadend-app';
 /*
  * render app
  */
-if (app == 'enigma2') ReactDOM.render(<Enigma2App url="/api/v1/enigma2" />, document.getElementById('appContainer'));
-else if (app == 'tvheadend') ReactDOM.render(<TVHeadendApp url="/api/v1/enigma2" />, document.getElementById('appContainer'));
+if (app == 'enigma2') ReactDOM.render(<Enigma2App />, document.getElementById('appContainer'));
+else if (app == 'tvheadend') ReactDOM.render(<TVHeadendApp />, document.getElementById('appContainer'));

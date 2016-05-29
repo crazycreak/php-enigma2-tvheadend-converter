@@ -28,21 +28,13 @@ export default class Enigma2App extends Component {
 		super(props);
 	}
 
-	loadBouquets = () => {
-		this.refs.bouquetService.loadServices();
-	}
+	loadBouquets = () => this.refs.bouquetService.loadServices();
 
-	clearBouquets = () => {
-		this.refs.bouquetService.clearServices();
-	}
+	clearBouquets = () => this.refs.bouquetService.clearServices();
 
-	loadProvider = () => {
-		this.refs.providerService.loadServices();
-	}
+	loadProvider = () => this.refs.providerService.loadServices();
 
-	clearProvider = () => {
-		this.refs.providerService.clearServices();
-	}
+	clearProvider = () => this.refs.providerService.clearServices();
 
 	render() {
 		var message = 'Enigma2';

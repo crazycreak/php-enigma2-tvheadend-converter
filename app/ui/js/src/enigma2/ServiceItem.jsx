@@ -13,13 +13,9 @@ export default class ServiceItem extends Component {
 		super(props);
 	}
 
-	loadChannels = () => {
-		this.refs.channelList.loadChannels();
-	}
+	loadChannels = () => this.refs.channelList.loadChannels();
 
-	clearChannels = () => {
-		this.refs.channelList.clearChannels();
-	}
+	clearChannels = () => this.refs.channelList.clearChannels();
 
 	render() {
 		return (

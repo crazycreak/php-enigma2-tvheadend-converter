@@ -38,7 +38,7 @@ var bootstrap = require('bootstrap');
 /*
  * render app
  */
-if (app == 'enigma2') _reactDom2.default.render(_react2.default.createElement(_enigma2App2.default, { url: '/api/v1/enigma2' }), document.getElementById('appContainer'));else if (app == 'tvheadend') _reactDom2.default.render(_react2.default.createElement(_tvheadendApp2.default, { url: '/api/v1/enigma2' }), document.getElementById('appContainer'));
+if (app == 'enigma2') _reactDom2.default.render(_react2.default.createElement(_enigma2App2.default, null), document.getElementById('appContainer'));else if (app == 'tvheadend') _reactDom2.default.render(_react2.default.createElement(_tvheadendApp2.default, null), document.getElementById('appContainer'));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"bootstrap":9,"enigma2-app":7,"jquery":23,"react":189,"react-dom":24,"tvheadend-app":8}],2:[function(require,module,exports){
@@ -316,11 +316,11 @@ var ServiceItem = function (_Component) {
 		};
 
 		_this.loadChannels = function () {
-			_this.refs.channelList.loadChannels();
+			return _this.refs.channelList.loadChannels();
 		};
 
 		_this.clearChannels = function () {
-			_this.refs.channelList.clearChannels();
+			return _this.refs.channelList.clearChannels();
 		};
 
 		return _this;
@@ -519,19 +519,19 @@ var Enigma2App = function (_Component) {
 		};
 
 		_this.loadBouquets = function () {
-			_this.refs.bouquetService.loadServices();
+			return _this.refs.bouquetService.loadServices();
 		};
 
 		_this.clearBouquets = function () {
-			_this.refs.bouquetService.clearServices();
+			return _this.refs.bouquetService.clearServices();
 		};
 
 		_this.loadProvider = function () {
-			_this.refs.providerService.loadServices();
+			return _this.refs.providerService.loadServices();
 		};
 
 		_this.clearProvider = function () {
-			_this.refs.providerService.clearServices();
+			return _this.refs.providerService.clearServices();
 		};
 
 		return _this;
@@ -664,13 +664,35 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var TVHeadendApp = function (_React$Component) {
-	_inherits(TVHeadendApp, _React$Component);
+var TVHeadendApp = function (_Component) {
+	_inherits(TVHeadendApp, _Component);
 
-	function TVHeadendApp() {
+	_createClass(TVHeadendApp, [{
+		key: 'getChildContext',
+
+		// get context function
+
+		// define default properties
+		value: function getChildContext() {
+			return { url: this.state.url };
+		}
+		// initial state
+
+		// child context variables
+
+		// define required / optional properties
+
+	}]);
+
+	function TVHeadendApp(props) {
 		_classCallCheck(this, TVHeadendApp);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(TVHeadendApp).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TVHeadendApp).call(this, props));
+
+		_this.state = {
+			url: _this.props.url
+		};
+		return _this;
 	}
 
 	_createClass(TVHeadendApp, [{
@@ -692,8 +714,17 @@ var TVHeadendApp = function (_React$Component) {
 	}]);
 
 	return TVHeadendApp;
-}(_react2.default.Component);
+}(_react.Component);
 
+TVHeadendApp.propTypes = {
+	url: _react.PropTypes.string.isRequired
+};
+TVHeadendApp.defaultProps = {
+	url: '/api/v1/tvheadend'
+};
+TVHeadendApp.childContextTypes = {
+	url: _react.PropTypes.string
+};
 exports.default = TVHeadendApp;
 
 },{"react":189}],9:[function(require,module,exports){
