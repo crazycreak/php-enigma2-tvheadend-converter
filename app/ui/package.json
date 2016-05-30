@@ -22,10 +22,13 @@
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.4",
     "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.1"
   },
   "browser": {
+    "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
+    "bootstrap-navitem": "./js/src/bootstrap/NavItem.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "tvheadend-app": "./js/src/tvheadend/app.jsx"
   },

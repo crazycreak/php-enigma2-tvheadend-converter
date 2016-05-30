@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
-export default class Enigma2App extends Component {
+export default class Button extends Component {
 	// initial state
 	state = {
 		props: this.props,
