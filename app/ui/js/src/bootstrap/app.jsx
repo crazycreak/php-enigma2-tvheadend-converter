@@ -12,8 +12,8 @@ export default class BootstrapApp extends Component {
         // define default properties
 	static defaultProps = {
         	menuItems: [
-                        {'id': 1, 'link': 'enigma2', 'name': 'Enigma2'},
-                        {'id': 2, 'link': 'tvheadend', 'name': 'TVHeadend'}
+                        {'id': 1, 'link': '/ui/enigma2', 'name': 'Enigma2'},
+                        {'id': 2, 'link': '/ui/tvheadend', 'name': 'TVHeadend'}
                 ]
 	}
         // initial state

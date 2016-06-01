@@ -19,12 +19,11 @@ import TVHeadendApp from 'tvheadend-app';
 /*
  * render app
  */
-
 render((
         <Router history={browserHistory}>
-                <Route path="/ui" component={BootstrapApp}>
-                        <Route path="/enigma2" component={Enigma2App} />
-                        <Route path="/tvheadend" component={TVHeadendApp} />
+                <Route path="/ui/" component={BootstrapApp}>
+                        <Route path="enigma2" component={Enigma2App} />
+                        <Route path="tvheadend" component={TVHeadendApp} />
                 </Route>
         </Router>
 ), document.getElementById('appContainer'));

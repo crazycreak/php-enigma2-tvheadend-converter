@@ -35,9 +35,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   { history: _reactRouter.browserHistory },
   _react2.default.createElement(
     _reactRouter.Route,
-    { path: '/ui', component: _bootstrapApp2.default },
-    _react2.default.createElement(_reactRouter.Route, { path: '/enigma2', component: _enigma2App2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/tvheadend', component: _tvheadendApp2.default })
+    { path: '/ui/', component: _bootstrapApp2.default },
+    _react2.default.createElement(_reactRouter.Route, { path: 'enigma2', component: _enigma2App2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: 'tvheadend', component: _tvheadendApp2.default })
   )
 ), document.getElementById('appContainer'));
 
@@ -286,7 +286,7 @@ BootstrapApp.propTypes = {
         menuItems: _react.PropTypes.array.isRequired
 };
 BootstrapApp.defaultProps = {
-        menuItems: [{ 'id': 1, 'link': 'enigma2', 'name': 'Enigma2' }, { 'id': 2, 'link': 'tvheadend', 'name': 'TVHeadend' }]
+        menuItems: [{ 'id': 1, 'link': '/ui/enigma2', 'name': 'Enigma2' }, { 'id': 2, 'link': '/ui/tvheadend', 'name': 'TVHeadend' }]
 };
 exports.default = BootstrapApp;
 
