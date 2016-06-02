@@ -28,7 +28,6 @@
   "browser": {
     "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
-    "bootstrap-navitem": "./js/src/bootstrap/NavItem.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "tvheadend-app": "./js/src/tvheadend/app.jsx"
   },
