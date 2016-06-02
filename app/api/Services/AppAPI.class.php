@@ -15,6 +15,7 @@ class AppAPI extends AbstractJsonAPI {
 	 * tvheadend request
 	 */
 	protected function tvheadend() {
-		// TODO ...
+		$request = new \Tvheadend\Request($this->getRequest(), $this->getRequestData());
+		$this->data = $request->process();
 	}
 }

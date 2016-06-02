@@ -1,5 +1,8 @@
 body {padding-top: 50px;}
-.enigma2-app .service-actionbar {margin-top: 10px;}
-.enigma2-app .service-actionbar > .btn {margin-left: 10px;}
-.enigma2-app .channel-item > .service-name {padding-left: 10px;}
+.enigma2-app .service-actionbar,
+.tvheadend-app .channel-actionbar {margin-top: 10px;}
+.enigma2-app .service-actionbar > .btn,
+.tvheadend-app .channel-actionbar > .btn {margin-left: 10px;}
+.enigma2-app .channel-item > .service-name,
+.tvheadend-app .channel-item > .name {padding-left: 10px;}
 .enigma2-app .channel-item > .number {margin-left: 10px;}

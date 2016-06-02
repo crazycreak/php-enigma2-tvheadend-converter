@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import $ from 'jquery';
 
-export function Data(module, ComposedComponent) {
+export function getData(module, ComposedComponent) {
         return class extends Component {
                 // context variables
                 static contextTypes = {
                         url: PropTypes.string.isRequired
                 }
+                // define default properties
+        	static defaultProps = {
+                	parameter: ''
+        	}
                 // initial state
                 state = {
                         method: this.props.method,
@@ -19,7 +23,8 @@ export function Data(module, ComposedComponent) {
         	}
 
                 load = () => {
-                        var _url = this.context.url + '/' + module + '/' + this.state.method + '/' + this.state.parameter;
+                        var _url = this.context.url + '/' + module + '/' + this.state.method;
+                        if (this.state.parameter != '') _url += '/' + this.state.parameter;
                         $.ajax({
                 		url: _url,
                 		dataType: 'json',
