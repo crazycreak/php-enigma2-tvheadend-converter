@@ -1,28 +1,29 @@
 <?php
-namespace Services;
-use Enigma2\Modules\Service as Enigma2ServiceModule;
-use Enigma2\Server as Enigma2Server;
+namespace Enigma2;
+use Enigma2\Modules\Service as ServiceModule;
+use Enigma2\Server;
 use Exception\UnknownException;
+use Modules\AbstractRequest;
 
-class Enigma2Request extends AbstractRequest {
+class Request extends AbstractRequest {
 	/**
 	 * Enigma2 Modules
 	 */
-	protected $enigma2Modules = array(
+	protected $modules = array(
 		'service'
 	);
 
 	/**
 	 * Enigma2 Parameters
 	 */
-	protected $enigma2Parameters = array(
+	protected $parameters = array(
 		'bouquets' => array(
-			'tv' => Enigma2ServiceModule::SERVICES_TV,
-			'radio' => Enigma2ServiceModule::SERVICES_RADIO
+			'tv' => ServiceModule::SERVICES_TV,
+			'radio' => ServiceModule::SERVICES_RADIO
 		),
 		'provider' => array(
-			'tv' => Enigma2ServiceModule::SERVICES_TV,
-			'radio' => Enigma2ServiceModule::SERVICES_RADIO
+			'tv' => ServiceModule::SERVICES_TV,
+			'radio' => ServiceModule::SERVICES_RADIO
 		),
 		'channels' => true
 	);
@@ -33,7 +34,7 @@ class Enigma2Request extends AbstractRequest {
 	public function __construct($request, $requestData) {
 		parent::__construct($request, $requestData);
 
-		$this->_serverInstance = new Enigma2Server(ENIGMA2_HOST);
+		$this->_serverInstance = new Server(ENIGMA2_HOST);
 	}
 
 	/**
@@ -45,7 +46,7 @@ class Enigma2Request extends AbstractRequest {
 			throw new UnknownException();
 		}
 		$moduleKey = $this->request[0];
-		if (!in_array($moduleKey, $this->enigma2Modules)) {
+		if (!in_array($moduleKey, $this->modules)) {
 			throw new UnknownException();
 		}
 		$module = 'get' . ucfirst($moduleKey) . 'Module';
@@ -59,15 +60,15 @@ class Enigma2Request extends AbstractRequest {
 		$parameter = '';
 		if (isset($this->request[2]) && !empty($this->request[2])) {
 			// check is valid
-			if (isset($this->enigma2Parameters[$methodKey])) {
+			if (isset($this->parameters[$methodKey])) {
 				// check mapping exists
 				$parameterValue = $this->request[2];
-				if ($this->enigma2Parameters[$methodKey] === true) {
+				if ($this->parameters[$methodKey] === true) {
 					// value as parameter
 					$parameter = $parameterValue;
-				} else if (isset($this->enigma2Parameters[$methodKey][$parameterValue])) {
+				} else if (isset($this->parameters[$methodKey][$parameterValue])) {
 					// mapping per array
-					$parameter = $this->enigma2Parameters[$methodKey][$parameterValue];
+					$parameter = $this->parameters[$methodKey][$parameterValue];
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 <?php
-namespace Services;
+namespace Modules;
 
 abstract class AbstractRequest {
 	/**
