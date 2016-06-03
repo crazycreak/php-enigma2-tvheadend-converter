@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { getData } from "core-data";
 import ServiceItem from './ServiceItem.jsx';
 
-export var Services = getData('service', class extends Component {
+export var ServiceBox = getData('service', 'GET', class extends Component {
 	render() {
 		if (this.props.data.length === 0) {
 			return <div className="empty"></div>;
@@ -14,7 +14,7 @@ export var Services = getData('service', class extends Component {
 			);
 		});
 		return (
-			<div className="services">
+			<div className="service-box">
 				{items}
 			</div>
 		);

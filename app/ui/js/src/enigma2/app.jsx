@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
-import { Services } from './Services.jsx';
+import { ServiceBox } from './ServiceBox.jsx';
 
 export default class Enigma2App extends Component {
 	// define required / optional properties
@@ -56,7 +56,7 @@ export default class Enigma2App extends Component {
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadBouquets}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearBouquets}>clear</BootstrapButton>
 						</div>
-						<Services ref="bouquetService" method="bouquets" parameter="tv" />
+						<ServiceBox ref="bouquetService" method="bouquets" parameter="tv" />
 					</div>
 					<div role="tabpanel" className="tab-pane" id="provider">
 						<div className="well well-sm service-actionbar">
@@ -64,7 +64,7 @@ export default class Enigma2App extends Component {
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadProvider}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearProvider}>clear</BootstrapButton>
 						</div>
-						<Services ref="providerService" method="provider" parameter="tv" />
+						<ServiceBox ref="providerService" method="provider" parameter="tv" />
 					</div>
 				</div>
 			</div>

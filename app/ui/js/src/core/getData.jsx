@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import $ from 'jquery';
 
-export function getData(module, ComposedComponent) {
+export function getData(module, method, ComposedComponent) {
         return class extends Component {
                 // context variables
                 static contextTypes = {
@@ -27,6 +27,7 @@ export function getData(module, ComposedComponent) {
                         if (this.state.parameter != '') _url += '/' + this.state.parameter;
                         $.ajax({
                 		url: _url,
+                                type: method,
                 		dataType: 'json',
                 		cache: false,
                 		success: function(result) {
