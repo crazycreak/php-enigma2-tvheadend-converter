@@ -2,6 +2,12 @@
 namespace Modules;
 
 abstract class AbstractRequest {
+	const REQUEST_METHOD_KEY = 'method';
+	const REQUEST_METHOD_GET = 'GET';
+	const REQUEST_METHOD_POST = 'POST';
+	const REQUEST_METHOD_PUT = 'PUT';
+	const REQUEST_METHOD_DELETE = 'DELETE';
+
 	/**
 	 * Server Instance
 	 */
@@ -28,17 +34,17 @@ abstract class AbstractRequest {
 	protected $validParameters = array();
 
 	/**
-	 * module
+	 * module key
 	 */
 	protected $moduleKey = '';
 
 	/**
-	 * method
+	 * method key
 	 */
 	protected $methodKey = '';
 
 	/**
-	 * method
+	 * parameter
 	 */
 	protected $parameter = '';
 
@@ -53,7 +59,14 @@ abstract class AbstractRequest {
 	public function __construct($request, $requestData) {
 		$this->request = $request;
 		$this->requestData = $requestData;
+
+		$this->setServer();
 	}
+
+	/**
+	 * initialise server
+	 */
+	protected abstract function setServer();
 
 	/**
 	 * execute request
@@ -80,10 +93,10 @@ abstract class AbstractRequest {
 		if (!$this->getServer()) {
 			throw new UnknownException();
 		}
-		if ($this->getParameter() === false) {
-			$this->result = $this->getServer()->{$this->getModule()}()->{$this->getMethod()}();
+		if ($this->getModuleParameter() === false) {
+			$this->result = $this->getServer()->{$this->getModule()}()->{$this->getModuleMethod()}();
 		} else {
-			$this->result = $this->getServer()->{$this->getModule()}()->{$this->getMethod()}($this->getParameter());
+			$this->result = $this->getServer()->{$this->getModule()}()->{$this->getModuleMethod()}($this->getModuleParameter());
 		}
 	}
 
@@ -157,21 +170,24 @@ abstract class AbstractRequest {
 	/**
 	 * @return method
 	 */
-	protected function getMethod() {
+	protected function getModuleMethod() {
 		if (empty($this->methodKey)) return false;
-		return 'get' . ucfirst($this->methodKey);
+		else if ($this->requestData[self::REQUEST_METHOD_KEY] == self::REQUEST_METHOD_GET) return 'get' . ucfirst($this->methodKey);
+		else if ($this->requestData[self::REQUEST_METHOD_KEY] == self::REQUEST_METHOD_POST) return 'set' . ucfirst($this->methodKey);
+		else if ($this->requestData[self::REQUEST_METHOD_KEY] == self::REQUEST_METHOD_DELETE) return 'del' . ucfirst($this->methodKey);
+		else throw new UnknownException();
 	}
 
 	/**
 	 * @return parameter
 	 */
-	protected function getParameter() {
+	protected function getModuleParameter() {
 		if (empty($this->parameter)) return false;
 		return $this->parameter;
 	}
 
 	/**
-	 * @return Server Instance
+	 * @return server instance
 	 */
 	protected function getServer() {
 		if ($this->server === null) return false;

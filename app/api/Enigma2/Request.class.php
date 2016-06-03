@@ -29,11 +29,9 @@ class Request extends AbstractRequest {
 	);
 
 	/**
-	 * constructor
+	 * see Modules\AbstractRequest
 	 */
-	public function __construct($request, $requestData) {
-		parent::__construct($request, $requestData);
-
+	protected function setServer() {
 		$this->server = new Server(ENIGMA2_HOST);
 	}
 }

@@ -10,12 +10,11 @@ class Request extends AbstractRequest {
 		'channel'
 	);
 
-        /**
-	 * constructor
-	 */
-	public function __construct($request, $requestData) {
-		parent::__construct($request, $requestData);
 
+	/**
+	 * see Modules\AbstractRequest
+	 */
+	protected function setServer() {
 		$this->server = new Server(TVHEADEND_HOST);
 	}
 }

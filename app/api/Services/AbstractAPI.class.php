@@ -3,6 +3,7 @@ namespace Services;
 use Exception\UnknownException;
 
 abstract class AbstractAPI {
+	const METHOD_KEY = 'method';
 	const METHOD_GET = 'GET';
 	const METHOD_POST = 'POST';
 	const METHOD_PUT = 'PUT';
@@ -155,6 +156,8 @@ abstract class AbstractAPI {
 				throw new UnknownException();
 				break;
 		}
+		// set method in requestData
+		$this->requestData[self::METHOD_KEY] = $this->method;
 		// unset init parameters
 		unset($this->requestData[$this->apiKeyParameter]);
 		unset($this->requestData[$this->apiVersionParameter]);
