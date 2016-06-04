@@ -13,7 +13,6 @@ export default class ChannelItem extends Component {
 
 	render() {
 		var name = null;
-		console.log(this.state.data);
 		if (typeof(this.state.data.name) != 'undefined') {
 			name = <span className="name">{this.state.data.name}</span>;
 		}

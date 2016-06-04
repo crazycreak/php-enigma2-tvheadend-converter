@@ -1243,7 +1243,6 @@ var ChannelItem = function (_Component) {
 		key: 'render',
 		value: function render() {
 			var name = null;
-			console.log(this.state.data);
 			if (typeof this.state.data.name != 'undefined') {
 				name = _react2.default.createElement(
 					'span',
