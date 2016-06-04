@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import $ from 'jquery';
 
-export function getData(module, method, ComposedComponent) {
+export function withData(module, method, ComposedComponent) {
         return class extends Component {
                 // context variables
                 static contextTypes = {

@@ -29,7 +29,7 @@
     "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
     "bootstrap-modal": "./js/src/bootstrap/Modal.jsx",
-    "core-data" : "./js/src/core/getData.jsx",
+    "core-data" : "./js/src/core/data.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "tvheadend-app": "./js/src/tvheadend/app.jsx"
   },

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { getData } from "core-data";
+import { withData } from "core-data";
 import ServiceItem from './ServiceItem.jsx';
 
-export var ServiceBox = getData('service', 'GET', class extends Component {
+export var ServiceBox = withData('service', 'GET', class extends Component {
 	render() {
 		if (this.props.data.length === 0) {
 			return <div className="empty"></div>;
