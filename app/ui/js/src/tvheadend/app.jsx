@@ -3,33 +3,7 @@ import BootstrapButton from 'bootstrap-button';
 import { ChannelList } from './ChannelList.jsx';
 
 export default class TVHeadendApp extends Component {
-	// define required / optional properties
-	static propTypes = {
-		url: PropTypes.string.isRequired
-	}
-	// define default properties
-	static defaultProps = {
-        	url: '/api/v1/tvheadend'
-	}
-	// child context variables
-	static childContextTypes = {
-		url: PropTypes.string
-	}
-	// get context function
-	getChildContext() {
-		return { url: this.state.url }
-	}
-	// initial state
-	state = {
-		url: this.props.url
-	}
-
-	constructor(props) {
-		super(props);
-	}
-
 	loadChannels = () => this.refs.channelService.load();
-
 	clearChannels = () => this.refs.channelService.clear();
 
 	render() {

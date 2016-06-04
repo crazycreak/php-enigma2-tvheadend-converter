@@ -31,7 +31,9 @@
     "bootstrap-modal": "./js/src/bootstrap/Modal.jsx",
     "core-data" : "./js/src/core/data.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
-    "tvheadend-app": "./js/src/tvheadend/app.jsx"
+    "enigma2-data": "./js/src/enigma2/data.jsx",
+    "tvheadend-app": "./js/src/tvheadend/app.jsx",
+    "tvheadend-data": "./js/src/tvheadend/data.jsx"
   },
   "browserify": {
     "transform": [

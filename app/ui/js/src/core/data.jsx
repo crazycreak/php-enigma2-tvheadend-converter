@@ -1,21 +1,20 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import $ from 'jquery';
 
-export function withData(module, method, ComposedComponent) {
+export function withData(httpMethod, ComposedComponent) {
         return class extends Component {
-                // context variables
-                static contextTypes = {
-                        url: PropTypes.string.isRequired
-                }
                 // define default properties
         	static defaultProps = {
+                        url: '',
+                        path: '',
                 	parameter: ''
         	}
                 // initial state
                 state = {
-                        method: this.props.method,
-                        parameter: this.props.parameter,
-                        data: []
+                        data: [],
+                        url: this.props.url,
+                        path: this.props.path,
+                        parameter: this.props.parameter
                 }
 
                 constructor(props) {
@@ -23,11 +22,16 @@ export function withData(module, method, ComposedComponent) {
         	}
 
                 load = () => {
-                        var _url = this.context.url + '/' + module + '/' + this.state.method;
+                        // required
+                        if (this.state.url == '' || this.state.path == '') return;
+
+                        var _url = this.state.url + this.state.path;
+                        // optional
                         if (this.state.parameter != '') _url += '/' + this.state.parameter;
+
                         $.ajax({
                 		url: _url,
-                                type: method,
+                                type: httpMethod,
                 		dataType: 'json',
                 		cache: false,
                 		success: function(result) {
@@ -44,7 +48,10 @@ export function withData(module, method, ComposedComponent) {
                 clear = () => this.setState({data: []});
 
                 render() {
-                        return <ComposedComponent {...this.props} data={this.state.data} />;
+                        const addProps = {
+                                data: this.state.data
+                        }
+                        return <ComposedComponent {...this.props} {...addProps} />;
                 }
         };
 }

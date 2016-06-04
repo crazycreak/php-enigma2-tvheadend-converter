@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-import { withData } from "core-data";
+import React, { Component } from 'react';
+import { withTVHeadendData } from "tvheadend-data";
 import ChannelItem from './ChannelItem.jsx';
 
-export var ChannelList = withData('channel', 'GET', class extends Component {
+export var ChannelList = withTVHeadendData('channel', 'GET', class extends Component {
 	render() {
 		if (this.props.data.length === 0) {
 			return <div className="empty"></div>;

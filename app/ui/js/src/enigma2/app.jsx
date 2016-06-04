@@ -3,37 +3,14 @@ import BootstrapButton from 'bootstrap-button';
 import { ServiceBox } from './ServiceBox.jsx';
 
 export default class Enigma2App extends Component {
-	// define required / optional properties
-	static propTypes = {
-		url: PropTypes.string.isRequired
-	}
-	// define default properties
-	static defaultProps = {
-        	url: '/api/v1/enigma2'
-	}
-	// child context variables
-	static childContextTypes = {
-		url: PropTypes.string
-	}
-	// get context function
-	getChildContext() {
-		return { url: this.state.url }
-	}
-	// initial state
-	state = {
-		url: this.props.url
-	}
-
 	constructor(props) {
 		super(props);
 	}
 
 	loadBouquets = () => this.refs.bouquetService.load();
-
 	clearBouquets = () => this.refs.bouquetService.clear();
 
 	loadProvider = () => this.refs.providerService.load();
-
 	clearProvider = () => this.refs.providerService.clear();
 
 	render() {
