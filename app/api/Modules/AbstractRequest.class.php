@@ -7,6 +7,7 @@ abstract class AbstractRequest {
 	const REQUEST_METHOD_POST = 'POST';
 	const REQUEST_METHOD_PUT = 'PUT';
 	const REQUEST_METHOD_DELETE = 'DELETE';
+	const REQUEST_PARAMETER_ARRAY = 'array';
 
 	/**
 	 * Server Instance
@@ -21,7 +22,12 @@ abstract class AbstractRequest {
 	/**
 	 * Request Data
 	 */
-	protected $requestData = '';
+	protected $requestData = array();
+
+	/**
+	 * Request Method
+	 */
+	protected $requestMethod = '';
 
 	/**
 	 * available Modules
@@ -59,6 +65,9 @@ abstract class AbstractRequest {
 	public function __construct($request, $requestData) {
 		$this->request = $request;
 		$this->requestData = $requestData;
+		$this->requestMethod = $this->requestData[self::REQUEST_METHOD_KEY];
+		// remove from request data
+		unset($this->requestData[self::REQUEST_METHOD_KEY]);
 
 		$this->setServer();
 	}
@@ -140,8 +149,15 @@ abstract class AbstractRequest {
 			// check mapping exists
 			$value = $this->request[2];
 			if ($this->validParameters[$_methodKey] === true) {
-				// value as parameter
-				$this->parameter = $value;
+				if ($value == self::REQUEST_PARAMETER_ARRAY) {
+					// request data as parameter
+					foreach ($this->requestData as $key => $value) {
+						$this->parameter[$key] = $value;
+					}
+				} else {
+					// value as parameter
+					$this->parameter = $value;
+				}
 			} else if (isset($this->validParameters[$_methodKey][$value])) {
 				// mapping per array
 				$this->parameter = $this->validParameters[$_methodKey][$value];
@@ -172,10 +188,21 @@ abstract class AbstractRequest {
 	 */
 	protected function getModuleMethod() {
 		if (empty($this->methodKey)) return false;
-		else if ($this->requestData[self::REQUEST_METHOD_KEY] == self::REQUEST_METHOD_GET) return 'get' . ucfirst($this->methodKey);
-		else if ($this->requestData[self::REQUEST_METHOD_KEY] == self::REQUEST_METHOD_POST) return 'set' . ucfirst($this->methodKey);
-		else if ($this->requestData[self::REQUEST_METHOD_KEY] == self::REQUEST_METHOD_DELETE) return 'del' . ucfirst($this->methodKey);
-		else throw new UnknownException();
+		$prefix = '';
+		switch($this->requestMethod) {
+			case self::REQUEST_METHOD_GET:
+				$prefix = 'get';
+				break;
+			case self::REQUEST_METHOD_POST:
+				$prefix = 'set';
+				break;
+			case self::REQUEST_METHOD_DELETE:
+				$prefix = 'del';
+				break;
+			default:
+				throw new UnknownException();
+		}
+		return $prefix . ucfirst($this->methodKey);
 	}
 
 	/**

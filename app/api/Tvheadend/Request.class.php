@@ -7,9 +7,15 @@ class Request extends AbstractRequest {
 	 * available Modules
 	 */
 	protected $validModules = array(
-		'channel'
+		'channel', 'service'
 	);
 
+	/**
+	 * available Parameters
+	 */
+	protected $validParameters = array(
+		'multiple' => true
+	);
 
 	/**
 	 * see Modules\AbstractRequest

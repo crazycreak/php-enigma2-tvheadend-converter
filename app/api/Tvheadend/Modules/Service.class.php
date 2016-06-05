@@ -8,7 +8,7 @@ class Service extends AbstractExtendedModule {
 	 * @param	array			$filters
 	 * @return	array<\Tvheadend\Models\Service>
 	 */
-	public function get(array $filters = array()) {
+	public function getMultiple(array $filters = array()) {
 		if (empty($filters)) return false;
 
 		// get all tags
@@ -20,10 +20,8 @@ class Service extends AbstractExtendedModule {
 			function ($service) use ($filters) {
 				$valid = true;
 				foreach ($filters as $key => $value) {
-					// invalid filter
-					if (!$service->hasProperty($key)) continue;
 					// filter ok
-					else if ($service->$key === $value) continue;
+					if ($service->hasProperty($key) && $service->$key === $value) continue;
 					// not valid
 					$valid = false;
 					break;
