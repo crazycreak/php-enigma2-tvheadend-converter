@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
-import BootstrapModal from 'bootstrap-modal';
+import ChannelMap from './ChannelMap.jsx';
 
 export default class ChannelItem extends Component {
 	// initial state
@@ -12,22 +12,7 @@ export default class ChannelItem extends Component {
 		super(props);
 	}
 
-	mapChannel = () => {
-		// todo: call server with data
-		console.log(this.state.data);
-	}
-
-	openModal = () => this.refs.modal.open();
-	closeModal = () => this.refs.modal.close();
-	handleConfirm = () => {
-		this.mapChannel();
-		this.closeModal();
-	}
-	handleCancel = () => {
-		if (confirm('Are you sure you want to cancel?')) {
-			this.refs.modal.close();
-		}
-	}
+	handleClick = () => this.refs.modal.handleMap();
 
 	render() {
 		var servicename = null;
@@ -41,20 +26,12 @@ export default class ChannelItem extends Component {
 
 		var modal = null;
 		modal = (
-			<BootstrapModal ref="modal"
-					confirm="map"
-					onConfirm={this.handleConfirm}
-					cancel="cancel"
-					onCancel={this.handleCancel}
-					title="Map TVHeadend Channel">
-				<h4>Name: {servicename}</h4>
-				<span>Ref: {servicereference}</span>
-			</BootstrapModal>
+			<ChannelMap ref="modal" data={this.state.data} />
 		);
 
 		return (
 			<li className="channel-item list-group-item">
-				<BootstrapButton className="btn-info btn-xs" onClick={this.openModal}>map</BootstrapButton>
+				<BootstrapButton className="btn-info btn-xs" onClick={this.handleClick}>map</BootstrapButton>
 				{modal}
 				{number}
 				{servicename}

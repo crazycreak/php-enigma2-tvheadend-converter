@@ -7,14 +7,18 @@ export function withData(httpMethod, ComposedComponent) {
         	static defaultProps = {
                         url: '',
                         path: '',
-                	parameter: ''
+                	parameter: '',
+                        parameterObj: {},
+                        async: true
         	}
                 // initial state
                 state = {
                         data: [],
                         url: this.props.url,
                         path: this.props.path,
-                        parameter: this.props.parameter
+                        parameter: this.props.parameter,
+                        parameterObj: this.props.parameterObj,
+                        async: this.props.async
                 }
 
                 constructor(props) {
@@ -29,10 +33,12 @@ export function withData(httpMethod, ComposedComponent) {
                         // optional
                         if (this.state.parameter != '') _url += '/' + this.state.parameter;
 
-                        $.ajax({
+                        return $.ajax({
                 		url: _url,
                                 type: httpMethod,
+                                async: this.state.async,
                 		dataType: 'json',
+                                data: this.state.parameterObj,
                 		cache: false,
                 		success: function(result) {
                 			if (result['code'] == 200) {

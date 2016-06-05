@@ -6,3 +6,4 @@ body {padding-top: 50px;}
 .enigma2-app .channel-item > .service-name,
 .tvheadend-app .channel-item > .name {padding-left: 10px;}
 .enigma2-app .channel-item > .number {margin-left: 10px;}
+.enigma2-app .channel-map .channels-found {padding-top: 10px;}

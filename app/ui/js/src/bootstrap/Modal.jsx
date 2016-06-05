@@ -14,6 +14,7 @@ export default class Modal extends Component {
 	}
         // initial state
 	state = {
+                className: this.props.className,
 		confirm: this.props.confirm,
                 onConfirm: this.props.onConfirm,
                 cancel: this.props.cancel,
@@ -53,7 +54,7 @@ export default class Modal extends Component {
                 }
 
                 return (
-                        <div className="modal fade" ref="root">
+                        <div ref="root" className={(this.state.className || '') + ' modal fade'}>
                                 <div className="modal-dialog">
                                         <div className="modal-content">
                                                 <div className="modal-header">

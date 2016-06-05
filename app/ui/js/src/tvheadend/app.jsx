@@ -25,7 +25,7 @@ export default class TVHeadendApp extends Component {
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadChannels}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearChannels}>clear</BootstrapButton>
 						</div>
-						<ChannelList ref="channelService" method="all" parameter="" />
+						<ChannelList ref="channelService" method="all" />
 					</div>
 				</div>
 			</div>

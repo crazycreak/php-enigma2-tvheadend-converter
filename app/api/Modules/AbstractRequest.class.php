@@ -8,6 +8,7 @@ abstract class AbstractRequest {
 	const REQUEST_METHOD_PUT = 'PUT';
 	const REQUEST_METHOD_DELETE = 'DELETE';
 	const REQUEST_PARAMETER_ARRAY = 'array';
+	const REQUEST_CACHE_KEY = '_';
 
 	/**
 	 * Server Instance
@@ -68,6 +69,8 @@ abstract class AbstractRequest {
 		$this->requestMethod = $this->requestData[self::REQUEST_METHOD_KEY];
 		// remove from request data
 		unset($this->requestData[self::REQUEST_METHOD_KEY]);
+		// remove cache parameter (e.g. jQuery)
+		unset($this->requestData[self::REQUEST_CACHE_KEY]);
 
 		$this->setServer();
 	}
