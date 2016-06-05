@@ -576,6 +576,14 @@ function withData(httpMethod, ComposedComponent) {
                                 async: _this.props.async
                         };
 
+                        _this.setParameter = function (param) {
+                                return _this.setState({ parameter: param });
+                        };
+
+                        _this.setParameterObj = function (obj) {
+                                return _this.setState({ parameterObj: obj });
+                        };
+
                         _this.load = function () {
                                 // required
                                 if (_this.state.url == '' || _this.state.path == '') return;
@@ -612,6 +620,11 @@ function withData(httpMethod, ComposedComponent) {
 
 
                 _createClass(_class, [{
+                        key: 'get',
+                        value: function get() {
+                                return this.state.data;
+                        }
+                }, {
                         key: 'render',
                         value: function render() {
                                 var addProps = {
@@ -716,9 +729,9 @@ var ChannelItem = function (_Component) {
 					{ className: 'btn-info btn-xs', onClick: this.handleClick },
 					'map'
 				),
-				modal,
 				number,
-				servicename
+				servicename,
+				modal
 			);
 		}
 	}]);
@@ -829,34 +842,49 @@ var ChannelMap = function (_Component) {
 			data: _this.props.data
 		};
 
-		_this.openModal = function () {
-			return _this.refs.root.open();
-		};
-
-		_this.closeModal = function () {
-			return _this.refs.root.close();
-		};
-
-		_this.loadServices = function () {
-			return _this.refs.tvhService.load();
-		};
-
 		_this.handleMap = function () {
-			return _jquery2.default.when(_this.loadServices()).done(_this.openModal());
+			return _jquery2.default.when(_this.loadPreviewServices()).done(_this.openPreviewModal());
 		};
 
-		_this.handleConfirm = function () {
-			_this.mapChannel();
-			_this.closeModal();
+		_this.loadPreviewServices = function () {
+			return _this.refs.previewService.load();
 		};
 
-		_this.handleCancel = function () {
-			if (confirm('Are you sure you want to cancel?')) _this.closeModal();
+		_this.openPreviewModal = function () {
+			return _this.refs.previewModal.open();
 		};
 
-		_this.mapChannel = function () {
-			// todo: call server with data
-			console.log(_this.refs.tvhData);
+		_this.closePreviewModal = function () {
+			return _this.refs.previewModal.close();
+		};
+
+		_this.handlePreviewConfirm = function () {
+			_this.closePreviewModal();
+			_jquery2.default.when(_this.loadMapServices()).done(_this.openMapModal());
+		};
+
+		_this.handlePreviewCancel = function () {
+			if (confirm('Are you sure you want to cancel?')) _this.closePreviewModal();
+		};
+
+		_this.handlePreviewLoad = function (data) {
+			return _this.refs.mapService.setParameterObj(data);
+		};
+
+		_this.loadMapServices = function () {
+			return _this.refs.mapService.load();
+		};
+
+		_this.openMapModal = function () {
+			return _this.refs.mapModal.open();
+		};
+
+		_this.closeMapModal = function () {
+			return _this.refs.mapModal.close();
+		};
+
+		_this.handleMapConfirm = function () {
+			return _this.closeMapModal();
 		};
 
 		return _this;
@@ -867,90 +895,83 @@ var ChannelMap = function (_Component) {
 	_createClass(ChannelMap, [{
 		key: 'render',
 		value: function render() {
-			var ModalComponent = function (_Component2) {
-				_inherits(ModalComponent, _Component2);
-
-				function ModalComponent() {
-					_classCallCheck(this, ModalComponent);
-
-					return _possibleConstructorReturn(this, Object.getPrototypeOf(ModalComponent).apply(this, arguments));
-				}
-
-				_createClass(ModalComponent, [{
-					key: 'render',
-					value: function render() {
-						if (this.props.data.length === 0) {
-							return _react2.default.createElement(
-								'div',
-								{ className: 'no-channels-found' },
-								'no TVHeadend Channel(s) found ...'
-							);
-						}
-						var items = this.props.data.map(function (item) {
-							return _react2.default.createElement(
-								'li',
-								null,
-								item.svcname
-							);
-						});
-						return _react2.default.createElement(
-							'div',
-							{ className: 'channels-found' },
-							_react2.default.createElement(
-								'strong',
-								null,
-								'TVHeadend Channel(s) found:'
-							),
-							_react2.default.createElement(
-								'ul',
-								null,
-								items
-							)
-						);
-					}
-				}]);
-
-				return ModalComponent;
-			}(_react.Component);
-
-			var TVHService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', ModalComponent);
-
 			var async = false;
-			var parameters = { 'svcname': this.state.data.e2servicename };
-			var TVHComponent = _react2.default.createElement(TVHService, { ref: 'tvhService', method: 'multiple', parameter: 'array', parameterObj: parameters, async: async });
+			var parameters = null;
+			parameters = {
+				'svcname': this.state.data.e2servicename
+			};
+			var PreviewComponent = null;
+			PreviewComponent = _react2.default.createElement(PreviewService, { ref: 'previewService', method: 'multiple', parameter: 'array', parameterObj: parameters, async: async, loaded: this.handlePreviewLoad });
+			var MapComponent = null;
+			MapComponent = _react2.default.createElement(MapService, { ref: 'mapService', method: 'channel', parameter: 'array' });
 
 			return _react2.default.createElement(
-				_bootstrapModal2.default,
-				{ ref: 'root',
-					className: 'channel-map',
-					confirm: 'map',
-					onConfirm: this.handleConfirm,
-					cancel: 'cancel',
-					onCancel: this.handleCancel,
-					title: 'Map Channel => E2-to-TVH' },
+				'div',
+				{ className: 'channel-map' },
 				_react2.default.createElement(
-					'div',
-					null,
+					_bootstrapModal2.default,
+					{ ref: 'previewModal',
+						className: 'preview-modal',
+						confirm: 'map',
+						onConfirm: this.handlePreviewConfirm,
+						cancel: 'cancel',
+						onCancel: this.handlePreviewCancel,
+						title: 'Preview' },
 					_react2.default.createElement(
-						'strong',
+						'div',
 						null,
-						'Name:'
+						_react2.default.createElement(
+							'strong',
+							null,
+							'Name:'
+						),
+						' ',
+						this.state.data.e2servicename
 					),
-					' ',
-					this.state.data.e2servicename
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'strong',
+							null,
+							'Reference:'
+						),
+						' ',
+						this.state.data.e2servicereference
+					),
+					PreviewComponent
 				),
 				_react2.default.createElement(
-					'div',
-					null,
+					_bootstrapModal2.default,
+					{ ref: 'mapModal',
+						className: 'map-modal',
+						confirm: 'ok',
+						onConfirm: this.handleMapConfirm,
+						title: 'Map' },
 					_react2.default.createElement(
-						'strong',
+						'div',
 						null,
-						'Reference:'
+						_react2.default.createElement(
+							'strong',
+							null,
+							'Name:'
+						),
+						' ',
+						this.state.data.e2servicename
 					),
-					' ',
-					this.state.data.e2servicereference
-				),
-				TVHComponent
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'strong',
+							null,
+							'Reference:'
+						),
+						' ',
+						this.state.data.e2servicereference
+					),
+					MapComponent
+				)
 			);
 		}
 	}]);
@@ -959,6 +980,95 @@ var ChannelMap = function (_Component) {
 }(_react.Component);
 
 exports.default = ChannelMap;
+
+
+var PreviewService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', function (_Component2) {
+	_inherits(_class, _Component2);
+
+	function _class() {
+		_classCallCheck(this, _class);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(_class).apply(this, arguments));
+	}
+
+	_createClass(_class, [{
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate() {
+			this.props.loaded(this.props.data[0]);
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			if (this.props.data.length === 0) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'no-channels-found' },
+					_react2.default.createElement(
+						'strong',
+						null,
+						'no TVHeadend Channel(s) found ...'
+					)
+				);
+			}
+			var items = this.props.data.map(function (item) {
+				return _react2.default.createElement(
+					'li',
+					null,
+					item.svcname,
+					' (',
+					item.provider,
+					')'
+				);
+			});
+			return _react2.default.createElement(
+				'div',
+				{ className: 'channels-found' },
+				_react2.default.createElement(
+					'strong',
+					null,
+					'TVHeadend Channel(s) found:'
+				),
+				_react2.default.createElement(
+					'ul',
+					null,
+					items
+				)
+			);
+		}
+	}]);
+
+	return _class;
+}(_react.Component));
+
+var MapService = (0, _tvheadendData.withTVHeadendData)('service', 'POST', function (_Component3) {
+	_inherits(_class2, _Component3);
+
+	function _class2() {
+		_classCallCheck(this, _class2);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(_class2).apply(this, arguments));
+	}
+
+	_createClass(_class2, [{
+		key: 'render',
+		value: function render() {
+			if (this.props.data.length === 0) {
+				return _react2.default.createElement('div', { className: 'empty' });
+			}
+			return _react2.default.createElement(
+				'div',
+				{ className: 'channel-mapped' },
+				_react2.default.createElement(
+					'strong',
+					null,
+					'sucess'
+				)
+			);
+		}
+	}]);
+
+	return _class2;
+}(_react.Component));
 
 },{"bootstrap-modal":3,"jquery":34,"react":261,"tvheadend-data":19}],12:[function(require,module,exports){
 'use strict';
@@ -1306,12 +1416,24 @@ function withEnigma2Data(e2Module, httpMethod, ComposedComponent) {
                                 path: '/' + e2Module + '/' + _this.props.method
                         };
 
+                        _this.setParameter = function (param) {
+                                return _this.refs.core.setParameter(param);
+                        };
+
+                        _this.setParameterObj = function (obj) {
+                                return _this.refs.core.setParameterObj(obj);
+                        };
+
                         _this.load = function () {
-                                return _this.refs.data.load();
+                                return _this.refs.core.load();
+                        };
+
+                        _this.get = function () {
+                                return _this.refs.core.get();
                         };
 
                         _this.clear = function () {
-                                return _this.refs.data.clear();
+                                return _this.refs.core.clear();
                         };
 
                         return _this;
@@ -1328,7 +1450,7 @@ function withEnigma2Data(e2Module, httpMethod, ComposedComponent) {
                                 };
 
                                 var Data = (0, _coreData.withData)(httpMethod, ComposedComponent);
-                                return _react2.default.createElement(Data, _extends({ ref: 'data' }, this.props, addProps));
+                                return _react2.default.createElement(Data, _extends({ ref: 'core' }, this.props, addProps));
                         }
                 }]);
 
@@ -1630,12 +1752,24 @@ function withTVHeadendData(tvhModule, httpMethod, ComposedComponent) {
                                 path: '/' + tvhModule + '/' + _this.props.method
                         };
 
+                        _this.setParameter = function (param) {
+                                return _this.refs.core.setParameter(param);
+                        };
+
+                        _this.setParameterObj = function (obj) {
+                                return _this.refs.core.setParameterObj(obj);
+                        };
+
                         _this.load = function () {
-                                return _this.refs.data.load();
+                                return _this.refs.core.load();
+                        };
+
+                        _this.get = function () {
+                                return _this.refs.core.get();
                         };
 
                         _this.clear = function () {
-                                return _this.refs.data.clear();
+                                return _this.refs.core.clear();
                         };
 
                         return _this;
@@ -1652,7 +1786,7 @@ function withTVHeadendData(tvhModule, httpMethod, ComposedComponent) {
                                 };
 
                                 var Data = (0, _coreData.withData)(httpMethod, ComposedComponent);
-                                return _react2.default.createElement(Data, _extends({ ref: 'data' }, this.props, addProps));
+                                return _react2.default.createElement(Data, _extends({ ref: 'core' }, this.props, addProps));
                         }
                 }]);
 

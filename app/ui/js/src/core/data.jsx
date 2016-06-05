@@ -25,6 +25,9 @@ export function withData(httpMethod, ComposedComponent) {
         		super(props);
         	}
 
+                setParameter = (param) => this.setState({parameter: param});
+                setParameterObj = (obj) => this.setState({parameterObj: obj});
+
                 load = () => {
                         // required
                         if (this.state.url == '' || this.state.path == '') return;
@@ -50,6 +53,8 @@ export function withData(httpMethod, ComposedComponent) {
                 		}.bind(this)
                         });
                 }
+
+                get() { return this.state.data; }
 
                 clear = () => this.setState({data: []});
 

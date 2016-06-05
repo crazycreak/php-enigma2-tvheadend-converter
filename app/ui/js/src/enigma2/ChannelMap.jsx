@@ -13,62 +13,102 @@ export default class ChannelMap extends Component {
 		super(props);
 	}
 
-	openModal = () => this.refs.root.open();
-	closeModal = () => this.refs.root.close();
-	loadServices = () => this.refs.tvhService.load();
+	handleMap = () => $.when(this.loadPreviewServices()).done(this.openPreviewModal());
 
-        handleMap = () => $.when(this.loadServices()).done(this.openModal());
+	loadPreviewServices = () => this.refs.previewService.load();
+	openPreviewModal = () => this.refs.previewModal.open();
+	closePreviewModal = () => this.refs.previewModal.close();
 
-	handleConfirm = () => {
-		this.mapChannel();
-		this.closeModal();
+	handlePreviewConfirm = () => {
+		this.closePreviewModal();
+		$.when(this.loadMapServices()).done(this.openMapModal());
 	}
-	handleCancel = () => {
-		if (confirm('Are you sure you want to cancel?')) this.closeModal();
+	handlePreviewCancel = () => {
+		if (confirm('Are you sure you want to cancel?')) this.closePreviewModal();
 	}
-	mapChannel = () => {
-		// todo: call server with data
-		console.log(this.refs.tvhData);
-	}
+	handlePreviewLoad = (data) => this.refs.mapService.setParameterObj(data);
+
+	loadMapServices = () => this.refs.mapService.load();
+	openMapModal = () => this.refs.mapModal.open();
+	closeMapModal = () => this.refs.mapModal.close();
+
+	handleMapConfirm = () => this.closeMapModal();
 
         render() {
-                var ModalComponent = class extends Component {
-			render() {
-				if (this.props.data.length === 0) {
-					return <div className="no-channels-found">no TVHeadend Channel(s) found ...</div>;
-				}
-				var items = this.props.data.map(function(item) {
-					return <li>{item.svcname}</li>;
-				});
-				return (
-					<div className="channels-found">
-						<strong>TVHeadend Channel(s) found:</strong>
-						<ul>{items}</ul>
-					</div>
-				);
-			}
-                };
-
-                var TVHService = withTVHeadendData('service', 'GET', ModalComponent);
-
 		var async = false;
-		var parameters = {'svcname': this.state.data.e2servicename};
-                var TVHComponent = (
-			<TVHService ref="tvhService" method="multiple" parameter="array" parameterObj={parameters} async={async} />
+		var parameters = null;
+		parameters = {
+			'svcname': this.state.data.e2servicename
+		};
+		var PreviewComponent = null;
+                PreviewComponent = (
+			<PreviewService ref="previewService" method="multiple" parameter="array" parameterObj={parameters} async={async} loaded={this.handlePreviewLoad} />
+		);
+		var MapComponent = null;
+                MapComponent = (
+			<MapService ref="mapService" method="channel" parameter="array" />
 		);
 
                 return (
-			<BootstrapModal ref="root"
-					className="channel-map"
-					confirm="map"
-					onConfirm={this.handleConfirm}
-					cancel="cancel"
-					onCancel={this.handleCancel}
-					title="Map Channel => E2-to-TVH">
-				<div><strong>Name:</strong> {this.state.data.e2servicename}</div>
-				<div><strong>Reference:</strong> {this.state.data.e2servicereference}</div>
-                                {TVHComponent}
-			</BootstrapModal>
+			<div className="channel-map">
+				<BootstrapModal ref="previewModal"
+						className="preview-modal"
+						confirm="map"
+						onConfirm={this.handlePreviewConfirm}
+						cancel="cancel"
+						onCancel={this.handlePreviewCancel}
+						title="Preview">
+					<div><strong>Name:</strong> {this.state.data.e2servicename}</div>
+					<div><strong>Reference:</strong> {this.state.data.e2servicereference}</div>
+					{PreviewComponent}
+				</BootstrapModal>
+				<BootstrapModal ref="mapModal"
+						className="map-modal"
+						confirm="ok"
+						onConfirm={this.handleMapConfirm}
+						title="Map">
+					<div><strong>Name:</strong> {this.state.data.e2servicename}</div>
+					<div><strong>Reference:</strong> {this.state.data.e2servicereference}</div>
+					{MapComponent}
+				</BootstrapModal>
+			</div>
                 );
         }
 }
+
+var PreviewService = withTVHeadendData('service', 'GET', class extends Component {
+	componentDidUpdate () {
+		this.props.loaded(this.props.data[0]);
+	}
+	render() {
+		if (this.props.data.length === 0) {
+			return (
+				<div className="no-channels-found">
+					<strong>no TVHeadend Channel(s) found ...</strong>
+				</div>
+			);
+		}
+		var items = this.props.data.map(function(item) {
+			return <li>{item.svcname} ({item.provider})</li>;
+		});
+		return (
+			<div className="channels-found">
+				<strong>TVHeadend Channel(s) found:</strong>
+				<ul>{items}</ul>
+			</div>
+		);
+	}
+});
+
+var MapService = withTVHeadendData('service', 'POST', class extends Component {
+	render() {
+		if (this.props.data.length === 0) {
+			return <div className="empty"></div>;
+		}
+		return (
+			<div className="channel-mapped">
+				<strong>sucess</strong>
+			</div>
+		);
+	}
+});

@@ -18,8 +18,12 @@ export function withTVHeadendData(tvhModule, httpMethod, ComposedComponent) {
         		super(props);
         	}
 
-                load = () => this.refs.data.load();
-                clear = () => this.refs.data.clear();
+                setParameter = (param) => this.refs.core.setParameter(param);
+                setParameterObj = (obj) => this.refs.core.setParameterObj(obj);
+
+                load = () => this.refs.core.load();
+                get = () => this.refs.core.get();
+                clear = () => this.refs.core.clear();
 
                 render() {
                         const addProps = {
@@ -28,7 +32,7 @@ export function withTVHeadendData(tvhModule, httpMethod, ComposedComponent) {
                         }
 
                         var Data = withData(httpMethod, ComposedComponent);
-                        return <Data ref="data" {...this.props} {...addProps} />;
+                        return <Data ref="core" {...this.props} {...addProps} />;
                 }
         }
 }

@@ -32,9 +32,9 @@ export default class ChannelItem extends Component {
 		return (
 			<li className="channel-item list-group-item">
 				<BootstrapButton className="btn-info btn-xs" onClick={this.handleClick}>map</BootstrapButton>
-				{modal}
 				{number}
 				{servicename}
+				{modal}
 			</li>
 		);
 	}
