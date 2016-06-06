@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
+import BootstrapWell from 'bootstrap-well';
 import { ServiceBox } from './ServiceBox.jsx';
 
 export default class Enigma2App extends Component {
@@ -28,19 +29,19 @@ export default class Enigma2App extends Component {
 				</ul>
 				<div className="tab-content">
 					<div role="tabpanel" className="tab-pane active" id="bouquets">
-						<div className="well well-sm service-actionbar">
+						<BootstrapWell className="service-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadBouquets}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearBouquets}>clear</BootstrapButton>
-						</div>
+						</BootstrapWell>
 						<ServiceBox ref="bouquetService" method="bouquets" parameter="tv" />
 					</div>
 					<div role="tabpanel" className="tab-pane" id="provider">
-						<div className="well well-sm service-actionbar">
+						<BootstrapWell className="service-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadProvider}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearProvider}>clear</BootstrapButton>
-						</div>
+						</BootstrapWell>
 						<ServiceBox ref="providerService" method="provider" parameter="tv" />
 					</div>
 				</div>

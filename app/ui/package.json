@@ -29,6 +29,8 @@
     "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
     "bootstrap-modal": "./js/src/bootstrap/Modal.jsx",
+    "bootstrap-panel": "./js/src/bootstrap/Panel.jsx",
+    "bootstrap-well": "./js/src/bootstrap/Well.jsx",
     "core-data" : "./js/src/core/data.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "enigma2-data": "./js/src/enigma2/data.jsx",

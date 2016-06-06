@@ -15,12 +15,12 @@ export default class Modal extends Component {
         // initial state
 	state = {
                 className: this.props.className,
+                children: this.props.children,
+                title: this.props.title,
 		confirm: this.props.confirm,
                 onConfirm: this.props.onConfirm,
                 cancel: this.props.cancel,
-                onCancel: this.props.onCancel,
-                children: this.props.children,
-                title: this.props.title
+                onCancel: this.props.onCancel
 	}
 
         constructor(props) {

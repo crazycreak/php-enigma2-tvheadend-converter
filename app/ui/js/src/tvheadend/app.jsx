@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
+import BootstrapWell from 'bootstrap-well';
 import { ChannelList } from './ChannelList.jsx';
 
 export default class TVHeadendApp extends Component {
@@ -20,11 +21,11 @@ export default class TVHeadendApp extends Component {
 				</ul>
 				<div className="tab-content">
 					<div role="tabpanel" className="tab-pane active" id="channels">
-						<div className="well well-sm channel-actionbar">
+						<BootstrapWell className="channel-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
 							<BootstrapButton className="btn-info btn-sm" onClick={this.loadChannels}>load</BootstrapButton>
 							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearChannels}>clear</BootstrapButton>
-						</div>
+						</BootstrapWell>
 						<ChannelList ref="channelService" method="all" />
 					</div>
 				</div>
