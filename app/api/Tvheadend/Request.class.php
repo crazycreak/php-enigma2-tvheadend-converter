@@ -14,8 +14,10 @@ class Request extends AbstractRequest {
 	 * available Parameters
 	 */
 	protected $validParameters = array(
-		'multiple' => true,
-		'channel' => true
+		'service' => array(
+			'multiple' => true,
+			'channel' => true
+		)
 	);
 
 	/**

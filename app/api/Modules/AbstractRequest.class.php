@@ -148,12 +148,14 @@ abstract class AbstractRequest {
 		if (!isset($this->request[2]) || empty($this->request[2])) {
 			return;
 		}
+		$_moduleKey = $this->moduleKey;
 		$_methodKey = $this->methodKey;
 		// check is valid
-		if (isset($this->validParameters[$_methodKey])) {
+		if (isset($this->validParameters[$_moduleKey]) && isset($this->validParameters[$_moduleKey][$_methodKey])) {
+			$_validParameters = $this->validParameters[$_moduleKey][$_methodKey];
 			// check mapping exists
 			$value = $this->request[2];
-			if ($this->validParameters[$_methodKey] === true) {
+			if ($_validParameters === true) {
 				if ($value == self::REQUEST_PARAMETER_ARRAY) {
 					// request data as parameter
 					foreach ($this->requestData as $key => $value) {
@@ -163,9 +165,9 @@ abstract class AbstractRequest {
 					// value as parameter
 					$this->parameter = $value;
 				}
-			} else if (isset($this->validParameters[$_methodKey][$value])) {
+			} else if (isset($_validParameters[$value])) {
 				// mapping per array
-				$this->parameter = $this->validParameters[$_methodKey][$value];
+				$this->parameter = $_validParameters[$value];
 			}
 		}
 	}

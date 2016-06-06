@@ -17,15 +17,11 @@ class Request extends AbstractRequest {
 	 * available Parameters
 	 */
 	protected $validParameters = array(
-		'bouquets' => array(
-			'tv' => ServiceModule::SERVICES_TV,
-			'radio' => ServiceModule::SERVICES_RADIO
-		),
-		'provider' => array(
-			'tv' => ServiceModule::SERVICES_TV,
-			'radio' => ServiceModule::SERVICES_RADIO
-		),
-		'channels' => true
+		'service' => array(
+			'bouquets' => array('tv' => ServiceModule::SERVICES_TV, 'radio' => ServiceModule::SERVICES_RADIO),
+			'provider' => array('tv' => ServiceModule::SERVICES_TV, 'radio' => ServiceModule::SERVICES_RADIO),
+			'channels' => true
+		)
 	);
 
 	/**
