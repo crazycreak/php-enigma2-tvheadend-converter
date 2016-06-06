@@ -28,6 +28,8 @@
   "browser": {
     "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
+    "bootstrap-list": "./js/src/bootstrap/List.jsx",
+    "bootstrap-listitem": "./js/src/bootstrap/ListItem.jsx",
     "bootstrap-modal": "./js/src/bootstrap/Modal.jsx",
     "bootstrap-panel": "./js/src/bootstrap/Panel.jsx",
     "bootstrap-well": "./js/src/bootstrap/Well.jsx",

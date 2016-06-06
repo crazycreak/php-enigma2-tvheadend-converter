@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BootstrapList from 'bootstrap-list';
 import { withEnigma2Data } from "enigma2-data";
 import ChannelItem from './ChannelItem.jsx';
 
@@ -14,9 +15,9 @@ export var ChannelList = withEnigma2Data('service', 'GET',  class extends Compon
 			);
 		});
 		return (
-			<ul className="channel-list list-group">
+			<BootstrapList className="channel-list">
 				{items}
-			</ul>
+			</BootstrapList>
 		);
 	}
 });

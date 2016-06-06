@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BootstrapPanel from 'bootstrap-panel';
+import BootstrapList from 'bootstrap-list';
 import { withTVHeadendData } from "tvheadend-data";
 import ChannelItem from './ChannelItem.jsx';
 
@@ -16,9 +17,9 @@ export var ChannelList = withTVHeadendData('channel', 'GET', class extends Compo
 		});
 		return (
 			<BootstrapPanel classNamePanel="panel-default" classNameHeading="channel-all" headingText="All">
-				<ul className="channel-list list-group">
+				<BootstrapList className="channel-list">
 					{items}
-				</ul>
+				</BootstrapList>
 			</BootstrapPanel>
 		);
 	}

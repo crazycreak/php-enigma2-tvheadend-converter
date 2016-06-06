@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
+import BootstrapListItem from 'bootstrap-listitem';
 
 export default class ChannelItem extends Component {
 	// initial state
@@ -23,10 +24,10 @@ export default class ChannelItem extends Component {
 		}
 
 		return (
-			<li className="channel-item list-group-item">
+			<BootstrapListItem className="channel-item">
 				{number}
 				{name}
-			</li>
+			</BootstrapListItem>
 		);
 	}
 }

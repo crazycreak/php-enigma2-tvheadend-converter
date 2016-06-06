@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import BootstrapButton from 'bootstrap-button';
+import BootstrapListItem from 'bootstrap-listitem';
 import ChannelMap from './ChannelMap.jsx';
 
 export default class ChannelItem extends Component {
@@ -30,12 +31,12 @@ export default class ChannelItem extends Component {
 		);
 
 		return (
-			<li className="channel-item list-group-item">
+			<BootstrapListItem className="channel-item">
 				<BootstrapButton className="btn-info btn-xs" onClick={this.handleClick}>map</BootstrapButton>
 				{number}
 				{servicename}
 				{modal}
-			</li>
+			</BootstrapListItem>
 		);
 	}
 }
