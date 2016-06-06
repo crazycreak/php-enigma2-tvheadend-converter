@@ -31,7 +31,8 @@ class Request extends AbstractRequest {
 	/**
 	 * see Modules\AbstractRequest
 	 */
-	protected function setServer() {
+	protected function init() {
+		parent::init();
 		$this->server = new Server(ENIGMA2_HOST);
 	}
 }

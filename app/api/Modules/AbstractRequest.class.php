@@ -72,13 +72,15 @@ abstract class AbstractRequest {
 		// remove cache parameter (e.g. jQuery)
 		unset($this->requestData[self::REQUEST_CACHE_KEY]);
 
-		$this->setServer();
+		$this->init();
 	}
 
 	/**
 	 * initialise server
 	 */
-	protected abstract function setServer();
+	protected function init() {
+		// defaults
+	}
 
 	/**
 	 * execute request

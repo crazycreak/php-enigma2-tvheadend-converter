@@ -21,7 +21,8 @@ class Request extends AbstractRequest {
 	/**
 	 * see Modules\AbstractRequest
 	 */
-	protected function setServer() {
+	protected function init() {
+		parent::init();
 		$this->server = new Server(TVHEADEND_HOST);
 	}
 }
