@@ -8,7 +8,7 @@ export function withData(httpMethod, ComposedComponent) {
                         url: '',
                         path: '',
                 	parameter: '',
-                        parameterObj: {},
+                        parameterObj: null,
                         async: true
         	}
                 // initial state
@@ -24,6 +24,16 @@ export function withData(httpMethod, ComposedComponent) {
                 constructor(props) {
         		super(props);
         	}
+
+                handleSuccess = (result) => {
+                        if (result['code'] == 200) {
+                                this.setState({data: result['data']});
+                        }
+                }
+
+                handleError = (xhr, status, err) => {
+                        console.error(_url, status, err.toString());
+                }
 
                 setParameter = (param) => this.setState({parameter: param});
                 setParameterObj = (obj) => this.setState({parameterObj: obj});
@@ -43,14 +53,8 @@ export function withData(httpMethod, ComposedComponent) {
                 		dataType: 'json',
                                 data: this.state.parameterObj,
                 		cache: false,
-                		success: function(result) {
-                			if (result['code'] == 200) {
-                				this.setState({data: result['data']});
-                			}
-                		}.bind(this),
-                		error: function(xhr, status, err) {
-                			console.error(_url, status, err.toString());
-                		}.bind(this)
+                		success: this.handleSuccess,
+                		error: this.handleError
                         });
                 }
 

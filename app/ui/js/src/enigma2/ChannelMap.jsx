@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import { withTVHeadendData } from "tvheadend-data";
 import BootstrapModal from 'bootstrap-modal';
+import BootstrapRadioButtonGroup from 'bootstrap-radiobuttongroup';
 
 export default class ChannelMap extends Component {
 	// initial state
 	state = {
+		loaded: false,
 		data: this.props.data
 	}
 
@@ -20,13 +22,20 @@ export default class ChannelMap extends Component {
 	closePreviewModal = () => this.refs.previewModal.close();
 
 	handlePreviewConfirm = () => {
-		this.closePreviewModal();
-		$.when(this.loadMapServices()).done(this.openMapModal());
+		if (this.state.loaded) {
+			this.closePreviewModal();
+			$.when(this.loadMapServices()).done(this.openMapModal());
+		} else {
+			if (confirm('No channel selected, cancel?')) this.closePreviewModal();
+		}
 	}
 	handlePreviewCancel = () => {
 		if (confirm('Are you sure you want to cancel?')) this.closePreviewModal();
 	}
-	handlePreviewLoad = (data) => this.refs.mapService.setParameterObj(data);
+	handleLoaded = (data) => {
+		if (!this.state.loaded) this.setState({loaded: true});
+		this.refs.mapService.setParameterObj(data);
+	}
 
 	loadMapServices = () => this.refs.mapService.load();
 	openMapModal = () => this.refs.mapModal.open();
@@ -42,7 +51,7 @@ export default class ChannelMap extends Component {
 		};
 		var PreviewComponent = null;
                 PreviewComponent = (
-			<PreviewService ref="previewService" method="multiple" parameter="array" parameterObj={parameters} async={async} loaded={this.handlePreviewLoad} />
+			<PreviewService ref="previewService" method="multiple" parameter="array" parameterObj={parameters} async={async} loaded={this.handleLoaded} />
 		);
 		var MapComponent = null;
                 MapComponent = (
@@ -77,8 +86,23 @@ export default class ChannelMap extends Component {
 }
 
 var PreviewService = withTVHeadendData('service', 'GET', class extends Component {
+	// initial state
+	state = {
+                checkedIndex: ''
+	}
+
+
 	componentDidUpdate () {
-		this.props.loaded(this.props.data[0]);
+		var index = this.state.checkedIndex;
+		if (this.props.data.length === 1) {
+			index = 0;
+		}
+		if (index !== '') {
+			this.props.loaded(this.props.data[index]);
+		}
+	}
+	onChange = (index) => {
+		this.setState({checkedIndex: index});
 	}
 	render() {
 		if (this.props.data.length === 0) {
@@ -88,13 +112,16 @@ var PreviewService = withTVHeadendData('service', 'GET', class extends Component
 				</div>
 			);
 		}
-		var items = this.props.data.map(function(item) {
-			return <li>{item.svcname} ({item.provider})</li>;
+		var items = this.props.data.map(function(item, index) {
+			return {
+				label: item.svcname + ' (' + item.provider + ')',
+				index: index
+			};
 		});
 		return (
 			<div className="channels-found">
 				<strong>TVHeadend Channel(s) found:</strong>
-				<ul>{items}</ul>
+				<BootstrapRadioButtonGroup name="tvh-items" choices={items} onChange={this.onChange} />
 			</div>
 		);
 	}
