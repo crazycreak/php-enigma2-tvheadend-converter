@@ -24,8 +24,8 @@ export default class RadioButton extends Component {
 
 	render() {
                 var props = {};
-                if (this.state.checked) props.checked = true;
-                else if (this.state.disabled) props.disabled = true;
+                if (this.state.disabled) props.disabled = true;
+                else if (this.state.checked) props.checked = true;
 
 		return (
                         <div class="radio">

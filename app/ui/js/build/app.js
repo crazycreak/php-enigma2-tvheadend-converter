@@ -701,7 +701,7 @@ var RadioButton = function (_Component) {
                 key: 'render',
                 value: function render() {
                         var props = {};
-                        if (this.state.checked) props.checked = true;else if (this.state.disabled) props.disabled = true;
+                        if (this.state.disabled) props.disabled = true;else if (this.state.checked) props.checked = true;
 
                         return _react2.default.createElement(
                                 'div',
@@ -1423,7 +1423,7 @@ var PreviewService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', fun
 		key: 'componentDidUpdate',
 		value: function componentDidUpdate() {
 			var index = this.state.checkedIndex;
-			if (this.props.data.length === 1) {
+			if (this.props.data.length === 1 && this.props.data.channel.length === 0) {
 				index = 0;
 			}
 			if (index !== '') {

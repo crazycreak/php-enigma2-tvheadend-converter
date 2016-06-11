@@ -94,7 +94,7 @@ var PreviewService = withTVHeadendData('service', 'GET', class extends Component
 
 	componentDidUpdate () {
 		var index = this.state.checkedIndex;
-		if (this.props.data.length === 1) {
+		if (this.props.data.length === 1 && this.props.data.channel.length === 0) {
 			index = 0;
 		}
 		if (index !== '') {
@@ -115,7 +115,7 @@ var PreviewService = withTVHeadendData('service', 'GET', class extends Component
 		var items = this.props.data.map(function(item, index) {
 			var disabled = item.channel.length > 0 ? true : false;
 			var label = item.svcname + ' (' + item.provider + ')';
-			if (disabled ) label += ' - already mapped';
+			if (disabled) label += ' - already mapped';
 			return {
 				label: label,
 				value: index,
