@@ -4,6 +4,11 @@ use Tvheadend\Models;
 
 class Service extends AbstractExtendedModule {
 	/**
+	 * @see Tvheadend\Services\ExtendedBase
+	 */
+	protected $notificationClass = 'channel';
+
+	/**
 	 * returns a filterd list of services
 	 * @param	array			$filters
 	 * @return	array<\Tvheadend\Models\Service>
@@ -92,7 +97,7 @@ class Service extends AbstractExtendedModule {
 		$status = $response->getStatus();
 		// failed
 		if ($status != 200) return false;
-		// success
-		return true;
+		// check result
+		return $this->getResult('change');;
 	}
 }

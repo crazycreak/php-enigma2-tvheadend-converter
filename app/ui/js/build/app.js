@@ -1422,7 +1422,7 @@ var PreviewService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', fun
 		key: 'componentDidUpdate',
 		value: function componentDidUpdate() {
 			var index = this.state.checkedIndex;
-			if (this.props.data.length === 1 && this.props.data.channel.length === 0) {
+			if (this.props.data.length === 1 && (typeof this.props.data.channel == 'undefined' || this.props.data.channel.length === 0)) {
 				index = 0;
 			}
 			if (index !== '') {
@@ -1444,7 +1444,7 @@ var PreviewService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', fun
 				);
 			}
 			var items = this.props.data.map(function (item, index) {
-				var disabled = item.channel.length > 0 ? true : false;
+				var disabled = typeof item.channel != 'undefined' && item.channel.length > 0 ? true : false;
 				var label = item.svcname + ' (' + item.provider + ')';
 				if (disabled) label += ' - already mapped';
 				return {
