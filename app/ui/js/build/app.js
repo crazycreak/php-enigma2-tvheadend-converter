@@ -1006,6 +1006,10 @@ function withData(httpMethod, ComposedComponent) {
                                 });
                         };
 
+                        _this.get = function () {
+                                return _this.state.data;
+                        };
+
                         _this.clear = function () {
                                 return _this.setState({ data: [] });
                         };
@@ -1016,11 +1020,6 @@ function withData(httpMethod, ComposedComponent) {
 
 
                 _createClass(_class, [{
-                        key: 'get',
-                        value: function get() {
-                                return this.state.data;
-                        }
-                }, {
                         key: 'render',
                         value: function render() {
                                 var addProps = {

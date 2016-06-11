@@ -58,7 +58,7 @@ export function withData(httpMethod, ComposedComponent) {
                         });
                 }
 
-                get() { return this.state.data; }
+                get = () => { return this.state.data; }
 
                 clear = () => this.setState({data: []});
 
