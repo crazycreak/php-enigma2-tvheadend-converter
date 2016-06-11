@@ -4,11 +4,16 @@ use Tvheadend\Models;
 
 class Service extends AbstractExtendedModule {
 	/**
+	 * @see Tvheadend\Services\ExtendedBase
+	 */
+	protected $notificationClass = 'channel';
+
+	/**
 	 * returns a filterd list of services
 	 * @param	array			$filters
 	 * @return	array<\Tvheadend\Models\Service>
 	 */
-	public function get(array $filters = array()) {
+	public function getMultiple(array $filters = array()) {
 		if (empty($filters)) return false;
 
 		// get all tags
@@ -20,10 +25,8 @@ class Service extends AbstractExtendedModule {
 			function ($service) use ($filters) {
 				$valid = true;
 				foreach ($filters as $key => $value) {
-					// invalid filter
-					if (!$service->hasProperty($key)) continue;
 					// filter ok
-					else if ($service->$key === $value) continue;
+					if ($service->hasProperty($key) && $service->$key === $value) continue;
 					// not valid
 					$valid = false;
 					break;
@@ -57,6 +60,17 @@ class Service extends AbstractExtendedModule {
 	}
 
 	/**
+	 * maps the given simple services array as channel
+	 * @param	array					$services
+	 * @return	boolean
+	 */
+	public function setChannel($serviceArray = null) {
+		$service = new Models\Service((object)$serviceArray);
+
+		return $this->map(array($service));
+	}
+
+	/**
 	 * maps the given services as channels
 	 * @param	array<\Tvheadend\Models\Service>	$services
 	 * @return	boolean
@@ -71,17 +85,19 @@ class Service extends AbstractExtendedModule {
 				array_push($uuids, $service->uuid);
 			}
 		}
+
 		// no valid services
 		if (empty($uuids)) return false;
 
 		$response = $this->_client->doGet('/api/service/mapper/start', array(
+			'encrypted' => 'on',
 			'uuids' => json_encode($uuids)
 		));
 
 		$status = $response->getStatus();
 		// failed
 		if ($status != 200) return false;
-		// success
-		return true;
+		// check result
+		return $this->getResult('change');;
 	}
 }

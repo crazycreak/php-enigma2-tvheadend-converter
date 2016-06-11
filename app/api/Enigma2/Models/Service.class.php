@@ -8,7 +8,8 @@ class Service extends AbstractModel {
 	 */
 	protected $_validProperties = array(
 		'e2servicereference',
-		'e2servicename'
+		'e2servicename',
+		'number'
 	);
 
 	/**
