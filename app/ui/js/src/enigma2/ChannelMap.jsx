@@ -102,7 +102,7 @@ var PreviewService = withTVHeadendData('service', 'GET', class extends Component
 		}
 	}
 	onChange = (index) => {
-		this.setState({checkedIndex: index});
+		if (this.state.checkedIndex !== index) this.setState({checkedIndex: index});
 	}
 	render() {
 		if (this.props.data.length === 0) {
@@ -113,15 +113,19 @@ var PreviewService = withTVHeadendData('service', 'GET', class extends Component
 			);
 		}
 		var items = this.props.data.map(function(item, index) {
+			var disabled = item.channel.length > 0 ? true : false;
+			var label = item.svcname + ' (' + item.provider + ')';
+			if (disabled ) label += ' - already mapped';
 			return {
-				label: item.svcname + ' (' + item.provider + ')',
-				index: index
+				label: label,
+				value: index,
+				disabled: disabled
 			};
 		});
 		return (
 			<div className="channels-found">
 				<strong>TVHeadend Channel(s) found:</strong>
-				<BootstrapRadioButtonGroup name="tvh-items" choices={items} onChange={this.onChange} />
+				<BootstrapRadioButtonGroup name="tvh-items" buttons={items} onChange={this.onChange} />
 			</div>
 		);
 	}

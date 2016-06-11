@@ -5,7 +5,7 @@ export default class RadioButtonGroup extends Component {
 	// initial state
 	state = {
 		name: this.props.name,
-                choices: this.props.choices,
+                buttons: this.props.buttons,
                 onChange: this.props.onChange
 	}
 
@@ -16,12 +16,14 @@ export default class RadioButtonGroup extends Component {
         onChange = (index) => this.state.onChange(index);
 
         render() {
-                var checked = this.state.choices.length === 1;
-                var items = this.state.choices.map((item, index) => {
+                var checked = this.state.buttons.length === 1;
+                var items = this.state.buttons.map((item, index) => {
+                        var key = 'item-' + index;
                         return (
-                                <BootstrapRadioButton key={index}
+                                <BootstrapRadioButton key={key}
                                         label={item.label}
-                                        value={item.index}
+                                        value={item.value}
+                                        disabled={item.disabled}
                                         name={this.state.name}
                                         checked={checked}
                                         onChange={this.onChange} />

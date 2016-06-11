@@ -647,17 +647,17 @@ var Panel = function (_Component) {
 exports.default = Panel;
 
 },{"react":267}],10:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+        value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -670,51 +670,59 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var RadioButton = function (_Component) {
-  _inherits(RadioButton, _Component);
+        _inherits(RadioButton, _Component);
 
-  function RadioButton(props) {
-    _classCallCheck(this, RadioButton);
+        // define default properties
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButton).call(this, props));
+        function RadioButton(props) {
+                _classCallCheck(this, RadioButton);
 
-    _this.state = {
-      name: _this.props.name,
-      label: _this.props.label,
-      value: _this.props.value,
-      checked: _this.props.checked,
-      onChange: _this.props.onChange
-    };
+                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButton).call(this, props));
 
-    _this.handleChange = function () {
-      return _this.state.onChange(_this.state.value);
-    };
+                _this.state = {
+                        name: _this.props.name,
+                        label: _this.props.label,
+                        value: _this.props.value,
+                        disabled: _this.props.disabled,
+                        checked: _this.props.checked,
+                        onChange: _this.props.onChange
+                };
 
-    return _this;
-  }
-  // initial state
+                _this.handleChange = function () {
+                        return _this.state.onChange(_this.state.value);
+                };
+
+                return _this;
+        }
+        // initial state
 
 
-  _createClass(RadioButton, [{
-    key: "render",
-    value: function render() {
-      var props = {};
-      if (this.state.checked) props.checked = true;
-      return _react2.default.createElement(
-        "div",
-        { "class": "radio" },
-        _react2.default.createElement(
-          "label",
-          null,
-          _react2.default.createElement("input", _extends({ type: "radio", name: this.state.name, value: this.state.value, onChange: this.handleChange }, props)),
-          this.state.label
-        )
-      );
-    }
-  }]);
+        _createClass(RadioButton, [{
+                key: 'render',
+                value: function render() {
+                        var props = {};
+                        if (this.state.checked) props.checked = true;else if (this.state.disabled) props.disabled = true;
 
-  return RadioButton;
+                        return _react2.default.createElement(
+                                'div',
+                                { 'class': 'radio' },
+                                _react2.default.createElement(
+                                        'label',
+                                        null,
+                                        _react2.default.createElement('input', _extends({}, props, { type: 'radio', name: this.state.name, value: this.state.value, onChange: this.handleChange })),
+                                        this.state.label
+                                )
+                        );
+                }
+        }]);
+
+        return RadioButton;
 }(_react.Component);
 
+RadioButton.defaultProps = {
+        'disabled': false,
+        'checked': false
+};
 exports.default = RadioButton;
 
 },{"react":267}],11:[function(require,module,exports){
@@ -752,7 +760,7 @@ var RadioButtonGroup = function (_Component) {
 
                 _this.state = {
                         name: _this.props.name,
-                        choices: _this.props.choices,
+                        buttons: _this.props.buttons,
                         onChange: _this.props.onChange
                 };
 
@@ -770,11 +778,13 @@ var RadioButtonGroup = function (_Component) {
                 value: function render() {
                         var _this2 = this;
 
-                        var checked = this.state.choices.length === 1;
-                        var items = this.state.choices.map(function (item, index) {
-                                return _react2.default.createElement(_bootstrapRadiobutton2.default, { key: index,
+                        var checked = this.state.buttons.length === 1;
+                        var items = this.state.buttons.map(function (item, index) {
+                                var key = 'item-' + index;
+                                return _react2.default.createElement(_bootstrapRadiobutton2.default, { key: key,
                                         label: item.label,
-                                        value: item.index,
+                                        value: item.value,
+                                        disabled: item.disabled,
                                         name: _this2.state.name,
                                         checked: checked,
                                         onChange: _this2.onChange });
@@ -1403,7 +1413,7 @@ var PreviewService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', fun
 		return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(_class2)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this2), _this2.state = {
 			checkedIndex: ''
 		}, _this2.onChange = function (index) {
-			_this2.setState({ checkedIndex: index });
+			if (_this2.state.checkedIndex !== index) _this2.setState({ checkedIndex: index });
 		}, _temp), _possibleConstructorReturn(_this2, _ret);
 	}
 	// initial state
@@ -1435,9 +1445,13 @@ var PreviewService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', fun
 				);
 			}
 			var items = this.props.data.map(function (item, index) {
+				var disabled = item.channel.length > 0 ? true : false;
+				var label = item.svcname + ' (' + item.provider + ')';
+				if (disabled) label += ' - already mapped';
 				return {
-					label: item.svcname + ' (' + item.provider + ')',
-					index: index
+					label: label,
+					value: index,
+					disabled: disabled
 				};
 			});
 			return _react2.default.createElement(
@@ -1448,7 +1462,7 @@ var PreviewService = (0, _tvheadendData.withTVHeadendData)('service', 'GET', fun
 					null,
 					'TVHeadend Channel(s) found:'
 				),
-				_react2.default.createElement(_bootstrapRadiobuttongroup2.default, { name: 'tvh-items', choices: items, onChange: this.onChange })
+				_react2.default.createElement(_bootstrapRadiobuttongroup2.default, { name: 'tvh-items', buttons: items, onChange: this.onChange })
 			);
 		}
 	}]);
