@@ -7,6 +7,10 @@ import { ServiceBox } from './ServiceBox.jsx';
 export default class Enigma2App extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+                        appHeaderText: 'Header'
+                }
 	}
 
         componentWillMount() {
@@ -19,6 +23,9 @@ export default class Enigma2App extends Component {
         }
 
         updateState() {
+		this.setState({
+                        appHeaderText: enigma2Store.get('appHeaderText')
+                });
         }
 
 	loadBouquets = () => this.refs.bouquetService.load();
@@ -28,9 +35,8 @@ export default class Enigma2App extends Component {
 	clearProvider = () => this.refs.providerService.clear();
 
 	render() {
-		var message = 'Enigma2';
 		var header = (
-			<h1>{message}</h1>
+			<h1>{this.state.appHeaderText}</h1>
 		);
 
 		return (

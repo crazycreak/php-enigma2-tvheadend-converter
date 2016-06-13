@@ -2251,6 +2251,9 @@ var Enigma2App = function (_Component) {
 			return _this.refs.providerService.clear();
 		};
 
+		_this.state = {
+			appHeaderText: 'Header'
+		};
 		return _this;
 	}
 
@@ -2271,15 +2274,18 @@ var Enigma2App = function (_Component) {
 		}
 	}, {
 		key: 'updateState',
-		value: function updateState() {}
+		value: function updateState() {
+			this.setState({
+				appHeaderText: _enigma2Store2.default.get('appHeaderText')
+			});
+		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var message = 'Enigma2';
 			var header = _react2.default.createElement(
 				'h1',
 				null,
-				message
+				this.state.appHeaderText
 			);
 
 			return _react2.default.createElement(
@@ -2493,6 +2499,8 @@ var Enigma2Store = function (_Store) {
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Enigma2Store).call(this, 'Enigma2Store'));
 
 		_this.logger.debug('Initializing AppStore');
+
+		_this.initialize('appHeaderText', 'Enigma2');
 		return _this;
 	}
 

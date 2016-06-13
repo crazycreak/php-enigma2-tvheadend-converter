@@ -5,6 +5,8 @@ class Enigma2Store extends Store {
 	constructor() {
         	super('Enigma2Store');
         	this.logger.debug('Initializing AppStore');
+
+		this.initialize('appHeaderText', 'Enigma2');
 	}
 
 	onAction(actionType, data) {
