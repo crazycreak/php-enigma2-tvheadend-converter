@@ -21,11 +21,14 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.4",
+    "lodash": "^4.13.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1"
   },
   "browser": {
+    "core-data": "./js/src/core/Data.jsx",
+    "core-dispatcher": "./js/src/core/Dispatcher.js",
     "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
     "bootstrap-radiobuttongroup": "./js/src/bootstrap/RadioButtonGroup.jsx",
@@ -35,7 +38,6 @@
     "bootstrap-modal": "./js/src/bootstrap/Modal.jsx",
     "bootstrap-panel": "./js/src/bootstrap/Panel.jsx",
     "bootstrap-well": "./js/src/bootstrap/Well.jsx",
-    "core-data" : "./js/src/core/data.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "enigma2-data": "./js/src/enigma2/data.jsx",
     "tvheadend-app": "./js/src/tvheadend/app.jsx",

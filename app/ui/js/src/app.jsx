@@ -1,6 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom'
 import { Router, Route, browserHistory } from 'react-router'
+import dispatcher from './dispatcher';
+
+dispatcher.dispatch('APPINIT');
 
 /*
  * BootstrapApp
