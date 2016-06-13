@@ -29,6 +29,7 @@
   "browser": {
     "core-data": "./js/src/core/Data.jsx",
     "core-dispatcher": "./js/src/core/Dispatcher.js",
+    "core-store": "./js/src/core/Store.js",
     "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
     "bootstrap-radiobuttongroup": "./js/src/bootstrap/RadioButtonGroup.jsx",
@@ -40,6 +41,7 @@
     "bootstrap-well": "./js/src/bootstrap/Well.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "enigma2-data": "./js/src/enigma2/data.jsx",
+    "enigma2-store": "./js/src/enigma2/store.js",
     "tvheadend-app": "./js/src/tvheadend/app.jsx",
     "tvheadend-data": "./js/src/tvheadend/data.jsx"
   },
