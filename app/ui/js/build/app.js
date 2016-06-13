@@ -931,6 +931,128 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+exports.withData = withData;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function withData(httpMethod, ComposedComponent) {
+	var _class, _temp;
+
+	return _temp = _class = function (_Component) {
+		_inherits(_class, _Component);
+
+		// define default properties
+
+		function _class(props) {
+			_classCallCheck(this, _class);
+
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
+
+			_this.state = {
+				data: [],
+				url: _this.props.url,
+				path: _this.props.path,
+				parameter: _this.props.parameter,
+				parameterObj: _this.props.parameterObj,
+				async: _this.props.async
+			};
+
+			_this.handleSuccess = function (result) {
+				if (result['code'] == 200) {
+					_this.setState({ data: result['data'] });
+				}
+			};
+
+			_this.handleError = function (xhr, status, err) {
+				console.error(_url, status, err.toString());
+			};
+
+			_this.setParameter = function (param) {
+				return _this.setState({ parameter: param });
+			};
+
+			_this.setParameterObj = function (obj) {
+				return _this.setState({ parameterObj: obj });
+			};
+
+			_this.load = function () {
+				// required
+				if (_this.state.url == '' || _this.state.path == '') return;
+
+				var _url = _this.state.url + _this.state.path;
+				// optional
+				if (_this.state.parameter != '') _url += '/' + _this.state.parameter;
+
+				return _jquery2.default.ajax({
+					url: _url,
+					type: httpMethod,
+					async: _this.state.async,
+					dataType: 'json',
+					data: _this.state.parameterObj,
+					cache: false,
+					success: _this.handleSuccess,
+					error: _this.handleError
+				});
+			};
+
+			_this.get = function () {
+				return _this.state.data;
+			};
+
+			_this.clear = function () {
+				return _this.setState({ data: [] });
+			};
+
+			return _this;
+		}
+		// initial state
+
+
+		_createClass(_class, [{
+			key: 'render',
+			value: function render() {
+				var addProps = {
+					data: this.state.data
+				};
+				return _react2.default.createElement(ComposedComponent, _extends({}, this.props, addProps));
+			}
+		}]);
+
+		return _class;
+	}(_react.Component), _class.defaultProps = {
+		url: '',
+		path: '',
+		parameter: '',
+		parameterObj: null,
+		async: true
+	}, _temp;
+}
+
+},{"jquery":44,"react":302}],15:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _events = require('events');
@@ -1071,7 +1193,7 @@ var Dispatcher = function () {
 
 exports.default = Dispatcher;
 
-},{"./Logger":15,"events":42,"lodash/assign":59}],15:[function(require,module,exports){
+},{"./Logger":16,"events":42,"lodash/assign":59}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1233,129 +1355,7 @@ Logger.LogLevels = {
 	OFF: 10
 };
 
-},{"lodash/assign":59}],16:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-        value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-exports.withData = withData;
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function withData(httpMethod, ComposedComponent) {
-        var _class, _temp;
-
-        return _temp = _class = function (_Component) {
-                _inherits(_class, _Component);
-
-                // define default properties
-
-                function _class(props) {
-                        _classCallCheck(this, _class);
-
-                        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
-
-                        _this.state = {
-                                data: [],
-                                url: _this.props.url,
-                                path: _this.props.path,
-                                parameter: _this.props.parameter,
-                                parameterObj: _this.props.parameterObj,
-                                async: _this.props.async
-                        };
-
-                        _this.handleSuccess = function (result) {
-                                if (result['code'] == 200) {
-                                        _this.setState({ data: result['data'] });
-                                }
-                        };
-
-                        _this.handleError = function (xhr, status, err) {
-                                console.error(_url, status, err.toString());
-                        };
-
-                        _this.setParameter = function (param) {
-                                return _this.setState({ parameter: param });
-                        };
-
-                        _this.setParameterObj = function (obj) {
-                                return _this.setState({ parameterObj: obj });
-                        };
-
-                        _this.load = function () {
-                                // required
-                                if (_this.state.url == '' || _this.state.path == '') return;
-
-                                var _url = _this.state.url + _this.state.path;
-                                // optional
-                                if (_this.state.parameter != '') _url += '/' + _this.state.parameter;
-
-                                return _jquery2.default.ajax({
-                                        url: _url,
-                                        type: httpMethod,
-                                        async: _this.state.async,
-                                        dataType: 'json',
-                                        data: _this.state.parameterObj,
-                                        cache: false,
-                                        success: _this.handleSuccess,
-                                        error: _this.handleError
-                                });
-                        };
-
-                        _this.get = function () {
-                                return _this.state.data;
-                        };
-
-                        _this.clear = function () {
-                                return _this.setState({ data: [] });
-                        };
-
-                        return _this;
-                }
-                // initial state
-
-
-                _createClass(_class, [{
-                        key: 'render',
-                        value: function render() {
-                                var addProps = {
-                                        data: this.state.data
-                                };
-                                return _react2.default.createElement(ComposedComponent, _extends({}, this.props, addProps));
-                        }
-                }]);
-
-                return _class;
-        }(_react.Component), _class.defaultProps = {
-                url: '',
-                path: '',
-                parameter: '',
-                parameterObj: null,
-                async: true
-        }, _temp;
-}
-
-},{"jquery":44,"react":302}],17:[function(require,module,exports){
+},{"lodash/assign":59}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1375,7 +1375,7 @@ var dispatcher = new _coreDispatcher2.default({
 
 exports.default = dispatcher;
 
-},{"core-dispatcher":14}],18:[function(require,module,exports){
+},{"core-dispatcher":15}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2139,7 +2139,7 @@ exports.default = Enigma2App;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+	value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2163,69 +2163,69 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function withEnigma2Data(e2Module, httpMethod, ComposedComponent) {
-        var _class, _temp;
+	var _class, _temp;
 
-        return _temp = _class = function (_Component) {
-                _inherits(_class, _Component);
+	return _temp = _class = function (_Component) {
+		_inherits(_class, _Component);
 
-                // define default properties
+		// define default properties
 
-                function _class(props) {
-                        _classCallCheck(this, _class);
+		function _class(props) {
+			_classCallCheck(this, _class);
 
-                        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
 
-                        _this.state = {
-                                url: _this.props.url,
-                                path: '/' + e2Module + '/' + _this.props.method
-                        };
+			_this.state = {
+				url: _this.props.url,
+				path: '/' + e2Module + '/' + _this.props.method
+			};
 
-                        _this.setParameter = function (param) {
-                                return _this.refs.core.setParameter(param);
-                        };
+			_this.setParameter = function (param) {
+				return _this.refs.core.setParameter(param);
+			};
 
-                        _this.setParameterObj = function (obj) {
-                                return _this.refs.core.setParameterObj(obj);
-                        };
+			_this.setParameterObj = function (obj) {
+				return _this.refs.core.setParameterObj(obj);
+			};
 
-                        _this.load = function () {
-                                return _this.refs.core.load();
-                        };
+			_this.load = function () {
+				return _this.refs.core.load();
+			};
 
-                        _this.get = function () {
-                                return _this.refs.core.get();
-                        };
+			_this.get = function () {
+				return _this.refs.core.get();
+			};
 
-                        _this.clear = function () {
-                                return _this.refs.core.clear();
-                        };
+			_this.clear = function () {
+				return _this.refs.core.clear();
+			};
 
-                        return _this;
-                }
-                // initial state
+			return _this;
+		}
+		// initial state
 
 
-                _createClass(_class, [{
-                        key: 'render',
-                        value: function render() {
-                                var addProps = {
-                                        url: this.state.url,
-                                        path: this.state.path
-                                };
+		_createClass(_class, [{
+			key: 'render',
+			value: function render() {
+				var addProps = {
+					url: this.state.url,
+					path: this.state.path
+				};
 
-                                var Data = (0, _coreData.withData)(httpMethod, ComposedComponent);
-                                return _react2.default.createElement(Data, _extends({ ref: 'core' }, this.props, addProps));
-                        }
-                }]);
+				var Data = (0, _coreData.withData)(httpMethod, ComposedComponent);
+				return _react2.default.createElement(Data, _extends({ ref: 'core' }, this.props, addProps));
+			}
+		}]);
 
-                return _class;
-        }(_react.Component), _class.defaultProps = {
-                url: '/api/v1/enigma2',
-                path: ''
-        }, _temp;
+		return _class;
+	}(_react.Component), _class.defaultProps = {
+		url: '/api/v1/enigma2',
+		path: ''
+	}, _temp;
 }
 
-},{"core-data":16,"react":302}],25:[function(require,module,exports){
+},{"core-data":14,"react":302}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2495,7 +2495,7 @@ exports.default = TVHeadendApp;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+	value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2519,69 +2519,69 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function withTVHeadendData(tvhModule, httpMethod, ComposedComponent) {
-        var _class, _temp;
+	var _class, _temp;
 
-        return _temp = _class = function (_Component) {
-                _inherits(_class, _Component);
+	return _temp = _class = function (_Component) {
+		_inherits(_class, _Component);
 
-                // define default properties
+		// define default properties
 
-                function _class(props) {
-                        _classCallCheck(this, _class);
+		function _class(props) {
+			_classCallCheck(this, _class);
 
-                        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(_class).call(this, props));
 
-                        _this.state = {
-                                url: _this.props.url,
-                                path: '/' + tvhModule + '/' + _this.props.method
-                        };
+			_this.state = {
+				url: _this.props.url,
+				path: '/' + tvhModule + '/' + _this.props.method
+			};
 
-                        _this.setParameter = function (param) {
-                                return _this.refs.core.setParameter(param);
-                        };
+			_this.setParameter = function (param) {
+				return _this.refs.core.setParameter(param);
+			};
 
-                        _this.setParameterObj = function (obj) {
-                                return _this.refs.core.setParameterObj(obj);
-                        };
+			_this.setParameterObj = function (obj) {
+				return _this.refs.core.setParameterObj(obj);
+			};
 
-                        _this.load = function () {
-                                return _this.refs.core.load();
-                        };
+			_this.load = function () {
+				return _this.refs.core.load();
+			};
 
-                        _this.get = function () {
-                                return _this.refs.core.get();
-                        };
+			_this.get = function () {
+				return _this.refs.core.get();
+			};
 
-                        _this.clear = function () {
-                                return _this.refs.core.clear();
-                        };
+			_this.clear = function () {
+				return _this.refs.core.clear();
+			};
 
-                        return _this;
-                }
-                // initial state
+			return _this;
+		}
+		// initial state
 
 
-                _createClass(_class, [{
-                        key: 'render',
-                        value: function render() {
-                                var addProps = {
-                                        url: this.state.url,
-                                        path: this.state.path
-                                };
+		_createClass(_class, [{
+			key: 'render',
+			value: function render() {
+				var addProps = {
+					url: this.state.url,
+					path: this.state.path
+				};
 
-                                var Data = (0, _coreData.withData)(httpMethod, ComposedComponent);
-                                return _react2.default.createElement(Data, _extends({ ref: 'core' }, this.props, addProps));
-                        }
-                }]);
+				var Data = (0, _coreData.withData)(httpMethod, ComposedComponent);
+				return _react2.default.createElement(Data, _extends({ ref: 'core' }, this.props, addProps));
+			}
+		}]);
 
-                return _class;
-        }(_react.Component), _class.defaultProps = {
-                url: '/api/v1/tvheadend',
-                path: ''
-        }, _temp;
+		return _class;
+	}(_react.Component), _class.defaultProps = {
+		url: '/api/v1/tvheadend',
+		path: ''
+	}, _temp;
 }
 
-},{"core-data":16,"react":302}],29:[function(require,module,exports){
+},{"core-data":14,"react":302}],29:[function(require,module,exports){
 // This file is autogenerated via the `commonjs` Grunt task. You can require() this file in a CommonJS environment.
 require('../../js/transition.js')
 require('../../js/alert.js')
