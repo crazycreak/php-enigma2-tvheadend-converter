@@ -104,14 +104,14 @@ export default class Store {
 	 * @throws exception if the key does not exist
 	 */
 	set(key, value, squashEvent = false) {
-		this.logger.debug(`Setting ${key}=${value}`);
-		if (key in this.storeData) {
-			this.storeData[key] = value;
-			if (!squashEvent) {
-				this.changeStore();
-			}
-		} else {
+		this.logger.debug(`Setting ${key} = ${value}`);
+		if (!this.exists(key)) {
 			throw `Unknown key ${key} in store`;
+		}
+
+		this.storeData[key] = value;
+		if (!squashEvent) {
+			this.changeStore();
 		}
 	}
 
@@ -123,10 +123,23 @@ export default class Store {
 	 * @throws exception if the key does not exist
 	 */
 	get(key) {
-		if (key in this.storeData) {
-			return this.storeData[key];
+		if (!this.exists(key)) {
+			throw `Unknown key ${key} in store`;
 		}
-		throw `Unknown key ${key} in store`;
+		return this.storeData[key];
+	}
+
+	/**
+	 * Check if a key exists in the store
+	 *
+	 * @param {string} key the key name
+	 * @returns {boolean}
+	 */
+	exists(key) {
+		if (key in this.storeData) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

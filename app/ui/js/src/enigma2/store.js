@@ -1,5 +1,7 @@
 import Store from 'core-store';
 import dispatcher from '../dispatcher';
+import Actions from '../actions';
+import $ from 'jquery';
 
 class Enigma2Store extends Store {
 	constructor() {
@@ -12,12 +14,38 @@ class Enigma2Store extends Store {
 	onAction(actionType, data) {
 		this.logger.debug(`Received Action ${actionType} with data`, data);
 		switch (actionType) {
+			case 'REQUEST-ENIGMA2-DATA':
+				let path = '/' + data.module + '/' + data.method;
+				let url = data.url + path;
+				if (data.parameter != '') url += '/' + data.parameter;
+
+				this.sendAjaxRequest(url, data.http, data.async, data.property);
+				break;
+			case 'PROCESS-ENIGMA2-DATA':
+				if (data['request']['code'] == 200) {
+					this.set(data['setProperty'], data['request']['data']);
+				}
+				break;
+			case 'RESET-ENIGMA2-DATA':
+				this.set(data, []);
+				break;
 			default:
                 		this.logger.debug('Unknown actionType for this store - ignoring');
-                	break;
+                		break;
 		}
         }
 
+	sendAjaxRequest(url, method, async, setProperty) {
+		$.ajax({
+			url: url,
+			type: method,
+			async: async,
+			dataType: 'json',
+			cache: false
+		}).done(response => {
+			Actions.processEnigma2Data(response, setProperty);
+		});
+	}
 }
 
 var enigma2Store = new Enigma2Store();

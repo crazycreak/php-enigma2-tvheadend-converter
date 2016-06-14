@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import enigma2Store from 'enigma2-store';
 import BootstrapButton from 'bootstrap-button';
 import BootstrapWell from 'bootstrap-well';
-import { ServiceBox } from './ServiceBox.jsx';
+import ServiceBox from './ServiceBox.jsx';
 
 export default class Enigma2App extends Component {
 	constructor(props) {
