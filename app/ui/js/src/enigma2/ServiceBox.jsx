@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import enigma2Store from 'enigma2-store';
 import Actions from '../actions';
-import { withEnigma2Data } from "enigma2-data";
+import { withEnigma2Data } from 'enigma2-data';
 import ServiceItem from './ServiceItem.jsx';
 
 export default class ServiceBox extends Component {

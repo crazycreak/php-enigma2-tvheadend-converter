@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Navigation from './Navigation.jsx';
 // es6 import not working for jquery/bootstrap
-global.jQuery = require("jquery");
+global.jQuery = require('jquery');
 var bootstrap = require('bootstrap');
 
 export default class BootstrapApp extends Component {

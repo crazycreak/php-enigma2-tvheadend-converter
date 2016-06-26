@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { withTVHeadendData } from "tvheadend-data";
+import { withTVHeadendData } from 'tvheadend-data';
 import BootstrapModal from 'bootstrap-modal';
 import BootstrapRadioButtonGroup from 'bootstrap-radiobuttongroup';
 

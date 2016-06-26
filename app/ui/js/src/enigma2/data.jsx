@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withData } from "core-data";
+import { withData } from 'core-data';
 
 export function withEnigma2Data(e2Module, httpMethod, ComposedComponent) {
 	return class extends Component {
