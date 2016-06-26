@@ -290,8 +290,8 @@ exports.default = List;
 
 List.displayName = 'List';
 List.propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.any
+	className: _react.PropTypes.string,
+	children: _react.PropTypes.any
 };
 
 },{"react":306}],5:[function(require,module,exports){
@@ -369,8 +369,8 @@ exports.default = ListItem;
 
 ListItem.displayName = 'ListItem';
 ListItem.propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.any
+	className: _react.PropTypes.string,
+	children: _react.PropTypes.any
 };
 
 },{"react":306}],6:[function(require,module,exports){
@@ -578,8 +578,6 @@ var Navigation = function (_Component) {
         }
         // initial state
 
-        // define required / optional properties
-
         _createClass(Navigation, [{
                 key: 'render',
                 value: function render() {
@@ -595,15 +593,15 @@ var Navigation = function (_Component) {
         return Navigation;
 }(_react.Component);
 
-Navigation.propTypes = {
-        menuItems: _react.PropTypes.array.isRequired
-};
 Navigation.defaultProps = {
         menuItems: [{ 'id': 1, 'link': '/ui/enigma2', 'name': 'Enigma2' }, { 'id': 2, 'link': '/ui/tvheadend', 'name': 'TVHeadend' }]
 };
 exports.default = Navigation;
 
 Navigation.displayName = 'Navigation';
+Navigation.propTypes = {
+        menuItems: _react.PropTypes.array.isRequired
+};
 
 },{"./NavigationHeader.jsx":8,"./NavigationItem.jsx":9,"react":306}],8:[function(require,module,exports){
 "use strict";
@@ -673,8 +671,8 @@ exports.default = NavigationHeader;
 
 NavigationHeader.displayName = 'NavigationHeader';
 NavigationHeader.propTypes = {
-        href: PropTypes.string,
-        title: PropTypes.string
+        href: _react.PropTypes.string,
+        title: _react.PropTypes.string
 };
 
 },{"react":306}],9:[function(require,module,exports){
@@ -727,8 +725,6 @@ function _inherits(subClass, superClass) {
 var NavigationItem = function (_Component) {
         _inherits(NavigationItem, _Component);
 
-        // context variables
-
         function NavigationItem(props) {
                 _classCallCheck(this, NavigationItem);
 
@@ -755,14 +751,14 @@ var NavigationItem = function (_Component) {
         return NavigationItem;
 }(_react.Component);
 
-NavigationItem.contextTypes = {
-        router: _react.PropTypes.object.isRequired
-};
 exports.default = NavigationItem;
 
 NavigationItem.displayName = 'NavigationItem';
 NavigationItem.propTypes = {
         item: _react.PropTypes.object
+};
+NavigationItem.contextTypes = {
+        router: _react.PropTypes.object.isRequired
 };
 
 },{"react":306,"react-router":109}],10:[function(require,module,exports){
@@ -850,123 +846,121 @@ exports.default = Panel;
 
 Panel.displayName = 'Panel';
 Panel.propTypes = {
-	classNamePanel: PropTypes.string,
-	classNameHeading: PropTypes.string,
-	classNameFooter: PropTypes.string,
-	headingText: PropTypes.string,
-	footerText: PropTypes.string,
-	children: PropTypes.any
+	classNamePanel: _react.PropTypes.string,
+	classNameHeading: _react.PropTypes.string,
+	classNameFooter: _react.PropTypes.string,
+	headingText: _react.PropTypes.string,
+	footerText: _react.PropTypes.string,
+	children: _react.PropTypes.any
 };
 
 },{"react":306}],11:[function(require,module,exports){
-'use strict';
+"use strict";
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
 
 var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }return target;
+	for (var i = 1; i < arguments.length; i++) {
+		var source = arguments[i];for (var key in source) {
+			if (Object.prototype.hasOwnProperty.call(source, key)) {
+				target[key] = source[key];
+			}
+		}
+	}return target;
 };
 
 var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
+	function defineProperties(target, props) {
+		for (var i = 0; i < props.length; i++) {
+			var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+		}
+	}return function (Constructor, protoProps, staticProps) {
+		if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	};
 }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
+	return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
+	if (!(instance instanceof Constructor)) {
+		throw new TypeError("Cannot call a class as a function");
+	}
 }
 
 function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	if (!self) {
+		throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	}return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	if (typeof superClass !== "function" && superClass !== null) {
+		throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+	}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 var RadioButton = function (_Component) {
-  _inherits(RadioButton, _Component);
+	_inherits(RadioButton, _Component);
 
-  // define default properties
+	function RadioButton(props) {
+		_classCallCheck(this, RadioButton);
 
-  function RadioButton(props) {
-    _classCallCheck(this, RadioButton);
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButton).call(this, props));
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButton).call(this, props));
+		_this.state = {
+			name: _this.props.name,
+			label: _this.props.label,
+			value: _this.props.value,
+			disabled: _this.props.disabled,
+			checked: _this.props.checked,
+			onChange: _this.props.onChange
+		};
 
-    _this.state = {
-      name: _this.props.name,
-      label: _this.props.label,
-      value: _this.props.value,
-      disabled: _this.props.disabled,
-      checked: _this.props.checked,
-      onChange: _this.props.onChange
-    };
+		_this.handleChange = function () {
+			return _this.state.onChange(_this.state.value);
+		};
 
-    _this.handleChange = function () {
-      return _this.state.onChange(_this.state.value);
-    };
+		return _this;
+	}
+	// initial state
 
-    return _this;
-  }
-  // initial state
+	_createClass(RadioButton, [{
+		key: "render",
+		value: function render() {
+			var props = {};
+			if (this.state.disabled) props.disabled = true;else if (this.state.checked) props.checked = true;
 
-  _createClass(RadioButton, [{
-    key: 'render',
-    value: function render() {
-      var props = {};
-      if (this.state.disabled) props.disabled = true;else if (this.state.checked) props.checked = true;
+			return _react2.default.createElement("div", { className: "radio" }, _react2.default.createElement("label", null, _react2.default.createElement("input", _extends({}, props, { type: "radio", name: this.state.name, value: this.state.value, onChange: this.handleChange })), this.state.label));
+		}
+	}]);
 
-      return _react2.default.createElement('div', { className: 'radio' }, _react2.default.createElement('label', null, _react2.default.createElement('input', _extends({}, props, { type: 'radio', name: this.state.name, value: this.state.value, onChange: this.handleChange })), this.state.label));
-    }
-  }]);
-
-  return RadioButton;
+	return RadioButton;
 }(_react.Component);
 
-RadioButton.defaultProps = {
-  'disabled': false,
-  'checked': false
-};
 exports.default = RadioButton;
 
 RadioButton.displayName = 'RadioButton';
 RadioButton.propTypes = {
-  name: _react.PropTypes.string,
-  label: _react.PropTypes.string,
-  value: _react.PropTypes.string,
-  disabled: _react.PropTypes.bool,
-  checked: _react.PropTypes.bool,
-  onChange: _react.PropTypes.func
+	name: _react.PropTypes.string,
+	label: _react.PropTypes.string,
+	value: _react.PropTypes.string,
+	disabled: _react.PropTypes.bool,
+	checked: _react.PropTypes.bool,
+	onChange: _react.PropTypes.func
+};
+RadioButton.defaultProps = {
+	disabled: false,
+	checked: false
 };
 
 },{"react":306}],12:[function(require,module,exports){
@@ -1067,9 +1061,9 @@ exports.default = RadioButtonGroup;
 
 RadioButtonGroup.displayName = 'RadioButtonGroup';
 RadioButtonGroup.propTypes = {
-        name: PropTypes.string,
-        buttons: PropTypes.any,
-        onChange: PropTypes.func
+        name: _react.PropTypes.string,
+        buttons: _react.PropTypes.any,
+        onChange: _react.PropTypes.func
 };
 
 },{"bootstrap-radiobutton":11,"react":306}],13:[function(require,module,exports){
@@ -1147,8 +1141,8 @@ exports.default = Well;
 
 Well.displayName = 'Well';
 Well.propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.any
+	className: _react.PropTypes.string,
+	children: _react.PropTypes.any
 };
 
 },{"react":306}],14:[function(require,module,exports){
@@ -2704,22 +2698,6 @@ var Enigma2App = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Enigma2App).call(this, props));
 
-		_this.loadBouquets = function () {
-			return _this.refs.bouquetService.load();
-		};
-
-		_this.clearBouquets = function () {
-			return _this.refs.bouquetService.clear();
-		};
-
-		_this.loadProvider = function () {
-			return _this.refs.providerService.load();
-		};
-
-		_this.clearProvider = function () {
-			return _this.refs.providerService.clear();
-		};
-
 		_this.state = {
 			appHeaderText: 'Header'
 		};
@@ -2749,11 +2727,47 @@ var Enigma2App = function (_Component) {
 			});
 		}
 	}, {
+		key: 'loadBouquets',
+		value: function loadBouquets() {
+			this.refs.bouquetService.load();
+		}
+	}, {
+		key: 'clearBouquets',
+		value: function clearBouquets() {
+			this.refs.bouquetService.clear();
+		}
+	}, {
+		key: 'loadProvider',
+		value: function loadProvider() {
+			this.refs.providerService.load();
+		}
+	}, {
+		key: 'clearProvider',
+		value: function clearProvider() {
+			this.refs.providerService.clear();
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this3 = this;
+
 			var header = _react2.default.createElement('h1', null, this.state.appHeaderText);
 
-			return _react2.default.createElement('div', { className: 'enigma2-app' }, header, _react2.default.createElement('ul', { className: 'nav nav-tabs', role: 'tablist' }, _react2.default.createElement('li', { role: 'presentation', className: 'active' }, _react2.default.createElement('a', { href: '#bouquets', 'aria-controls': 'bouquets', role: 'tab', 'data-toggle': 'tab' }, 'Bouquets')), _react2.default.createElement('li', { role: 'presentation' }, _react2.default.createElement('a', { href: '#provider', 'aria-controls': 'provider', role: 'tab', 'data-toggle': 'tab' }, 'Provider'))), _react2.default.createElement('div', { className: 'tab-content' }, _react2.default.createElement('div', { role: 'tabpanel', className: 'tab-pane active', id: 'bouquets' }, _react2.default.createElement(_bootstrapWell2.default, { className: 'service-actionbar well-sm' }, _react2.default.createElement('span', { className: 'text-uppercase' }, 'actionbar:'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-info btn-sm', onClick: this.loadBouquets }, 'load'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-danger btn-sm', onClick: this.clearBouquets }, 'clear')), _react2.default.createElement(_ServiceBox2.default, { ref: 'bouquetService', method: 'bouquets', parameter: 'tv' })), _react2.default.createElement('div', { role: 'tabpanel', className: 'tab-pane', id: 'provider' }, _react2.default.createElement(_bootstrapWell2.default, { className: 'service-actionbar well-sm' }, _react2.default.createElement('span', { className: 'text-uppercase' }, 'actionbar:'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-info btn-sm', onClick: this.loadProvider }, 'load'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-danger btn-sm', onClick: this.clearProvider }, 'clear')), _react2.default.createElement(_ServiceBox2.default, { ref: 'providerService', method: 'provider', parameter: 'tv' }))));
+			var loadBouquetsHandler = function loadBouquetsHandler(event) {
+				return _this3.loadBouquets(event);
+			};
+			var clearBouquetsHandler = function clearBouquetsHandler(event) {
+				return _this3.clearBouquets(event);
+			};
+
+			var loadProviderHandler = function loadProviderHandler(event) {
+				return _this3.loadProvider(event);
+			};
+			var clearProviderHandler = function clearProviderHandler(event) {
+				return _this3.clearProvider(event);
+			};
+
+			return _react2.default.createElement('div', { className: 'enigma2-app' }, header, _react2.default.createElement('ul', { className: 'nav nav-tabs', role: 'tablist' }, _react2.default.createElement('li', { role: 'presentation', className: 'active' }, _react2.default.createElement('a', { href: '#bouquets', 'aria-controls': 'bouquets', role: 'tab', 'data-toggle': 'tab' }, 'Bouquets')), _react2.default.createElement('li', { role: 'presentation' }, _react2.default.createElement('a', { href: '#provider', 'aria-controls': 'provider', role: 'tab', 'data-toggle': 'tab' }, 'Provider'))), _react2.default.createElement('div', { className: 'tab-content' }, _react2.default.createElement('div', { role: 'tabpanel', className: 'tab-pane active', id: 'bouquets' }, _react2.default.createElement(_bootstrapWell2.default, { className: 'service-actionbar well-sm' }, _react2.default.createElement('span', { className: 'text-uppercase' }, 'actionbar:'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-info btn-sm', onClick: loadBouquetsHandler }, 'load'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-danger btn-sm', onClick: clearBouquetsHandler }, 'clear')), _react2.default.createElement(_ServiceBox2.default, { ref: 'bouquetService', method: 'bouquets', parameter: 'tv' })), _react2.default.createElement('div', { role: 'tabpanel', className: 'tab-pane', id: 'provider' }, _react2.default.createElement(_bootstrapWell2.default, { className: 'service-actionbar well-sm' }, _react2.default.createElement('span', { className: 'text-uppercase' }, 'actionbar:'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-info btn-sm', onClick: loadProviderHandler }, 'load'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-danger btn-sm', onClick: clearProviderHandler }, 'clear')), _react2.default.createElement(_ServiceBox2.default, { ref: 'providerService', method: 'provider', parameter: 'tv' }))));
 		}
 	}]);
 

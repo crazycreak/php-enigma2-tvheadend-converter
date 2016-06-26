@@ -3,10 +3,6 @@ import NavigationHeader from './NavigationHeader.jsx';
 import NavigationItem from './NavigationItem.jsx';
 
 export default class Navigation extends Component {
-        // define required / optional properties
-	static propTypes = {
-		menuItems: PropTypes.array.isRequired
-	}
         // define default properties
 	static defaultProps = {
         	menuItems: [
@@ -45,3 +41,6 @@ export default class Navigation extends Component {
 }
 
 Navigation.displayName = 'Navigation';
+Navigation.propTypes = {
+	menuItems: PropTypes.array.isRequired
+};

@@ -2,10 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 export default class NavigationItem extends Component {
-        // context variables
-        static contextTypes = {
-                router: PropTypes.object.isRequired
-        }
         // initial state
 	state = {
 		item: this.props.item
@@ -29,4 +25,7 @@ export default class NavigationItem extends Component {
 NavigationItem.displayName = 'NavigationItem';
 NavigationItem.propTypes = {
 	item: PropTypes.object
+};
+NavigationItem.contextTypes = {
+	router: PropTypes.object.isRequired
 };

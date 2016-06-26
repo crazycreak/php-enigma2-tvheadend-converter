@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import BootstrapRadioButton from 'bootstrap-radiobutton';
 
 export default class RadioButtonGroup extends Component {

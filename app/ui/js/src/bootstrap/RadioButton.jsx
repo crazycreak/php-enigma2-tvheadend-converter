@@ -1,11 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class RadioButton extends Component {
-        // define default properties
-	static defaultProps = {
-                'disabled': false,
-                'checked': false
-	}
 	// initial state
 	state = {
                 name: this.props.name,
@@ -46,4 +41,8 @@ RadioButton.propTypes = {
 	disabled: PropTypes.bool,
 	checked: PropTypes.bool,
 	onChange: PropTypes.func
+};
+RadioButton.defaultProps = {
+	disabled: false,
+	checked: false
 };
