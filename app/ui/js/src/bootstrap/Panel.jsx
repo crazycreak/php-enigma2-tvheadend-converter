@@ -7,8 +7,8 @@ export default class Panel extends Component {
                 classNameHeading: this.props.classNameHeading,
                 classNameFooter: this.props.classNameFooter,
                 headingText: this.props.headingText,
-                children: this.props.children,
-                footerText: this.props.footerText
+                footerText: this.props.footerText,
+		children: this.props.children
 	}
 
 	constructor(props) {
@@ -33,3 +33,11 @@ export default class Panel extends Component {
 }
 
 Panel.displayName = 'Panel';
+Panel.propTypes = {
+	classNamePanel: PropTypes.string,
+	classNameHeading: PropTypes.string,
+	classNameFooter: PropTypes.string,
+	headingText: PropTypes.string,
+	footerText: PropTypes.string,
+	children: PropTypes.any
+};

@@ -21,3 +21,7 @@ export default class ListItem extends Component {
 }
 
 ListItem.displayName = 'ListItem';
+ListItem.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any
+};

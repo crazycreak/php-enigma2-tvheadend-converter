@@ -211,6 +211,9 @@ var Button = function (_Component) {
 exports.default = Button;
 
 Button.displayName = 'Button';
+Button.propTypes = {
+	className: _react.PropTypes.string
+};
 
 },{"react":306}],4:[function(require,module,exports){
 'use strict';
@@ -286,6 +289,10 @@ var List = function (_Component) {
 exports.default = List;
 
 List.displayName = 'List';
+List.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any
+};
 
 },{"react":306}],5:[function(require,module,exports){
 'use strict';
@@ -361,6 +368,10 @@ var ListItem = function (_Component) {
 exports.default = ListItem;
 
 ListItem.displayName = 'ListItem';
+ListItem.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any
+};
 
 },{"react":306}],6:[function(require,module,exports){
 'use strict';
@@ -487,6 +498,15 @@ Modal.defaultProps = {
 exports.default = Modal;
 
 Modal.displayName = 'Modal';
+Modal.propTypes = {
+        className: _react.PropTypes.string,
+        children: _react.PropTypes.any,
+        title: _react.PropTypes.string,
+        confirm: _react.PropTypes.string,
+        onConfirm: _react.PropTypes.func,
+        cancel: _react.PropTypes.string,
+        onCancel: _react.PropTypes.func
+};
 
 },{"bootstrap-button":3,"jquery":47,"react":306}],7:[function(require,module,exports){
 'use strict';
@@ -652,6 +672,10 @@ var NavigationHeader = function (_Component) {
 exports.default = NavigationHeader;
 
 NavigationHeader.displayName = 'NavigationHeader';
+NavigationHeader.propTypes = {
+        href: PropTypes.string,
+        title: PropTypes.string
+};
 
 },{"react":306}],9:[function(require,module,exports){
 'use strict';
@@ -737,6 +761,9 @@ NavigationItem.contextTypes = {
 exports.default = NavigationItem;
 
 NavigationItem.displayName = 'NavigationItem';
+NavigationItem.propTypes = {
+        item: _react.PropTypes.object
+};
 
 },{"react":306,"react-router":109}],10:[function(require,module,exports){
 'use strict';
@@ -744,17 +771,17 @@ NavigationItem.displayName = 'NavigationItem';
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+	value: true
 });
 
 var _createClass = function () {
-        function defineProperties(target, props) {
-                for (var i = 0; i < props.length; i++) {
-                        var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-                }
-        }return function (Constructor, protoProps, staticProps) {
-                if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-        };
+	function defineProperties(target, props) {
+		for (var i = 0; i < props.length; i++) {
+			var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+		}
+	}return function (Constructor, protoProps, staticProps) {
+		if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+	};
 }();
 
 var _react = require('react');
@@ -762,66 +789,74 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : { default: obj };
+	return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-                throw new TypeError("Cannot call a class as a function");
-        }
+	if (!(instance instanceof Constructor)) {
+		throw new TypeError("Cannot call a class as a function");
+	}
 }
 
 function _possibleConstructorReturn(self, call) {
-        if (!self) {
-                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-        }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+	if (!self) {
+		throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+	}return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-        if (typeof superClass !== "function" && superClass !== null) {
-                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-        }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+	if (typeof superClass !== "function" && superClass !== null) {
+		throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+	}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 var Panel = function (_Component) {
-        _inherits(Panel, _Component);
+	_inherits(Panel, _Component);
 
-        function Panel(props) {
-                _classCallCheck(this, Panel);
+	function Panel(props) {
+		_classCallCheck(this, Panel);
 
-                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Panel).call(this, props));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Panel).call(this, props));
 
-                _this.state = {
-                        classNamePanel: _this.props.classNamePanel,
-                        classNameHeading: _this.props.classNameHeading,
-                        classNameFooter: _this.props.classNameFooter,
-                        headingText: _this.props.headingText,
-                        children: _this.props.children,
-                        footerText: _this.props.footerText
-                };
-                return _this;
-        }
-        // initial state
+		_this.state = {
+			classNamePanel: _this.props.classNamePanel,
+			classNameHeading: _this.props.classNameHeading,
+			classNameFooter: _this.props.classNameFooter,
+			headingText: _this.props.headingText,
+			footerText: _this.props.footerText,
+			children: _this.props.children
+		};
+		return _this;
+	}
+	// initial state
 
-        _createClass(Panel, [{
-                key: 'render',
-                value: function render() {
-                        var header = null;
-                        if (this.state.headingText) header = _react2.default.createElement('div', { className: (this.state.classNameHeading || '') + ' panel-heading' }, this.state.headingText);
+	_createClass(Panel, [{
+		key: 'render',
+		value: function render() {
+			var header = null;
+			if (this.state.headingText) header = _react2.default.createElement('div', { className: (this.state.classNameHeading || '') + ' panel-heading' }, this.state.headingText);
 
-                        var footer = null;
-                        if (this.state.footerText) footer = _react2.default.createElement('div', { className: (this.state.classNameFooter || '') + ' panel-footer' }, this.state.footerText);
+			var footer = null;
+			if (this.state.footerText) footer = _react2.default.createElement('div', { className: (this.state.classNameFooter || '') + ' panel-footer' }, this.state.footerText);
 
-                        return _react2.default.createElement('div', { className: (this.state.classNamePanel || '') + ' panel' }, header, this.state.children, footer);
-                }
-        }]);
+			return _react2.default.createElement('div', { className: (this.state.classNamePanel || '') + ' panel' }, header, this.state.children, footer);
+		}
+	}]);
 
-        return Panel;
+	return Panel;
 }(_react.Component);
 
 exports.default = Panel;
 
 Panel.displayName = 'Panel';
+Panel.propTypes = {
+	classNamePanel: PropTypes.string,
+	classNameHeading: PropTypes.string,
+	classNameFooter: PropTypes.string,
+	headingText: PropTypes.string,
+	footerText: PropTypes.string,
+	children: PropTypes.any
+};
 
 },{"react":306}],11:[function(require,module,exports){
 'use strict';
@@ -829,27 +864,27 @@ Panel.displayName = 'Panel';
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 Object.defineProperty(exports, "__esModule", {
-               value: true
+  value: true
 });
 
 var _extends = Object.assign || function (target) {
-               for (var i = 1; i < arguments.length; i++) {
-                              var source = arguments[i];for (var key in source) {
-                                             if (Object.prototype.hasOwnProperty.call(source, key)) {
-                                                            target[key] = source[key];
-                                             }
-                              }
-               }return target;
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }return target;
 };
 
 var _createClass = function () {
-               function defineProperties(target, props) {
-                              for (var i = 0; i < props.length; i++) {
-                                             var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-                              }
-               }return function (Constructor, protoProps, staticProps) {
-                              if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-               };
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
 }();
 
 var _react = require('react');
@@ -857,74 +892,82 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) {
-               return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _classCallCheck(instance, Constructor) {
-               if (!(instance instanceof Constructor)) {
-                              throw new TypeError("Cannot call a class as a function");
-               }
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
 function _possibleConstructorReturn(self, call) {
-               if (!self) {
-                              throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-               }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-               if (typeof superClass !== "function" && superClass !== null) {
-                              throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-               }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 var RadioButton = function (_Component) {
-               _inherits(RadioButton, _Component);
+  _inherits(RadioButton, _Component);
 
-               // define default properties
+  // define default properties
 
-               function RadioButton(props) {
-                              _classCallCheck(this, RadioButton);
+  function RadioButton(props) {
+    _classCallCheck(this, RadioButton);
 
-                              var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButton).call(this, props));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButton).call(this, props));
 
-                              _this.state = {
-                                             name: _this.props.name,
-                                             label: _this.props.label,
-                                             value: _this.props.value,
-                                             disabled: _this.props.disabled,
-                                             checked: _this.props.checked,
-                                             onChange: _this.props.onChange
-                              };
+    _this.state = {
+      name: _this.props.name,
+      label: _this.props.label,
+      value: _this.props.value,
+      disabled: _this.props.disabled,
+      checked: _this.props.checked,
+      onChange: _this.props.onChange
+    };
 
-                              _this.handleChange = function () {
-                                             return _this.state.onChange(_this.state.value);
-                              };
+    _this.handleChange = function () {
+      return _this.state.onChange(_this.state.value);
+    };
 
-                              return _this;
-               }
-               // initial state
+    return _this;
+  }
+  // initial state
 
-               _createClass(RadioButton, [{
-                              key: 'render',
-                              value: function render() {
-                                             var props = {};
-                                             if (this.state.disabled) props.disabled = true;else if (this.state.checked) props.checked = true;
+  _createClass(RadioButton, [{
+    key: 'render',
+    value: function render() {
+      var props = {};
+      if (this.state.disabled) props.disabled = true;else if (this.state.checked) props.checked = true;
 
-                                             return _react2.default.createElement('div', { className: 'radio' }, _react2.default.createElement('label', null, _react2.default.createElement('input', _extends({}, props, { type: 'radio', name: this.state.name, value: this.state.value, onChange: this.handleChange })), this.state.label));
-                              }
-               }]);
+      return _react2.default.createElement('div', { className: 'radio' }, _react2.default.createElement('label', null, _react2.default.createElement('input', _extends({}, props, { type: 'radio', name: this.state.name, value: this.state.value, onChange: this.handleChange })), this.state.label));
+    }
+  }]);
 
-               return RadioButton;
+  return RadioButton;
 }(_react.Component);
 
 RadioButton.defaultProps = {
-               'disabled': false,
-               'checked': false
+  'disabled': false,
+  'checked': false
 };
 exports.default = RadioButton;
 
 RadioButton.displayName = 'RadioButton';
+RadioButton.propTypes = {
+  name: _react.PropTypes.string,
+  label: _react.PropTypes.string,
+  value: _react.PropTypes.string,
+  disabled: _react.PropTypes.bool,
+  checked: _react.PropTypes.bool,
+  onChange: _react.PropTypes.func
+};
 
 },{"react":306}],12:[function(require,module,exports){
 'use strict';
@@ -1023,6 +1066,11 @@ var RadioButtonGroup = function (_Component) {
 exports.default = RadioButtonGroup;
 
 RadioButtonGroup.displayName = 'RadioButtonGroup';
+RadioButtonGroup.propTypes = {
+        name: PropTypes.string,
+        buttons: PropTypes.any,
+        onChange: PropTypes.func
+};
 
 },{"bootstrap-radiobutton":11,"react":306}],13:[function(require,module,exports){
 'use strict';
@@ -1098,6 +1146,10 @@ var Well = function (_Component) {
 exports.default = Well;
 
 Well.displayName = 'Well';
+Well.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any
+};
 
 },{"react":306}],14:[function(require,module,exports){
 (function (global){
@@ -1175,6 +1227,9 @@ var BootstrapApp = function (_Component) {
 exports.default = BootstrapApp;
 
 BootstrapApp.displayName = 'BootstrapApp';
+BootstrapApp.propTypes = {
+        children: _react.PropTypes.any
+};
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 

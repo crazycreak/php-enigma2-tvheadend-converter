@@ -75,3 +75,12 @@ export default class Modal extends Component {
 }
 
 Modal.displayName = 'Modal';
+Modal.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any,
+	title: PropTypes.string,
+	confirm: PropTypes.string,
+	onConfirm: PropTypes.func,
+	cancel: PropTypes.string,
+	onCancel: PropTypes.func
+};

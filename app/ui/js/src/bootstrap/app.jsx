@@ -22,3 +22,6 @@ export default class BootstrapApp extends Component {
 }
 
 BootstrapApp.displayName = 'BootstrapApp';
+BootstrapApp.propTypes = {
+	children: PropTypes.any
+};

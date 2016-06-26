@@ -27,3 +27,6 @@ export default class NavigationItem extends Component {
 }
 
 NavigationItem.displayName = 'NavigationItem';
+NavigationItem.propTypes = {
+	item: PropTypes.object
+};

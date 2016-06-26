@@ -21,3 +21,7 @@ export default class NavigationHeader extends Component {
 }
 
 NavigationHeader.displayName = 'NavigationHeader';
+NavigationHeader.propTypes = {
+	href: PropTypes.string,
+	title: PropTypes.string
+};

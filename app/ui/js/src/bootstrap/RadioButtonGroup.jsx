@@ -38,3 +38,8 @@ export default class RadioButtonGroup extends Component {
 }
 
 RadioButtonGroup.displayName = 'RadioButtonGroup';
+RadioButtonGroup.propTypes = {
+	name: PropTypes.string,
+	buttons: PropTypes.any,
+	onChange: PropTypes.func
+};

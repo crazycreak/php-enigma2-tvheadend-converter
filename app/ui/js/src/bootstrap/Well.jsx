@@ -21,3 +21,7 @@ export default class Well extends Component {
 }
 
 Well.displayName = 'Well';
+Well.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any
+};

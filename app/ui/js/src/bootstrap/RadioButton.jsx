@@ -39,3 +39,11 @@ export default class RadioButton extends Component {
 }
 
 RadioButton.displayName = 'RadioButton';
+RadioButton.propTypes = {
+	name: PropTypes.string,
+	label: PropTypes.string,
+	value: PropTypes.string,
+	disabled: PropTypes.bool,
+	checked: PropTypes.bool,
+	onChange: PropTypes.func
+};

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class Button extends Component {
 	// initial state
@@ -22,3 +22,6 @@ export default class Button extends Component {
 }
 
 Button.displayName = 'Button';
+Button.propTypes = {
+	className: PropTypes.string
+};

@@ -21,3 +21,7 @@ export default class List extends Component {
 }
 
 List.displayName = 'List';
+List.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any
+};
