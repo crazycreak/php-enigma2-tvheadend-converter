@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		//"noImplicitAny": true,
+		"sourceMap": true,
+		"jsx": "react"
+	},
+	"files": [
+		"typings/tsd.d.ts",
+		"js/src/app.tsx"
+	]
+	/*
+	"exclude": [
+		"node_modules",
+		"build"
+	]
+	*/
+}
