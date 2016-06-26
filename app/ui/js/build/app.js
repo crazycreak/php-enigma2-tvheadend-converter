@@ -895,7 +895,7 @@ var RadioButton = function (_Component) {
                                              var props = {};
                                              if (this.state.disabled) props.disabled = true;else if (this.state.checked) props.checked = true;
 
-                                             return _react2.default.createElement('div', { 'class': 'radio' }, _react2.default.createElement('label', null, _react2.default.createElement('input', _extends({}, props, { type: 'radio', name: this.state.name, value: this.state.value, onChange: this.handleChange })), this.state.label));
+                                             return _react2.default.createElement('div', { className: 'radio' }, _react2.default.createElement('label', null, _react2.default.createElement('input', _extends({}, props, { type: 'radio', name: this.state.name, value: this.state.value, onChange: this.handleChange })), this.state.label));
                               }
                }]);
 

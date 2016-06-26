@@ -28,7 +28,7 @@ export default class RadioButton extends Component {
                 else if (this.state.checked) props.checked = true;
 
 		return (
-                        <div class="radio">
+                        <div className="radio">
                                 <label>
                                         <input {...props} type="radio" name={this.state.name} value={this.state.value} onChange={this.handleChange} />
                                         {this.state.label}

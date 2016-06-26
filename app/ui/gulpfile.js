@@ -28,7 +28,7 @@ gulp.task('eslint', function () {
                 .pipe(eslint.format());
 });
 
-function bundle() {
+gulp.task('build', [ 'eslint' ], function() {
 	var bundler = browserify({
                 extensions: ['.js', '.jsx'],
                 transform: ['babelify'],
@@ -44,13 +44,10 @@ function bundle() {
                 .pipe(rename('app.js'))
 		.pipe(sourcemaps.write('./'))
                 .pipe(gulp.dest(config.dest));
-}
+ });
 
-function build() {
-	util.log('... build ...');
-	return bundle();
-}
-
-gulp.task('build', [ 'eslint' ], function() { return build(); });
+gulp.task('watch', function() {
+	 gulp.watch(files.code, [ 'build' ]);
+});
 
 gulp.task('default', [ 'build' ]);
