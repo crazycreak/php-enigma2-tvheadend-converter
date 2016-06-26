@@ -210,6 +210,8 @@ var Button = function (_Component) {
 
 exports.default = Button;
 
+Button.displayName = 'Button';
+
 },{"react":306}],4:[function(require,module,exports){
 'use strict';
 
@@ -283,6 +285,8 @@ var List = function (_Component) {
 
 exports.default = List;
 
+List.displayName = 'List';
+
 },{"react":306}],5:[function(require,module,exports){
 'use strict';
 
@@ -355,6 +359,8 @@ var ListItem = function (_Component) {
 }(_react.Component);
 
 exports.default = ListItem;
+
+ListItem.displayName = 'ListItem';
 
 },{"react":306}],6:[function(require,module,exports){
 'use strict';
@@ -480,6 +486,8 @@ Modal.defaultProps = {
 };
 exports.default = Modal;
 
+Modal.displayName = 'Modal';
+
 },{"bootstrap-button":3,"jquery":47,"react":306}],7:[function(require,module,exports){
 'use strict';
 
@@ -575,6 +583,8 @@ Navigation.defaultProps = {
 };
 exports.default = Navigation;
 
+Navigation.displayName = 'Navigation';
+
 },{"./NavigationHeader.jsx":8,"./NavigationItem.jsx":9,"react":306}],8:[function(require,module,exports){
 "use strict";
 
@@ -641,6 +651,8 @@ var NavigationHeader = function (_Component) {
 
 exports.default = NavigationHeader;
 
+NavigationHeader.displayName = 'NavigationHeader';
+
 },{"react":306}],9:[function(require,module,exports){
 'use strict';
 
@@ -688,15 +700,15 @@ function _inherits(subClass, superClass) {
         }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
-var NavItem = function (_Component) {
-        _inherits(NavItem, _Component);
+var NavigationItem = function (_Component) {
+        _inherits(NavigationItem, _Component);
 
         // context variables
 
-        function NavItem(props) {
-                _classCallCheck(this, NavItem);
+        function NavigationItem(props) {
+                _classCallCheck(this, NavigationItem);
 
-                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavItem).call(this, props));
+                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavigationItem).call(this, props));
 
                 _this.state = {
                         item: _this.props.item
@@ -705,7 +717,7 @@ var NavItem = function (_Component) {
         }
         // initial state
 
-        _createClass(NavItem, [{
+        _createClass(NavigationItem, [{
                 key: 'render',
                 value: function render() {
                         var className = '';
@@ -716,13 +728,15 @@ var NavItem = function (_Component) {
                 }
         }]);
 
-        return NavItem;
+        return NavigationItem;
 }(_react.Component);
 
-NavItem.contextTypes = {
+NavigationItem.contextTypes = {
         router: _react.PropTypes.object.isRequired
 };
-exports.default = NavItem;
+exports.default = NavigationItem;
+
+NavigationItem.displayName = 'NavigationItem';
 
 },{"react":306,"react-router":109}],10:[function(require,module,exports){
 'use strict';
@@ -806,6 +820,8 @@ var Panel = function (_Component) {
 }(_react.Component);
 
 exports.default = Panel;
+
+Panel.displayName = 'Panel';
 
 },{"react":306}],11:[function(require,module,exports){
 'use strict';
@@ -908,6 +924,8 @@ RadioButton.defaultProps = {
 };
 exports.default = RadioButton;
 
+RadioButton.displayName = 'RadioButton';
+
 },{"react":306}],12:[function(require,module,exports){
 'use strict';
 
@@ -1004,6 +1022,8 @@ var RadioButtonGroup = function (_Component) {
 
 exports.default = RadioButtonGroup;
 
+RadioButtonGroup.displayName = 'RadioButtonGroup';
+
 },{"bootstrap-radiobutton":11,"react":306}],13:[function(require,module,exports){
 'use strict';
 
@@ -1076,6 +1096,8 @@ var Well = function (_Component) {
 }(_react.Component);
 
 exports.default = Well;
+
+Well.displayName = 'Well';
 
 },{"react":306}],14:[function(require,module,exports){
 (function (global){
@@ -1151,6 +1173,8 @@ var BootstrapApp = function (_Component) {
 }(_react.Component);
 
 exports.default = BootstrapApp;
+
+BootstrapApp.displayName = 'BootstrapApp';
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
@@ -2004,6 +2028,8 @@ var ChannelItem = function (_Component) {
 
 exports.default = ChannelItem;
 
+ChannelItem.displayName = 'ChannelItem';
+
 },{"./ChannelMap.jsx":22,"bootstrap-button":3,"bootstrap-listitem":5,"react":306}],21:[function(require,module,exports){
 'use strict';
 
@@ -2458,6 +2484,8 @@ var ServiceBox = function (_Component) {
 
 exports.default = ServiceBox;
 
+ServiceBox.displayName = 'ServiceBox';
+
 },{"../actions":1,"./ServiceItem.jsx":24,"enigma2-data":26,"enigma2-store":27,"react":306}],24:[function(require,module,exports){
 'use strict';
 
@@ -2549,6 +2577,8 @@ var ServiceItem = function (_Component) {
 }(_react.Component);
 
 exports.default = ServiceItem;
+
+ServiceItem.displayName = 'ServiceItem';
 
 },{"./ChannelList.jsx":21,"bootstrap-button":3,"bootstrap-panel":10,"react":306}],25:[function(require,module,exports){
 'use strict';
@@ -2676,6 +2706,8 @@ var Enigma2App = function (_Component) {
 }(_react.Component);
 
 exports.default = Enigma2App;
+
+Enigma2App.displayName = 'Enigma2App';
 
 },{"./ServiceBox.jsx":23,"bootstrap-button":3,"bootstrap-well":13,"enigma2-store":27,"react":306}],26:[function(require,module,exports){
 'use strict';
@@ -3007,6 +3039,8 @@ var ChannelItem = function (_Component) {
 
 exports.default = ChannelItem;
 
+ChannelItem.displayName = 'ChannelItem';
+
 },{"bootstrap-button":3,"bootstrap-listitem":5,"react":306}],29:[function(require,module,exports){
 'use strict';
 
@@ -3183,6 +3217,8 @@ var TVHeadendApp = function (_Component) {
 }(_react.Component);
 
 exports.default = TVHeadendApp;
+
+TVHeadendApp.displayName = 'TVHeadendApp';
 
 },{"./ChannelList.jsx":29,"bootstrap-button":3,"bootstrap-well":13,"react":306}],31:[function(require,module,exports){
 'use strict';

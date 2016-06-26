@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-export default class NavItem extends Component {
+export default class NavigationItem extends Component {
         // context variables
         static contextTypes = {
                 router: PropTypes.object.isRequired
@@ -25,3 +25,5 @@ export default class NavItem extends Component {
                 );
         }
 }
+
+NavigationItem.displayName = 'NavigationItem';

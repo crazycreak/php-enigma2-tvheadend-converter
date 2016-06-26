@@ -19,3 +19,5 @@ export default class NavigationHeader extends Component {
                 );
         }
 }
+
+NavigationHeader.displayName = 'NavigationHeader';

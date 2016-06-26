@@ -19,3 +19,5 @@ export default class List extends Component {
                 );
         }
 }
+
+List.displayName = 'List';

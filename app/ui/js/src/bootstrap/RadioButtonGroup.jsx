@@ -36,3 +36,5 @@ export default class RadioButtonGroup extends Component {
                 );
         }
 }
+
+RadioButtonGroup.displayName = 'RadioButtonGroup';

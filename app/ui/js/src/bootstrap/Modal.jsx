@@ -73,3 +73,5 @@ export default class Modal extends Component {
                 );
         }
 }
+
+Modal.displayName = 'Modal';

@@ -40,3 +40,5 @@ export default class ChannelItem extends Component {
 		);
 	}
 }
+
+ChannelItem.displayName = 'ChannelItem';

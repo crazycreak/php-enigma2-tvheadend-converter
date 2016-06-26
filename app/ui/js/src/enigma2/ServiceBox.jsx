@@ -62,3 +62,5 @@ export default class ServiceBox extends Component {
 		);
 	}
 }
+
+ServiceBox.displayName = 'ServiceBox';

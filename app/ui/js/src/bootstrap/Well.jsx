@@ -19,3 +19,5 @@ export default class Well extends Component {
                 );
         }
 }
+
+Well.displayName = 'Well';

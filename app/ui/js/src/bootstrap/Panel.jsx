@@ -31,3 +31,5 @@ export default class Panel extends Component {
                 );
         }
 }
+
+Panel.displayName = 'Panel';

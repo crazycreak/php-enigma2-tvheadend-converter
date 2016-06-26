@@ -43,3 +43,5 @@ export default class Navigation extends Component {
                 );
         }
 }
+
+Navigation.displayName = 'Navigation';

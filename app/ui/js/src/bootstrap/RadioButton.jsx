@@ -37,3 +37,5 @@ export default class RadioButton extends Component {
 		);
 	}
 }
+
+RadioButton.displayName = 'RadioButton';

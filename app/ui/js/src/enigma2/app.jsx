@@ -68,3 +68,5 @@ export default class Enigma2App extends Component {
 		);
 	}
 }
+
+Enigma2App.displayName = 'Enigma2App';

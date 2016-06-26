@@ -20,3 +20,5 @@ export default class BootstrapApp extends Component {
                 );
         }
 }
+
+BootstrapApp.displayName = 'BootstrapApp';

@@ -33,3 +33,5 @@ export default class TVHeadendApp extends Component {
 		);
 	}
 }
+
+TVHeadendApp.displayName = 'TVHeadendApp';

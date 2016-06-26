@@ -3,7 +3,7 @@ import { withData } from 'core-data';
 
 export function withTVHeadendData(tvhModule, httpMethod, ComposedComponent) {
 	return class extends Component {
-			// define default properties
+		// define default properties
 		static defaultProps = {
 			url: '/api/v1/tvheadend',
 			path: ''
