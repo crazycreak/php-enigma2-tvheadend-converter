@@ -51,7 +51,8 @@
     "enigma2-data": "./js/src/enigma2/data.jsx",
     "enigma2-store": "./js/src/enigma2/store.js",
     "tvheadend-app": "./js/src/tvheadend/app.jsx",
-    "tvheadend-data": "./js/src/tvheadend/data.jsx"
+    "tvheadend-data": "./js/src/tvheadend/data.jsx",
+    "tvheadend-store": "./js/src/tvheadend/store.js"
   },
   "browserify": {
     "transform": [

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import enigma2Store from 'enigma2-store';
 import Actions from '../actions';
 import { withEnigma2Data } from 'enigma2-data';

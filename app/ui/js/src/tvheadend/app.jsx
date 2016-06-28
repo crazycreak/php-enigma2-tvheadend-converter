@@ -1,16 +1,39 @@
 import React, { Component, PropTypes } from 'react';
+import tvheadendStore from 'tvheadend-store';
 import BootstrapButton from 'bootstrap-button';
 import BootstrapWell from 'bootstrap-well';
 import { ChannelList } from './ChannelList.jsx';
 
 export default class TVHeadendApp extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+                        appHeaderText: 'Header'
+                };
+	}
+
+	componentWillMount() {
+                this.appStoreId = tvheadendStore.registerView(() => { this.updateState(); });
+                this.updateState();
+        }
+
+        componentWillUnmount() {
+                tvheadendStore.deregisterView(this.appStoreId);
+        }
+
+        updateState() {
+		this.setState({
+                        appHeaderText: tvheadendStore.get('appHeaderText')
+                });
+        }
+
 	loadChannels() { this.refs.channelService.load(); }
 	clearChannels() { this.refs.channelService.clear(); }
 
 	render() {
-		var message = 'TVHeadend';
 		var header = (
-			<h1>{message}</h1>
+			<h1>{this.state.appHeaderText}</h1>
 		);
 
 		let loadChannelsHandler = event => { return this.loadChannels(event); };
