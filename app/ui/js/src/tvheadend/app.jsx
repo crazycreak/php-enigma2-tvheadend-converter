@@ -4,14 +4,17 @@ import BootstrapWell from 'bootstrap-well';
 import { ChannelList } from './ChannelList.jsx';
 
 export default class TVHeadendApp extends Component {
-	loadChannels = () => this.refs.channelService.load();
-	clearChannels = () => this.refs.channelService.clear();
+	loadChannels() { this.refs.channelService.load(); }
+	clearChannels() { this.refs.channelService.clear(); }
 
 	render() {
 		var message = 'TVHeadend';
 		var header = (
 			<h1>{message}</h1>
 		);
+
+		let loadChannelsHandler = event => { return this.loadChannels(event); };
+		let clearChannelsHandler = event => { return this.clearChannels(event); };
 
 		return (
 			<div className="tvheadend-app">
@@ -23,8 +26,8 @@ export default class TVHeadendApp extends Component {
 					<div role="tabpanel" className="tab-pane active" id="channels">
 						<BootstrapWell className="channel-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
-							<BootstrapButton className="btn-info btn-sm" onClick={this.loadChannels}>load</BootstrapButton>
-							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearChannels}>clear</BootstrapButton>
+							<BootstrapButton className="btn-info btn-sm" onClick={loadChannelsHandler}>load</BootstrapButton>
+							<BootstrapButton className="btn-danger btn-sm" onClick={clearChannelsHandler}>clear</BootstrapButton>
 						</BootstrapWell>
 						<ChannelList ref="channelService" method="all" />
 					</div>

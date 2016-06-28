@@ -10,7 +10,7 @@ export default class Enigma2App extends Component {
 
 		this.state = {
                         appHeaderText: 'Header'
-                }
+                };
 	}
 
         componentWillMount() {
@@ -28,16 +28,22 @@ export default class Enigma2App extends Component {
                 });
         }
 
-	loadBouquets = () => this.refs.bouquetService.load();
-	clearBouquets = () => this.refs.bouquetService.clear();
+	loadBouquets() { this.refs.bouquetService.load(); }
+	clearBouquets() { this.refs.bouquetService.clear(); }
 
-	loadProvider = () => this.refs.providerService.load();
-	clearProvider = () => this.refs.providerService.clear();
+	loadProvider() { this.refs.providerService.load(); }
+	clearProvider() { this.refs.providerService.clear(); }
 
 	render() {
 		var header = (
 			<h1>{this.state.appHeaderText}</h1>
 		);
+
+		let loadBouquetsHandler = event => { return this.loadBouquets(event); };
+		let clearBouquetsHandler = event => { return this.clearBouquets(event); };
+
+		let loadProviderHandler = event => { return this.loadProvider(event); };
+		let clearProviderHandler = event => { return this.clearProvider(event); };
 
 		return (
 			<div className="enigma2-app">
@@ -50,16 +56,16 @@ export default class Enigma2App extends Component {
 					<div role="tabpanel" className="tab-pane active" id="bouquets">
 						<BootstrapWell className="service-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
-							<BootstrapButton className="btn-info btn-sm" onClick={this.loadBouquets}>load</BootstrapButton>
-							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearBouquets}>clear</BootstrapButton>
+							<BootstrapButton className="btn-info btn-sm" onClick={loadBouquetsHandler}>load</BootstrapButton>
+							<BootstrapButton className="btn-danger btn-sm" onClick={clearBouquetsHandler}>clear</BootstrapButton>
 						</BootstrapWell>
 						<ServiceBox ref="bouquetService" method="bouquets" parameter="tv" />
 					</div>
 					<div role="tabpanel" className="tab-pane" id="provider">
 						<BootstrapWell className="service-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
-							<BootstrapButton className="btn-info btn-sm" onClick={this.loadProvider}>load</BootstrapButton>
-							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearProvider}>clear</BootstrapButton>
+							<BootstrapButton className="btn-info btn-sm" onClick={loadProviderHandler}>load</BootstrapButton>
+							<BootstrapButton className="btn-danger btn-sm" onClick={clearProviderHandler}>clear</BootstrapButton>
 						</BootstrapWell>
 						<ServiceBox ref="providerService" method="provider" parameter="tv" />
 					</div>

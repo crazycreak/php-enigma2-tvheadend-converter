@@ -2,13 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 export default class NavigationItem extends Component {
-        // initial state
-	state = {
-		item: this.props.item
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			item: this.props.item
+		};
 	}
 
         render() {

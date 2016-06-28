@@ -1,18 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class Panel extends Component {
-	// initial state
-	state = {
-		classNamePanel: this.props.classNamePanel,
-                classNameHeading: this.props.classNameHeading,
-                classNameFooter: this.props.classNameFooter,
-                headingText: this.props.headingText,
-                footerText: this.props.footerText,
-		children: this.props.children
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			classNamePanel: this.props.classNamePanel,
+			classNameHeading: this.props.classNameHeading,
+			classNameFooter: this.props.classNameFooter,
+			headingText: this.props.headingText,
+			footerText: this.props.footerText,
+			children: this.props.children
+		};
 	}
 
         render() {

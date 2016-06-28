@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class ListItem extends Component {
-	// initial state
-	state = {
-		className: this.props.className,
-                children: this.props.children
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			className: this.props.className,
+			children: this.props.children
+		};
 	}
 
         render() {

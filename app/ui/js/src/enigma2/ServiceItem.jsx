@@ -4,14 +4,13 @@ import BootstrapPanel from 'bootstrap-panel';
 import { ChannelList } from './ChannelList.jsx';
 
 export default class ServiceItem extends Component {
-	// initial state
-	state = {
-		servicename: this.props.data.e2servicename,
-		servicereference: this.props.data.e2servicereference
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			servicename: this.props.data.e2servicename,
+			servicereference: this.props.data.e2servicereference
+		};
 	}
 
 	loadChannels = () => this.refs.channelList.load();
@@ -32,3 +31,6 @@ export default class ServiceItem extends Component {
 }
 
 ServiceItem.displayName = 'ServiceItem';
+ServiceItem.propTypes = {
+	data: PropTypes.object
+};

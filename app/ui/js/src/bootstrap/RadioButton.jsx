@@ -1,18 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class RadioButton extends Component {
-	// initial state
-	state = {
-                name: this.props.name,
-                label: this.props.label,
-                value: this.props.value,
-                disabled: this.props.disabled,
-                checked: this.props.checked,
-                onChange: this.props.onChange
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			name: this.props.name,
+			label: this.props.label,
+			value: this.props.value,
+			disabled: this.props.disabled,
+			checked: this.props.checked,
+			onChange: this.props.onChange
+		};
 	}
 
         handleChange = () => this.state.onChange(this.state.value);

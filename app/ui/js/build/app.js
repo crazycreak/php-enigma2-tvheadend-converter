@@ -193,7 +193,6 @@ var Button = function (_Component) {
 		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(Button, [{
 		key: "render",
@@ -274,7 +273,6 @@ var List = function (_Component) {
 		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(List, [{
 		key: 'render',
@@ -353,7 +351,6 @@ var ListItem = function (_Component) {
 		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(ListItem, [{
 		key: 'render',
@@ -429,22 +426,10 @@ function _inherits(subClass, superClass) {
 var Modal = function (_Component) {
         _inherits(Modal, _Component);
 
-        // define default properties
-
         function Modal(props) {
                 _classCallCheck(this, Modal);
 
                 var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Modal).call(this, props));
-
-                _this.state = {
-                        className: _this.props.className,
-                        children: _this.props.children,
-                        title: _this.props.title,
-                        confirm: _this.props.confirm,
-                        onConfirm: _this.props.onConfirm,
-                        cancel: _this.props.cancel,
-                        onCancel: _this.props.onCancel
-                };
 
                 _this.handleCancel = function () {
                         if (_this.state.onCancel) _this.state.onCancel();
@@ -462,9 +447,17 @@ var Modal = function (_Component) {
                         return (0, _jquery2.default)(_this.refs.root).modal('show');
                 };
 
+                _this.state = {
+                        className: _this.props.className,
+                        children: _this.props.children,
+                        title: _this.props.title,
+                        confirm: _this.props.confirm,
+                        onConfirm: _this.props.onConfirm,
+                        cancel: _this.props.cancel,
+                        onCancel: _this.props.onCancel
+                };
                 return _this;
         }
-        // initial state
 
         _createClass(Modal, [{
                 key: 'render',
@@ -487,14 +480,6 @@ var Modal = function (_Component) {
         return Modal;
 }(_react.Component);
 
-Modal.defaultProps = {
-        confirm: false,
-        onConfirm: null,
-        cancel: false,
-        onCancel: null,
-        children: null,
-        title: 'Title'
-};
 exports.default = Modal;
 
 Modal.displayName = 'Modal';
@@ -507,6 +492,14 @@ Modal.propTypes = {
         cancel: _react.PropTypes.string,
         onCancel: _react.PropTypes.func
 };
+Modal.defaultProps = {
+        confirm: false,
+        onConfirm: null,
+        cancel: false,
+        onCancel: null,
+        children: null,
+        title: 'Title'
+};
 
 },{"bootstrap-button":3,"jquery":47,"react":306}],7:[function(require,module,exports){
 'use strict';
@@ -514,17 +507,17 @@ Modal.propTypes = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+  value: true
 });
 
 var _createClass = function () {
-        function defineProperties(target, props) {
-                for (var i = 0; i < props.length; i++) {
-                        var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-                }
-        }return function (Constructor, protoProps, staticProps) {
-                if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-        };
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
 }();
 
 var _react = require('react');
@@ -540,67 +533,64 @@ var _NavigationItem = require('./NavigationItem.jsx');
 var _NavigationItem2 = _interopRequireDefault(_NavigationItem);
 
 function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-                throw new TypeError("Cannot call a class as a function");
-        }
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
 function _possibleConstructorReturn(self, call) {
-        if (!self) {
-                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-        }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-        if (typeof superClass !== "function" && superClass !== null) {
-                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-        }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 var Navigation = function (_Component) {
-        _inherits(Navigation, _Component);
+  _inherits(Navigation, _Component);
 
-        // define default properties
+  function Navigation(props) {
+    _classCallCheck(this, Navigation);
 
-        function Navigation(props) {
-                _classCallCheck(this, Navigation);
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navigation).call(this, props));
 
-                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navigation).call(this, props));
+    _this.state = {
+      menuItems: _this.props.menuItems
+    };
+    return _this;
+  }
 
-                _this.state = {
-                        menuItems: _this.props.menuItems
-                };
-                return _this;
-        }
-        // initial state
+  _createClass(Navigation, [{
+    key: 'render',
+    value: function render() {
+      var headerText = 'E2-TVH-Converter';
+      var headerHref = '/ui/';
+      var items = this.state.menuItems.map(function (item) {
+        return _react2.default.createElement(_NavigationItem2.default, { key: item.id, item: item });
+      });
+      return _react2.default.createElement('nav', { className: 'navbar navbar-default navbar-fixed-top' }, _react2.default.createElement('div', { className: 'container' }, _react2.default.createElement(_NavigationHeader2.default, { href: headerHref, title: headerText }), _react2.default.createElement('div', { id: 'navbar', className: 'navbar-collapse collapse' }, _react2.default.createElement('ul', { className: 'nav navbar-nav' }, items))));
+    }
+  }]);
 
-        _createClass(Navigation, [{
-                key: 'render',
-                value: function render() {
-                        var headerText = 'E2-TVH-Converter';
-                        var headerHref = '/ui/';
-                        var items = this.state.menuItems.map(function (item) {
-                                return _react2.default.createElement(_NavigationItem2.default, { key: item.id, item: item });
-                        });
-                        return _react2.default.createElement('nav', { className: 'navbar navbar-default navbar-fixed-top' }, _react2.default.createElement('div', { className: 'container' }, _react2.default.createElement(_NavigationHeader2.default, { href: headerHref, title: headerText }), _react2.default.createElement('div', { id: 'navbar', className: 'navbar-collapse collapse' }, _react2.default.createElement('ul', { className: 'nav navbar-nav' }, items))));
-                }
-        }]);
-
-        return Navigation;
+  return Navigation;
 }(_react.Component);
 
-Navigation.defaultProps = {
-        menuItems: [{ 'id': 1, 'link': '/ui/enigma2', 'name': 'Enigma2' }, { 'id': 2, 'link': '/ui/tvheadend', 'name': 'TVHeadend' }]
-};
 exports.default = Navigation;
 
 Navigation.displayName = 'Navigation';
 Navigation.propTypes = {
-        menuItems: _react.PropTypes.array.isRequired
+  menuItems: _react.PropTypes.array.isRequired
+};
+Navigation.defaultProps = {
+  menuItems: [{ 'id': 1, 'link': '/ui/enigma2', 'name': 'Enigma2' }, { 'id': 2, 'link': '/ui/tvheadend', 'name': 'TVHeadend' }]
 };
 
 },{"./NavigationHeader.jsx":8,"./NavigationItem.jsx":9,"react":306}],8:[function(require,module,exports){
@@ -681,17 +671,17 @@ NavigationHeader.propTypes = {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+  value: true
 });
 
 var _createClass = function () {
-        function defineProperties(target, props) {
-                for (var i = 0; i < props.length; i++) {
-                        var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-                }
-        }return function (Constructor, protoProps, staticProps) {
-                if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-        };
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
 }();
 
 var _react = require('react');
@@ -701,64 +691,63 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) {
-        return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-                throw new TypeError("Cannot call a class as a function");
-        }
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
 function _possibleConstructorReturn(self, call) {
-        if (!self) {
-                throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-        }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-        if (typeof superClass !== "function" && superClass !== null) {
-                throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-        }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 var NavigationItem = function (_Component) {
-        _inherits(NavigationItem, _Component);
+  _inherits(NavigationItem, _Component);
 
-        function NavigationItem(props) {
-                _classCallCheck(this, NavigationItem);
+  function NavigationItem(props) {
+    _classCallCheck(this, NavigationItem);
 
-                var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavigationItem).call(this, props));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NavigationItem).call(this, props));
 
-                _this.state = {
-                        item: _this.props.item
-                };
-                return _this;
-        }
-        // initial state
+    _this.state = {
+      item: _this.props.item
+    };
+    return _this;
+  }
 
-        _createClass(NavigationItem, [{
-                key: 'render',
-                value: function render() {
-                        var className = '';
-                        if (this.context.router.isActive(this.state.item.link)) {
-                                className = 'active';
-                        }
-                        return _react2.default.createElement('li', { className: className }, _react2.default.createElement(_reactRouter.Link, { to: this.state.item.link }, this.state.item.name));
-                }
-        }]);
+  _createClass(NavigationItem, [{
+    key: 'render',
+    value: function render() {
+      var className = '';
+      if (this.context.router.isActive(this.state.item.link)) {
+        className = 'active';
+      }
+      return _react2.default.createElement('li', { className: className }, _react2.default.createElement(_reactRouter.Link, { to: this.state.item.link }, this.state.item.name));
+    }
+  }]);
 
-        return NavigationItem;
+  return NavigationItem;
 }(_react.Component);
 
 exports.default = NavigationItem;
 
 NavigationItem.displayName = 'NavigationItem';
 NavigationItem.propTypes = {
-        item: _react.PropTypes.object
+  item: _react.PropTypes.object
 };
 NavigationItem.contextTypes = {
-        router: _react.PropTypes.object.isRequired
+  router: _react.PropTypes.object.isRequired
 };
 
 },{"react":306,"react-router":109}],10:[function(require,module,exports){
@@ -824,7 +813,6 @@ var Panel = function (_Component) {
 		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(Panel, [{
 		key: 'render',
@@ -917,6 +905,10 @@ var RadioButton = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButton).call(this, props));
 
+		_this.handleChange = function () {
+			return _this.state.onChange(_this.state.value);
+		};
+
 		_this.state = {
 			name: _this.props.name,
 			label: _this.props.label,
@@ -925,14 +917,8 @@ var RadioButton = function (_Component) {
 			checked: _this.props.checked,
 			onChange: _this.props.onChange
 		};
-
-		_this.handleChange = function () {
-			return _this.state.onChange(_this.state.value);
-		};
-
 		return _this;
 	}
-	// initial state
 
 	_createClass(RadioButton, [{
 		key: "render",
@@ -1020,19 +1006,17 @@ var RadioButtonGroup = function (_Component) {
 
                 var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RadioButtonGroup).call(this, props));
 
+                _this.onChange = function (index) {
+                        return _this.state.onChange(index);
+                };
+
                 _this.state = {
                         name: _this.props.name,
                         buttons: _this.props.buttons,
                         onChange: _this.props.onChange
                 };
-
-                _this.onChange = function (index) {
-                        return _this.state.onChange(index);
-                };
-
                 return _this;
         }
-        // initial state
 
         _createClass(RadioButtonGroup, [{
                 key: 'render',
@@ -1125,7 +1109,6 @@ var Well = function (_Component) {
 		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(Well, [{
 		key: 'render',
@@ -2041,17 +2024,15 @@ var ChannelItem = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChannelItem).call(this, props));
 
-		_this.state = {
-			data: _this.props.data
-		};
-
 		_this.handleClick = function () {
 			return _this.refs.modal.handleMap();
 		};
 
+		_this.state = {
+			data: _this.props.data
+		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(ChannelItem, [{
 		key: 'render',
@@ -2078,6 +2059,9 @@ var ChannelItem = function (_Component) {
 exports.default = ChannelItem;
 
 ChannelItem.displayName = 'ChannelItem';
+ChannelItem.propTypes = {
+	data: _react.PropTypes.object
+};
 
 },{"./ChannelMap.jsx":22,"bootstrap-button":3,"bootstrap-listitem":5,"react":306}],21:[function(require,module,exports){
 'use strict';
@@ -2228,11 +2212,6 @@ var ChannelMap = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ChannelMap).call(this, props));
 
-		_this.state = {
-			loaded: false,
-			data: _this.props.data
-		};
-
 		_this.handleMap = function () {
 			return _jquery2.default.when(_this.loadPreviewServices()).done(_this.openPreviewModal());
 		};
@@ -2283,9 +2262,12 @@ var ChannelMap = function (_Component) {
 			return _this.closeMapModal();
 		};
 
+		_this.state = {
+			loaded: false,
+			data: _this.props.data
+		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(ChannelMap, [{
 		key: 'render',
@@ -2534,6 +2516,10 @@ var ServiceBox = function (_Component) {
 exports.default = ServiceBox;
 
 ServiceBox.displayName = 'ServiceBox';
+ServiceBox.propTypes = {
+	method: PropTypes.string,
+	parameter: PropTypes.string
+};
 
 },{"../actions":1,"./ServiceItem.jsx":24,"enigma2-data":26,"enigma2-store":27,"react":306}],24:[function(require,module,exports){
 'use strict';
@@ -2598,11 +2584,6 @@ var ServiceItem = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ServiceItem).call(this, props));
 
-		_this.state = {
-			servicename: _this.props.data.e2servicename,
-			servicereference: _this.props.data.e2servicereference
-		};
-
 		_this.loadChannels = function () {
 			return _this.refs.channelList.load();
 		};
@@ -2611,9 +2592,12 @@ var ServiceItem = function (_Component) {
 			return _this.refs.channelList.clear();
 		};
 
+		_this.state = {
+			servicename: _this.props.data.e2servicename,
+			servicereference: _this.props.data.e2servicereference
+		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(ServiceItem, [{
 		key: 'render',
@@ -2628,6 +2612,9 @@ var ServiceItem = function (_Component) {
 exports.default = ServiceItem;
 
 ServiceItem.displayName = 'ServiceItem';
+ServiceItem.propTypes = {
+	data: _react.PropTypes.object
+};
 
 },{"./ChannelList.jsx":21,"bootstrap-button":3,"bootstrap-panel":10,"react":306}],25:[function(require,module,exports){
 'use strict';
@@ -3084,7 +3071,6 @@ var ChannelItem = function (_Component) {
 		};
 		return _this;
 	}
-	// initial state
 
 	_createClass(ChannelItem, [{
 		key: 'render',
@@ -3109,6 +3095,9 @@ var ChannelItem = function (_Component) {
 exports.default = ChannelItem;
 
 ChannelItem.displayName = 'ChannelItem';
+ChannelItem.propTypes = {
+	data: _react.PropTypes.object
+};
 
 },{"bootstrap-button":3,"bootstrap-listitem":5,"react":306}],29:[function(require,module,exports){
 'use strict';
@@ -3255,30 +3244,37 @@ var TVHeadendApp = function (_Component) {
 	_inherits(TVHeadendApp, _Component);
 
 	function TVHeadendApp() {
-		var _Object$getPrototypeO;
-
-		var _temp, _this, _ret;
-
 		_classCallCheck(this, TVHeadendApp);
 
-		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-			args[_key] = arguments[_key];
-		}
-
-		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(TVHeadendApp)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.loadChannels = function () {
-			return _this.refs.channelService.load();
-		}, _this.clearChannels = function () {
-			return _this.refs.channelService.clear();
-		}, _temp), _possibleConstructorReturn(_this, _ret);
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(TVHeadendApp).apply(this, arguments));
 	}
 
 	_createClass(TVHeadendApp, [{
+		key: 'loadChannels',
+		value: function loadChannels() {
+			this.refs.channelService.load();
+		}
+	}, {
+		key: 'clearChannels',
+		value: function clearChannels() {
+			this.refs.channelService.clear();
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			var message = 'TVHeadend';
 			var header = _react2.default.createElement('h1', null, message);
 
-			return _react2.default.createElement('div', { className: 'tvheadend-app' }, header, _react2.default.createElement('ul', { className: 'nav nav-tabs', role: 'tablist' }, _react2.default.createElement('li', { role: 'presentation', className: 'active' }, _react2.default.createElement('a', { href: '#channels', 'aria-controls': 'channels', role: 'tab', 'data-toggle': 'tab' }, 'Channels'))), _react2.default.createElement('div', { className: 'tab-content' }, _react2.default.createElement('div', { role: 'tabpanel', className: 'tab-pane active', id: 'channels' }, _react2.default.createElement(_bootstrapWell2.default, { className: 'channel-actionbar well-sm' }, _react2.default.createElement('span', { className: 'text-uppercase' }, 'actionbar:'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-info btn-sm', onClick: this.loadChannels }, 'load'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-danger btn-sm', onClick: this.clearChannels }, 'clear')), _react2.default.createElement(_ChannelList.ChannelList, { ref: 'channelService', method: 'all' }))));
+			var loadChannelsHandler = function loadChannelsHandler(event) {
+				return _this2.loadChannels(event);
+			};
+			var clearChannelsHandler = function clearChannelsHandler(event) {
+				return _this2.clearChannels(event);
+			};
+
+			return _react2.default.createElement('div', { className: 'tvheadend-app' }, header, _react2.default.createElement('ul', { className: 'nav nav-tabs', role: 'tablist' }, _react2.default.createElement('li', { role: 'presentation', className: 'active' }, _react2.default.createElement('a', { href: '#channels', 'aria-controls': 'channels', role: 'tab', 'data-toggle': 'tab' }, 'Channels'))), _react2.default.createElement('div', { className: 'tab-content' }, _react2.default.createElement('div', { role: 'tabpanel', className: 'tab-pane active', id: 'channels' }, _react2.default.createElement(_bootstrapWell2.default, { className: 'channel-actionbar well-sm' }, _react2.default.createElement('span', { className: 'text-uppercase' }, 'actionbar:'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-info btn-sm', onClick: loadChannelsHandler }, 'load'), _react2.default.createElement(_bootstrapButton2.default, { className: 'btn-danger btn-sm', onClick: clearChannelsHandler }, 'clear')), _react2.default.createElement(_ChannelList.ChannelList, { ref: 'channelService', method: 'all' }))));
 		}
 	}]);
 

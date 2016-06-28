@@ -64,3 +64,7 @@ export default class ServiceBox extends Component {
 }
 
 ServiceBox.displayName = 'ServiceBox';
+ServiceBox.propTypes = {
+	method: PropTypes.string,
+	parameter: PropTypes.string
+};
