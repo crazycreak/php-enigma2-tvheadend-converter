@@ -1,7 +1,7 @@
-import dispatcher from './dispatcher';
-import assign from 'lodash/assign';
+import dispatcher from '../dispatcher';
+import { assign } from 'lodash';
 
-export default class Actions {
+export default class Enigma2Actions {
 	static requestEnigma2Data(obj) {
 		let defaultOptions = {
 			url: '/api/v1/enigma2',

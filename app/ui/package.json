@@ -49,10 +49,10 @@
     "bootstrap-well": "./js/src/bootstrap/Well.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "enigma2-data": "./js/src/enigma2/data.jsx",
-    "enigma2-store": "./js/src/enigma2/store.js",
+    "enigma2-store": "./js/src/stores/Enigma2Store.js",
     "tvheadend-app": "./js/src/tvheadend/app.jsx",
     "tvheadend-data": "./js/src/tvheadend/data.jsx",
-    "tvheadend-store": "./js/src/tvheadend/store.js"
+    "tvheadend-store": "./js/src/stores/TVHeadendStore.js"
   },
   "browserify": {
     "transform": [

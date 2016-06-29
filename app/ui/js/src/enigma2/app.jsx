@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import enigma2Store from 'enigma2-store';
+import Enigma2Store from 'enigma2-store';
 import BootstrapButton from 'bootstrap-button';
 import BootstrapWell from 'bootstrap-well';
 import ServiceBox from './ServiceBox.jsx';
@@ -14,17 +14,17 @@ export default class Enigma2App extends Component {
 	}
 
         componentWillMount() {
-                this.appStoreId = enigma2Store.registerView(() => { this.updateState(); });
+                this.appStoreId = Enigma2Store.registerView(() => { this.updateState(); });
                 this.updateState();
         }
 
         componentWillUnmount() {
-                enigma2Store.deregisterView(this.appStoreId);
+                Enigma2Store.deregisterView(this.appStoreId);
         }
 
         updateState() {
 		this.setState({
-                        appHeaderText: enigma2Store.get('appHeaderText')
+                        appHeaderText: Enigma2Store.get('appHeaderText')
                 });
         }
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import enigma2Store from 'enigma2-store';
-import Actions from '../actions';
+import Enigma2Actions from '../actions/Enigma2Actions';
 import { withEnigma2Data } from 'enigma2-data';
 import ServiceItem from './ServiceItem.jsx';
 
@@ -42,8 +42,8 @@ export default class ServiceBox extends Component {
                 });
         }
 
-	load = () => Actions.requestEnigma2Data(this.state.requestObj);
-	clear = () => Actions.resetEnigma2Data(this.state.dataName);
+	load = () => Enigma2Actions.requestEnigma2Data(this.state.requestObj);
+	clear = () => Enigma2Actions.resetEnigma2Data(this.state.dataName);
 
         render() {
 		if (this.state.data.length === 0) {

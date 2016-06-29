@@ -1,6 +1,6 @@
 import Store from 'core-store';
 import dispatcher from '../dispatcher';
-import Actions from '../actions';
+import Enigma2Actions from '../actions/Enigma2Actions';
 import $ from 'jquery';
 
 class Enigma2Store extends Store {
@@ -43,7 +43,7 @@ class Enigma2Store extends Store {
 			dataType: 'json',
 			cache: false
 		}).done(response => {
-			Actions.processEnigma2Data(response, setProperty);
+			Enigma2Actions.processEnigma2Data(response, setProperty);
 		});
 	}
 }

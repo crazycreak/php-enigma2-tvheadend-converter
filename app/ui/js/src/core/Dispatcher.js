@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 import Logger from './Logger';
-import assign from 'lodash/assign';
+import { assign } from 'lodash';
 
 export default class Dispatcher {
 	/**

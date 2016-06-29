@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import tvheadendStore from 'tvheadend-store';
+import TVHeadendStore from 'tvheadend-store';
 import BootstrapButton from 'bootstrap-button';
 import BootstrapWell from 'bootstrap-well';
 import { ChannelList } from './ChannelList.jsx';
@@ -14,17 +14,17 @@ export default class TVHeadendApp extends Component {
 	}
 
 	componentWillMount() {
-                this.appStoreId = tvheadendStore.registerView(() => { this.updateState(); });
+                this.appStoreId = TVHeadendStore.registerView(() => { this.updateState(); });
                 this.updateState();
         }
 
         componentWillUnmount() {
-                tvheadendStore.deregisterView(this.appStoreId);
+                TVHeadendStore.deregisterView(this.appStoreId);
         }
 
         updateState() {
 		this.setState({
-                        appHeaderText: tvheadendStore.get('appHeaderText')
+                        appHeaderText: TVHeadendStore.get('appHeaderText')
                 });
         }
 

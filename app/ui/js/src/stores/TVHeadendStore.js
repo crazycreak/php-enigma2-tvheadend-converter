@@ -1,6 +1,5 @@
 import Store from 'core-store';
 import dispatcher from '../dispatcher';
-import Actions from '../actions';
 import $ from 'jquery';
 
 class TVHeadendStore extends Store {
