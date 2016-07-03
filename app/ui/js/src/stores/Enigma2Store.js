@@ -23,7 +23,7 @@ class Enigma2Store extends Store {
 				break;
 			case 'PROCESS-ENIGMA2-DATA':
 				if (data['request']['code'] == 200) {
-					this.set(data['setProperty'], data['request']['data']);
+					this.set(data['property'], data['request']['data']);
 				}
 				break;
 			case 'RESET-ENIGMA2-DATA':
@@ -35,7 +35,7 @@ class Enigma2Store extends Store {
 		}
         }
 
-	sendAjaxRequest(url, method, async, setProperty) {
+	sendAjaxRequest(url, method, async, property) {
 		$.ajax({
 			url: url,
 			type: method,
@@ -43,7 +43,7 @@ class Enigma2Store extends Store {
 			dataType: 'json',
 			cache: false
 		}).done(response => {
-			Enigma2Actions.processEnigma2Data(response, setProperty);
+			Enigma2Actions.processEnigma2Data(response, property);
 		});
 	}
 }

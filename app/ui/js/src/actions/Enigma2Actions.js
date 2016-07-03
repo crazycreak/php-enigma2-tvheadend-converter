@@ -19,7 +19,7 @@ export default class Enigma2Actions {
 	static processEnigma2Data(request, property) {
 		let options = {
 			'request': request,
-			'setProperty': property
+			'property': property
 		};
 		dispatcher.dispatch('PROCESS-ENIGMA2-DATA', options);
 	}
