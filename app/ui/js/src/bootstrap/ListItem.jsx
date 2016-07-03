@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class ListItem extends Component {
-	// initial state
-	state = {
-		className: this.props.className,
-                children: this.props.children
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			className: this.props.className,
+			children: this.props.children
+		};
 	}
 
         render() {
@@ -19,3 +18,9 @@ export default class ListItem extends Component {
                 );
         }
 }
+
+ListItem.displayName = 'ListItem';
+ListItem.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any
+};

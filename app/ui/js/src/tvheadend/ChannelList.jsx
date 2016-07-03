@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BootstrapPanel from 'bootstrap-panel';
 import BootstrapList from 'bootstrap-list';
-import { withTVHeadendData } from "tvheadend-data";
+import { withTVHeadendData } from 'tvheadend-data';
 import ChannelItem from './ChannelItem.jsx';
 
 export var ChannelList = withTVHeadendData('channel', 'GET', class extends Component {

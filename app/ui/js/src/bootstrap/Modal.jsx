@@ -3,28 +3,18 @@ import $ from 'jquery';
 import BootstrapButton from 'bootstrap-button';
 
 export default class Modal extends Component {
-        // define default properties
-	static defaultProps = {
-        	confirm: false,
-                onConfirm: null,
-                cancel: false,
-                onCancel: null,
-                children: null,
-                title: 'Title'
-	}
-        // initial state
-	state = {
-                className: this.props.className,
-                children: this.props.children,
-                title: this.props.title,
-		confirm: this.props.confirm,
-                onConfirm: this.props.onConfirm,
-                cancel: this.props.cancel,
-                onCancel: this.props.onCancel
-	}
-
         constructor(props) {
 		super(props);
+
+		this.state = {
+			className: this.props.className,
+			children: this.props.children,
+			title: this.props.title,
+			confirm: this.props.confirm,
+			onConfirm: this.props.onConfirm,
+			cancel: this.props.cancel,
+			onCancel: this.props.onCancel
+		};
 	}
 
         handleCancel = () => { if (this.state.onCancel) this.state.onCancel(); }
@@ -73,3 +63,22 @@ export default class Modal extends Component {
                 );
         }
 }
+
+Modal.displayName = 'Modal';
+Modal.propTypes = {
+	className: PropTypes.string,
+	children: PropTypes.any,
+	title: PropTypes.string,
+	confirm: PropTypes.string,
+	onConfirm: PropTypes.func,
+	cancel: PropTypes.string,
+	onCancel: PropTypes.func
+};
+Modal.defaultProps = {
+	confirm: false,
+	onConfirm: null,
+	cancel: false,
+	onCancel: null,
+	children: null,
+	title: 'Title'
+};

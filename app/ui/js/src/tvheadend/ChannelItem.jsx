@@ -3,13 +3,12 @@ import BootstrapButton from 'bootstrap-button';
 import BootstrapListItem from 'bootstrap-listitem';
 
 export default class ChannelItem extends Component {
-	// initial state
-	state = {
-		data: this.props.data
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			data: this.props.data
+		};
 	}
 
 	render() {
@@ -31,3 +30,8 @@ export default class ChannelItem extends Component {
 		);
 	}
 }
+
+ChannelItem.displayName = 'ChannelItem';
+ChannelItem.propTypes = {
+	data: PropTypes.object
+};

@@ -1,24 +1,60 @@
 import React, { Component, PropTypes } from 'react';
+import Enigma2Store from 'enigma2-store';
+import Enigma2Actions from '../actions/Enigma2Actions';
 import BootstrapButton from 'bootstrap-button';
 import BootstrapWell from 'bootstrap-well';
-import { ServiceBox } from './ServiceBox.jsx';
+import ServiceBox from './ServiceBox.jsx';
 
 export default class Enigma2App extends Component {
 	constructor(props) {
 		super(props);
+		// initialize state
+		this.state = {
+                        appHeaderText: 'Header',
+			bouquets: [],
+			provider: [],
+                };
+		// initialize store
+		Enigma2Store.initialize('bouquets', []);
+		Enigma2Store.initialize('provider', []);
 	}
 
-	loadBouquets = () => this.refs.bouquetService.load();
-	clearBouquets = () => this.refs.bouquetService.clear();
+        componentWillMount() {
+                this.appStoreId = Enigma2Store.registerView(() => { this.updateState(); });
+                this.updateState();
+        }
 
-	loadProvider = () => this.refs.providerService.load();
-	clearProvider = () => this.refs.providerService.clear();
+        componentWillUnmount() {
+                Enigma2Store.deregisterView(this.appStoreId);
+        }
+
+        updateState() {
+		this.setState({
+                        appHeaderText: Enigma2Store.get('appHeaderText'),
+			bouquets: Enigma2Store.get('bouquets'),
+			provider: Enigma2Store.get('provider')
+                });
+        }
+
+	loadData(type) {
+		let requestObj = this.getRequestObj(type, type, 'tv');
+		Enigma2Actions.requestEnigma2Data(requestObj);
+	}
+
+	clearData(type) {
+		Enigma2Actions.resetEnigma2Data(type);
+	}
 
 	render() {
-		var message = 'Enigma2';
 		var header = (
-			<h1>{message}</h1>
+			<h1>{this.state.appHeaderText}</h1>
 		);
+
+		let loadBouquetsHandler = event => { return this.loadData('bouquets'); };
+		let clearBouquetsHandler = event => { return this.clearData('bouquets'); };
+
+		let loadProviderHandler = event => { return this.loadData('provider'); };
+		let clearProviderHandler = event => { return this.clearData('provider'); };
 
 		return (
 			<div className="enigma2-app">
@@ -31,21 +67,33 @@ export default class Enigma2App extends Component {
 					<div role="tabpanel" className="tab-pane active" id="bouquets">
 						<BootstrapWell className="service-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
-							<BootstrapButton className="btn-info btn-sm" onClick={this.loadBouquets}>load</BootstrapButton>
-							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearBouquets}>clear</BootstrapButton>
+							<BootstrapButton className="btn-info btn-sm" onClick={loadBouquetsHandler}>load</BootstrapButton>
+							<BootstrapButton className="btn-danger btn-sm" onClick={clearBouquetsHandler}>clear</BootstrapButton>
 						</BootstrapWell>
-						<ServiceBox ref="bouquetService" method="bouquets" parameter="tv" />
+						<ServiceBox data={this.state.bouquets} />
 					</div>
 					<div role="tabpanel" className="tab-pane" id="provider">
 						<BootstrapWell className="service-actionbar well-sm">
 							<span className="text-uppercase">actionbar:</span>
-							<BootstrapButton className="btn-info btn-sm" onClick={this.loadProvider}>load</BootstrapButton>
-							<BootstrapButton className="btn-danger btn-sm" onClick={this.clearProvider}>clear</BootstrapButton>
+							<BootstrapButton className="btn-info btn-sm" onClick={loadProviderHandler}>load</BootstrapButton>
+							<BootstrapButton className="btn-danger btn-sm" onClick={clearProviderHandler}>clear</BootstrapButton>
 						</BootstrapWell>
-						<ServiceBox ref="providerService" method="provider" parameter="tv" />
+						<ServiceBox data={this.state.provider} />
 					</div>
 				</div>
 			</div>
 		);
 	}
+
+	getRequestObj(property, method, parameter) {
+		let module = 'service';
+		return {
+			module: module,
+			method: method,
+			parameter: parameter,
+			property: property
+		};
+	}
 }
+
+Enigma2App.displayName = 'Enigma2App';

@@ -1,22 +1,38 @@
-import React, { Component } from 'react';
-import { withEnigma2Data } from "enigma2-data";
+import React, { Component, PropTypes } from 'react';
 import ServiceItem from './ServiceItem.jsx';
 
-export var ServiceBox = withEnigma2Data('service', 'GET', class extends Component {
-	render() {
-		if (this.props.data.length === 0) {
+export default class ServiceBox extends Component {
+        constructor(props) {
+                super(props);
+
+                this.state = {
+                        data: this.props.data
+                };
+        }
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+                        data: nextProps.data
+                });
+	}
+
+        render() {
+		if (this.state.data.length === 0) {
 			return <div className="empty"></div>;
 		}
 
-		var items = this.props.data.map(function(item) {
+		let items = this.state.data.map(function(item, index) {
 			return (
 				<ServiceItem data={item} />
 			);
 		});
 		return (
-			<div className="service-box">
-				{items}
-			</div>
+			<div className="service-box">{items}</div>
 		);
 	}
-});
+}
+
+ServiceBox.displayName = 'ServiceBox';
+ServiceBox.propTypes = {
+	data: PropTypes.array
+};

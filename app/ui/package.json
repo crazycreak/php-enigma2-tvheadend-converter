@@ -4,28 +4,40 @@
   "description": "A lightweight Enigma2-Bouquet to Tvheadend-Channel Converter.",
   "main": "app.jsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify js/src/app.jsx -o js/build/app.js",
-    "start": "watchify js/src/app.jsx -o js/build/app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "crazycreak",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "^6.1.0",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.5.0",
+    "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
+    "eslint": "^2.13.1",
+    "eslint-plugin-react": "^5.2.2",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.4",
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0",
-    "react-router": "^2.4.1"
+    "lodash": "^4.13.1",
+    "react": "^15.2.0",
+    "react-dom": "^15.2.0",
+    "react-router": "^2.5.2"
   },
   "browser": {
+    "core-data": "./js/src/core/Data.jsx",
+    "core-dispatcher": "./js/src/core/Dispatcher.js",
+    "core-store": "./js/src/core/Store.js",
     "bootstrap-app": "./js/src/bootstrap/app.jsx",
     "bootstrap-button": "./js/src/bootstrap/Button.jsx",
     "bootstrap-radiobuttongroup": "./js/src/bootstrap/RadioButtonGroup.jsx",
@@ -35,11 +47,12 @@
     "bootstrap-modal": "./js/src/bootstrap/Modal.jsx",
     "bootstrap-panel": "./js/src/bootstrap/Panel.jsx",
     "bootstrap-well": "./js/src/bootstrap/Well.jsx",
-    "core-data" : "./js/src/core/data.jsx",
     "enigma2-app": "./js/src/enigma2/app.jsx",
     "enigma2-data": "./js/src/enigma2/data.jsx",
+    "enigma2-store": "./js/src/stores/Enigma2Store.js",
     "tvheadend-app": "./js/src/tvheadend/app.jsx",
-    "tvheadend-data": "./js/src/tvheadend/data.jsx"
+    "tvheadend-data": "./js/src/tvheadend/data.jsx",
+    "tvheadend-store": "./js/src/stores/TVHeadendStore.js"
   },
   "browserify": {
     "transform": [

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import { withTVHeadendData } from "tvheadend-data";
+import { withTVHeadendData } from 'tvheadend-data';
 import BootstrapModal from 'bootstrap-modal';
 import BootstrapRadioButtonGroup from 'bootstrap-radiobuttongroup';
 
 export default class ChannelMap extends Component {
-	// initial state
-	state = {
-		loaded: false,
-		data: this.props.data
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			loaded: false,
+			data: this.props.data
+		};
 	}
 
 	handleMap = () => $.when(this.loadPreviewServices()).done(this.openPreviewModal());

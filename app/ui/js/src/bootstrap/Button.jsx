@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class Button extends Component {
-	// initial state
-	state = {
-		props: this.props,
-		className: this.props.className
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			props: this.props,
+			className: this.props.className
+		};
 	}
 
 	render() {
@@ -20,3 +19,8 @@ export default class Button extends Component {
 		);
 	}
 }
+
+Button.displayName = 'Button';
+Button.propTypes = {
+	className: PropTypes.string
+};

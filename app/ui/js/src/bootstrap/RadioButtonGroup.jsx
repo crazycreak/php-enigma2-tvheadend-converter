@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import BootstrapRadioButton from 'bootstrap-radiobutton';
 
 export default class RadioButtonGroup extends Component {
-	// initial state
-	state = {
-		name: this.props.name,
-                buttons: this.props.buttons,
-                onChange: this.props.onChange
-	}
-
         constructor(props) {
 		super(props);
+
+		this.state = {
+			name: this.props.name,
+			buttons: this.props.buttons,
+			onChange: this.props.onChange
+		};
 	}
 
         onChange = (index) => this.state.onChange(index);
@@ -36,3 +35,10 @@ export default class RadioButtonGroup extends Component {
                 );
         }
 }
+
+RadioButtonGroup.displayName = 'RadioButtonGroup';
+RadioButtonGroup.propTypes = {
+	name: PropTypes.string,
+	buttons: PropTypes.any,
+	onChange: PropTypes.func
+};

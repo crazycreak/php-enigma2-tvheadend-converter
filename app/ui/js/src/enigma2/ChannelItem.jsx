@@ -4,13 +4,12 @@ import BootstrapListItem from 'bootstrap-listitem';
 import ChannelMap from './ChannelMap.jsx';
 
 export default class ChannelItem extends Component {
-	// initial state
-	state = {
-		data: this.props.data
-	}
-
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			data: this.props.data
+		};
 	}
 
 	handleClick = () => this.refs.modal.handleMap();
@@ -40,3 +39,8 @@ export default class ChannelItem extends Component {
 		);
 	}
 }
+
+ChannelItem.displayName = 'ChannelItem';
+ChannelItem.propTypes = {
+	data: PropTypes.object
+};
